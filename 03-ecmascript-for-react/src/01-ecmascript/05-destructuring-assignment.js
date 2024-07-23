@@ -58,6 +58,7 @@ function spreadObject() {
   // 🔶 구조 분해 할당 구문을 사용해 reactCourse 객체에서 항목을 분해 및 할당합니다.
   // 참고: https://mzl.la/3Jfrwpm
 
+  // 별칭(alias)
   const { id: courseId, title: courseTitle, url: courseUrl } = reactCourse;
   // const courseId = id;
   // const courseTitle = title;
@@ -85,20 +86,25 @@ function spreadRender() {
     return removeSpaceHTMLString(/* html */ `
       <table class="table">
         <caption class="sr-only">${data.caption}</caption>
-        ${data.rows.reduce(function (htmlString, item) {
+        ${data.rows.reduce(function (
+          htmlString,
+          { headline, content } /* item: { headline, content } */
+        ) {
           // 🔶 구조 분해 할당 구문을 사용해 item 객체에서 항목을 분해 및 할당합니다.
           // 참고: https://mzl.la/3Jfrwpm
+          // const { headline, content } = item;
 
           return (
             htmlString +
             /* html */ `
               <tr>
-                <th>${item.headline}</th>
-                <td>${numberWithComma(item.content)}원</td>
+                <th>${headline}</th>
+                <td>${numberWithComma(content)}원</td>
               </tr>
             `
           );
-        }, '')}
+        },
+        '')}
       </table>
     `);
   }
