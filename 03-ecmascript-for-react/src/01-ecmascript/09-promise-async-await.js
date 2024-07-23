@@ -70,16 +70,35 @@ function practice2() {
     });
 }
 
-practice2();
+// practice2();
 
 // Async Await
 // 참고: https://mzl.la/49EvJxn
 
-function practice3() {
+// const practice3 = async () => {
+async function practice3() {
   // 🔶 비동기 함수를 사용해 delayPromise 함수가 1초마다 로그를 남기도록 작성합니다.
+  console.log('start!');
+
+  // + 1s
+  await delayPromise();
+  console.log('1s');
+  // + 1s
+  await delayPromise();
+  console.log('2s');
+  // + 1s
+  await delayPromise();
+  console.log('3s');
+  // + 1s
+  await delayPromise();
+  console.log('4s');
+
+  // + 1s
+  await delayPromise();
+  console.log('end!');
 }
 
-// practice3();
+practice3();
 
 // --------------------------------------------------------------------------
 // Promise.all, Promise.race
