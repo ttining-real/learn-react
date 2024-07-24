@@ -1,6 +1,6 @@
 // ---------------------------------------------------------
-// [x] STEP 1. Vanilla Script (ES + DOM API)
-// [ ] STEP 2. Class Programming
+// [x] STEP 1. Vanilla Script (ES + DOM API) -> 재사용하려면 복붙
+// [ ] STEP 2. Class Programming -> 재사용 가능
 // [ ] STEP 3. Web Components API
 // ---------------------------------------------------------
 

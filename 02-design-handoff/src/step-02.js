@@ -7,7 +7,10 @@ import SortableList from './SortableList.js';
 
 // Class => Instance
 // API 1. new Class()
-// API 2. Class.create()
-const sortableList = new SortableList('.list');
+const sortableList1 = new SortableList('.list');
+console.log(sortableList1);
 
-console.log(SortableList);
+// 클래스 재사용(reuse)
+// API 2. Class.create()
+const sortableList2 = SortableList.create('.another-list');
+console.log(sortableList2);

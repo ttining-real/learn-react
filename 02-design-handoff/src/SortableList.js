@@ -2,6 +2,10 @@ export default class SortableList {
   // 클래스 멤버
   static DRAGGING_CLASSNAME = 'dragging';
 
+  static create(...args) {
+    return new SortableList(...args);
+  }
+
   // 비공개 필드 멤버
   #list = null;
   #items = [];
