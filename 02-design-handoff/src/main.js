@@ -24,6 +24,8 @@ const listItems = Array.from(list.querySelectorAll('li')); // NodeList → Array
 // TODO: listItems 집합 순환 드래그 가능하게 처리
 listItems.forEach((item) => {
   item.setAttribute('draggable', true);
+  // item.setAttribute('tabindex', 0);
+  // item.style.cursor = 'move';
 
   // TODO: 각 리스트 아이템에 드래그 이벤트 핸들링
   item.addEventListener('dragstart', (e) => {
@@ -59,9 +61,14 @@ list.addEventListener('dragover', (e) => {
     // console.log(index, item.offsetTop);
     // console.log(index, item.offsetHeight);
     // console.log(index, item.offsetHeight * 0.5);
-    
+
     return e.clientY <= item.offsetTop + item.offsetHeight * 0.5;
   });
 
-  list.insertBefore(draggedItem, replaceItem);
+  // list.insertBefore(draggedItem, replaceItem);
+  if (replaceItem) {
+    list.insertBefore(draggedItem, replaceItem);
+  } else {
+    list.appendChild(draggedItem);
+  }
 });
