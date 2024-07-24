@@ -37,7 +37,38 @@ listItems.forEach((item) => {
     // console.log(e.type, e.currentTarget);
     e.currentTarget.classList.remove(DRAGGING_CLASSNAME);
   })
+
+  const handleButton = item.querySelector('[data-role="handle"]');
+
+  if (handleButton) {
+    handleButton.addEventListener('keyup', (e) => {
+      switch (e.key) {
+        case 'ArrowUp':
+        // case 'ArrowLeft':
+          const prevItem = item.previousElementSibling;
+          if(prevItem) {
+            prevItem.before(item);
+            // 핸들에게 초점 설정(유지)
+            e.currentTarget.focus();
+          }
+
+          break;
+
+        case 'ArrowDown':
+        // case 'ArrowRight':
+          const nextItem = item.nextElementSibling;
+          if(nextItem) {
+            nextItem.after(item);
+            // 핸들에게 초점 설정(유지)
+            e.currentTarget.focus();
+          }
+
+          break;
+      }
+    });
+  }
 })
+
 
 // TODO: list 드래그 이벤트 핸들링
 list.addEventListener('dragover', (e) => {
