@@ -1,6 +1,7 @@
-// TODO:
-// 데이터를 순환해서 리액트 엘리먼트를 생성한 후,
-// list의 자식들(children)로 설정하여 화면에 표시
+// 반응성(Reactivity) 구현
+// 개발자 -> 데이터 수정 -> 반응성(변경 감지) -> 리액트 -> 화면 업데이트 구현
+
+// 일반 JavaScript 객체
 const listData = {
   items: [
     { id: '1', title: 'Climatology' },
@@ -10,18 +11,34 @@ const listData = {
   ],
 };
 
-// 반응성(Reactivity) 구현
-// 개발자 -> 데이터 수정 -> 반응성(변경 감지) -> 리액트 -> 화면 업데이트 구현
+// 반응성 구현 : Proxy 객체 활용 (like Vue.js)
+const reactivity = (globalThis.reactivity = new Proxy(listData, {
+  // GET (원본 수정 대신, 프록시를 사용해 가로채서 읽기)
+  get(target, prop) {
+    console.log('[GET]');
+    // 객체의 속성 반환
+    return target[prop];
+  },
 
-// React 리스트 렌더링
-// Array.prototype.map 메서드 활용
+  // SET (원본 수정 대신, 프록시를 사용해 가로채서 쓰기)
+  set(target, prop, newValue) {
+    // 이전 값
+    const oldValue = target[prop];
+
+    // 새로운 값으로 업데이트 로직 작성
+    target[prop] = newValue;
+
+    console.log('[SET] update', JSON.stringify(newValue));
+
+    return true;
+  },
+}));
+
 const children = listData.items.map(({ id, title }) => {
-  // TODO:
-  // React API를 사용해 <li></li> React 엘리먼트 생성
   const reactElement = React.createElement(
     'li',
     {
-      key: id, // key를 사용한 이유
+      key: id,
       className: 'item',
     },
     React.createElement('img', {
@@ -51,31 +68,17 @@ const children = listData.items.map(({ id, title }) => {
   return reactElement;
 });
 
-// React.createElement API
-// <ul></ul> 리액트 엘리먼트 생성
 const list = React.createElement(
   'ul',
   { className: 'architectures', lang: 'en' },
-  // ...children (child1, child2, ..., childN)
+
   children
 );
 
-// 리액트 요소(React Element === 가상 DOM 요소 노드) 생성
-// console.log(list);
-
-// React.isValidElement API
-// console.log(React.isValidElement(list));
-
-// 리액트 앱 렌더링 (그림을 그리다, 화면에 표시)
-// ReactDOM / Server or [Client]
-// ReactDOM.createRoot(container/* 실제 DOM 노드: 요소 노드 */)
-
 const container = document.getElementById('root');
 
-// ReactDOM Root 생성
 const reactDomRoot = ReactDOM.createRoot(container);
 
-// 렌더링을 처리하는 함수
 function render() {
   reactDomRoot.render(list);
 }
@@ -85,12 +88,3 @@ function unmount() {
 }
 
 render();
-
-// 타이머 웹 API
-// setTimeout
-
-// 특정 시간이 지나면, 앱을 화면에 렌더링(표시) 하세요.
-// setTimeout(render, 2000);
-
-// 특정 시간이 지나면, 렌더링된 앱을 화면에서 표시하지 마세요.
-// setTimeout(unmount, 4000);
