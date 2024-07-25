@@ -2,14 +2,17 @@
 import { createElement } from './lib/virtual/index.js'; // like React
 import { createRoot } from './lib/virtual-dom/index.js'; // like React DOM
 
-// Data
+// Data (Declarative Programming)
 const listData = {
   items: [
     { id: '1', title: 'Climatology' },
     { id: '2', title: 'History of Architecture' },
+    { id: '3', title: 'Graphics' },
+    { id: '4', title: 'Building design' },
   ],
 };
 
+// Data + JavaScript Markup = Virtual DOM (VirtualElement Tree)
 const listItems = listData.items.map(({ id, title }) => {
   // 가상 요소 반환
   const itemElement = createElement(
@@ -35,7 +38,7 @@ const listItems = listData.items.map(({ id, title }) => {
   return itemElement;
 });
 
-console.log(listItems);
+// console.log(...listItems);
 
 // TODO: <ul class="architectures" lang="en"></ul> 가상 요소 생성
 // API : createElement(type, props, ...children)
