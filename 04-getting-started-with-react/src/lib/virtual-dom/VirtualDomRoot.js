@@ -35,7 +35,7 @@ class VirtualDomRoot {
   }
 
   render(vNode) {
-    const parsedElements = this.#parseVNode(vNode);
+    const parsedElements = this.#parseVNode(vNode); // 가상 -> 실제 DOM 생성
     this.#rootElement.append(parsedElements);
   }
 

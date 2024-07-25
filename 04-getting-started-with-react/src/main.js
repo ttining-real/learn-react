@@ -1,55 +1,56 @@
-// Virtual DOM
-// 가상 문서 객체 모델
-// 실제 DOM을 추상화(단순화)
+// 실습 (Practice)
+import { createElement } from './lib/virtual/index.js'; // like React
+import { createRoot } from './lib/virtual-dom/index.js'; // like React DOM
 
-// virtual
-import { createElement } from './lib/virtual/index.js';
-// virtual-dom
-import { createRoot } from './lib/virtual-dom/index.js'
+// Data
+const listData = {
+  items: [
+    { id: '1', title: 'Climatology' },
+    { id: '2', title: 'History of Architecture' },
+  ],
+};
 
-// console.log(typeof createElement);
+const listItems = listData.items.map(({ id, title }) => {
+  // 가상 요소 반환
+  const itemElement = createElement(
+    'li',
+    { className: 'item' },
+    createElement('img', {
+      src: `/architectures/architecture-${id}.jpg`,
+      alt: '',
+    }),
+    createElement('span', { className: 'content' }, title),
+    createElement(
+      'button',
+      {
+        type: 'button',
+        title: '아이템 이동 (위/아래 화살표 키 활용)',
+      },
+      createElement('img', {
+        src: '/icons/handle.svg',
+        alt: '아이템 이동 (위/아래 화살표 키 활용)',
+      })
+    )
+  );
+  return itemElement;
+});
 
-/* ----------------------------------------------------------------------- */
-// 가상(추상화된, 단순화된) 요소(엘리먼트) 생성
+console.log(listItems);
 
-// 자식(하위) 요소
-const figcaptionVElement = createElement('figcaption');
-// console.log(figcaptionVElement);
-
-// 부모(상위) 요소
-// API : createElement(type, props, child1, child2, ..., childN)
+// TODO: <ul class="architectures" lang="en"></ul> 가상 요소 생성
 // API : createElement(type, props, ...children)
-const figureVElement = createElement('figure', null, figcaptionVElement);
-// console.log(figureVElement);
+const list = createElement(
+  // type
+  'ul',
+  // props
+  { className: 'architectures', lang: 'en' },
+  // ...children (child1, child2, ..., childN)
+  // <li class="item"></li> 가상 요소 삽입(추가)
+  ...listItems
+);
 
-// virtual-dom / createRoot
-// 가상 요소를 실제 DOM 요소로 렌더링
+// 가상 DOM (실제 DOM 흉내: 단순화)
+// console.log(list);
+const root = createRoot(document.getElementById('virtual-dom'));
 
-// API : createRoot(container)
-const virtualRootElement = document.getElementById('virtual-dom');
-const vRoot = createRoot(virtualRootElement);
-vRoot.render(figureVElement);
-console.log(vRoot.render);
-
-
-/* ----------------------------------------------------------------------- */
-
-// 실제 DOM
-// 웹 API를 사용해서 문서 객체(Document Object)를 생성하는 방법
-// <figure></figure> 요소를 생성하고 싶어요. -> document.createElement('figure')
-
-// 부모(상위) 요소
-const figureElement = document.createElement('figure');
-// console.dir(figureElement); // 실제 DOM 객체는 복잡하다.
-
-// 자식(하위) 요소
-const figcaptionElement = document.createElement('figcaption');
-
-// 요소 간 관계 형성
-figureElement.append(figcaptionElement);
-
-// 실제 DOM에 마운트(mount, 착장 === 렌더링)
-const actualDomElement = document.getElementById('actual-dom');
-console.log(actualDomElement);
-
-actualDomElement.append(figureElement);
+root.render(list);
