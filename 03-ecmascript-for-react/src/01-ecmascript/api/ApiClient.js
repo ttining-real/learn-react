@@ -52,6 +52,7 @@ export class ApiClientClass {
   // 인스턴스(객체) 메서드
   // 클래스로부터 생성된 객체가 공유하는 메서드(생성된 객체가 소유하는 함수)
   readAll(page = 1, pageSize = 5) {
+    // fetch: 프로미스 객체 반환
     return fetch(`${this.#endpoint}?_page=${page}&_limit=${pageSize}`).then(
       (response) => response.json()
     );
