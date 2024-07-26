@@ -18,11 +18,39 @@ import { createElement as h } from 'https://esm.sh/react';
   }
 */
 function Avatar({ name, photo, status = 'offline', size = 64 }) {
+  // 지역 변수
+  let iconPath = '';
+  let statusMessage = '';
+
+  // switch 문 사용
+  switch (status) {
+    default:
+    case 'offline':
+      iconPath = '/icons/status-offline.svg';
+      statusMessage = '오프라인';
+      break;
+    case 'online':
+      iconPath = '/icons/status-online.svg';
+      statusMessage = '온라인';
+      break;
+    case 'dont-disturb':
+      iconPath = '/icons/status-dont-disturb.svg';
+      statusMessage = '방해금지';
+      break;
+    case 'away':
+      iconPath = '/icons/status-away.svg';
+      statusMessage = '자리비움';
+      break;
+  }
+
+  const label = `${name} (${statusMessage})`;
+
   return h(
     'figure',
     {
       className: 'Avatar',
-      'aria-label': `${name} (상태)`,
+      'aria-label': label,
+      title: label,
     },
     h('img', {
       src: `/faces/${photo}`,
@@ -34,7 +62,7 @@ function Avatar({ name, photo, status = 'offline', size = 64 }) {
       'figcaption',
       null,
       h('img', {
-        src: '/icons/status-offline.svg',
+        src: iconPath,
         alt: '',
       })
     )
