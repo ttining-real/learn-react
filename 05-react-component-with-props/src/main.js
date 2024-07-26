@@ -16,20 +16,15 @@ const container = document.getElementById('react-app');
 
 const reactDomRoot = createRoot(container);
 
-
-
-// 리액트 월드에서 컴포넌트를 사용해 리액트 엘리먼트를 생성하려면?
-// 별칭 h === React.createElement(컴포넌트_참조)
-const list1 = h(NumberList, { id: 'number-1', count: 3 });
-const list2 = h(NumberList, { id: 'number-2', count: 5 });
-const list3 = h(NumberList, { id: 'number-3', count: 11 });
-// console.log(list1, list2, list3);
-
 // 2. 함수 컴포넌트 (재사용)
 
 function render() {
   const children = listData.items.map(({ id, title }) => {
     
+    // TODO: 컴포넌트 정의(with 속성) & 추출
+    // <li> 리액트 엘리먼트를 생성하는 클래스 컴포넌트를 작성하세요.
+    // 컴포넌트 이름은 여러분이 생각하는 "그것"입니다. (여러분의 작명 센스를 볼께요.)
+
     // 리액트 엘리먼트 (객체)
     const reactElement = h(
       'li',
@@ -64,6 +59,9 @@ function render() {
     return reactElement;
   });
 
+  // TODO: 컴포넌트 정의(with 속성) & 추출
+  // <ul> 리액트 컴포넌트를 생성하는 클래스 컴포넌트를 작성하세요.
+  // 컴포넌트 이름은 여러분이 생각하는 "그것"입니다. (여러분의 작명 센스를 볼께요.)
   const list = h(
     'ul', // 컴포넌트 타입
     { className: 'architectures', lang: 'en' }, // 컴포넌트 속성(props)
@@ -75,9 +73,7 @@ function render() {
     'div',
     { className: 'list-container' },
     list,
-    list1,
-    list2,
-    list3
+    h(NumberList, { count: 7 })
   )
 
   reactDomRoot.render(listContainer);
