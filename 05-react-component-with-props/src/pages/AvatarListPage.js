@@ -16,7 +16,13 @@ function AvatarListPage() {
       'li',
       null,
       h(Avatar, { name: '범쌤', photo: 'man-04.jpg', status: 'away' })
-    )
+    ),
+    h(
+      'li',
+      null,
+      h(Avatar, { name: '주원', photo: 'woman-04.jpg', status: 'dont-disturb' })
+    ),
+    h('li', null, h(Avatar, { name: '정민', photo: 'woman-01.jpg' }))
   );
 }
 
