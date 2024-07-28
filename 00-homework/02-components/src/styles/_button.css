@@ -1,0 +1,94 @@
+.ButtonList {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 0.25rem;
+}
+
+.button {
+  --text-light: var(--white);
+  --text-dark: var(--gray-90);
+  --default-bg: var(--white);
+  --default-bd: var(--gray-400);
+  --default-hover: var(--gray-100);
+  --positive-bg: var(--confirm);
+  --positive-bd: var(--confirm);
+  --positive-hover: var(--confirm-deep);
+  --negative-bg: var(--error);
+  --negative-bd: var(--error);
+  --negative-hover: var(--error-deep);
+  --size-sm: 2rem;
+  --size-md: 3rem;
+  --size-lg: 3.75rem;
+
+  box-sizing: border-box;
+  white-space: nowrap;
+  line-height: 1.5;
+  border-radius: var(--rounded-sm);
+
+  &.button-default {
+    color: var(--text-dark);
+    border: 0.0625rem solid var(--default-bd);
+    background-color: var(--default-bg);
+
+    &:hover {
+      background-color: var(--default-hover);
+    }
+  }
+
+  &.button-positive {
+    color: var(--text-light);
+    border: 0.0625rem solid var(--positive-bd);
+    background-color: var(--positive-bg);
+
+    &:hover {
+      background-color: var(--positive-hover);
+    }
+  }
+
+  &.button-negative {
+    color: var(--text-light);
+    border: 0.0625rem solid var(--negative-bd);
+    background-color: var(--negative-bg);
+
+    &:hover {
+      background-color: var(--negative-hover);
+    }
+
+    &:focus-visible {
+      outline: 2.5px solid var(--focus, #EA4335ce);
+    }
+  }
+
+  &.button-sm {
+    height: var(--size-sm);
+    padding: 0.125rem 0.5rem;
+    font-size: 0.8125rem;
+    font-family: var(--font-light);
+  }
+
+  &.button-md {
+    height: var(--size-md);
+    padding: 0.125rem 0.75rem;
+    font-size: 1rem;
+    font-family: var(--font-medium);
+  }
+
+  &.button-lg {
+    height: var(--size-lg);
+    padding: 0.125rem 1rem;
+    font-size: 1.25rem;
+    font-family: var(--font-medium);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .button {
+    --default-bg: var(--gray-700);
+    --default-bd: var(--gray-700);
+    --default-hover: var(--gray-600);
+
+    &.button-default {
+      color: var(--text-light);
+    }
+  }
+}
