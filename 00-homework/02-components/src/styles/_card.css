@@ -1,0 +1,55 @@
+.Card {
+  --gap: 0.75rem;
+  --card-text: var(--gray-900);
+
+  max-inline-size: 16.25rem;
+
+  a {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: var(--gap);
+    text-decoration: none;
+    color: var(--card-text);
+    font-family: var(--font-light);
+  }
+
+  .card-thumbnail {
+    margin: 0;
+    inline-size: 16.25rem;
+    block-size: 25.625rem;
+  }
+
+  .card-info {
+    order: 1;
+    display: flex;
+    flex-flow: column-reverse nowrap;
+    gap: var(--gap);
+
+    .card-title {
+      margin-block: 0;
+      font-size: 1.375rem;
+      font-family: var(--font-medium);
+    }
+
+    .card-desc {
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      justify-content: space-between;
+      margin-block: 0;
+      font-size: 0.8125rem;
+    }
+  }
+}
+
+.CardList {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 1rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  .Card {
+    --card-text: var(--gray-200);
+  }
+}
