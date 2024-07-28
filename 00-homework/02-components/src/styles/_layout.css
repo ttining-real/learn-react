@@ -1,0 +1,48 @@
+body {
+  background-color: var(--gray-50);
+}
+
+.Layout {
+  display: flex;
+  flex-flow: column;
+  gap: 1.5rem;
+  padding: 1.5rem;
+}
+
+.component-section {
+  display: inherit;
+  flex-flow: inherit;
+  gap: 1rem;
+}
+
+.heading-title {
+  margin-block: 0;
+  font-size: 1.125;
+  font-family: var(--font-bold);
+  color: var(--gray-900);
+}
+
+.ButtonList {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  gap: 1.5rem;
+  margin-block: 0;
+  padding-inline-start: 0;
+
+  li {
+    display: inherit;
+    flex-flow: inherit;
+    gap: 0.5rem;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: var(--gray-900);
+  }
+
+  .heading-title {
+    color: var(--gray-50);
+  }
+}
