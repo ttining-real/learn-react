@@ -1,0 +1,13 @@
+{
+	"private": true,
+  "type": "module",
+  "name": "react-component",
+  "description": "리액트 컴포넌트 만들기",
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "node server.mjs"
+  },
+	"devDependencies": {
+		"live-server": "^1.2.2"
+	}
+}
