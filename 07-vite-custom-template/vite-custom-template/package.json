@@ -4,7 +4,16 @@
   "name": "vite-custom-template-react",
   "version": "0.0.1",
   "description": "Vite 커스텀 템필릇을 사용해 React 프로젝트 오토 스캐폴딩",
-    "devDependencies": {
-        "vite": "5.3.5"
-    }
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "5.3.5"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  }
 }
