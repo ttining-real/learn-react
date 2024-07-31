@@ -16,3 +16,10 @@
 
 - Vite 패키지 설치 (node_modules, package.json, pnpm-lock.yaml)
 - 명령어 인터페이스
+
+<br>
+
+### React
+
+- React 패키지 설치 (React, ReactDOM)
+- 타입 선언 패키지 설치 (React Type, ReactDOM Type, Node Type) ➡️optional
