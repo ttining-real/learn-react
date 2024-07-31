@@ -32,3 +32,4 @@
 - ESLint 설치
 - eslint.config.js 설정 (plugins, languageOptions-parserOptions, rules)
 - 명령어 인터페이스
+- ESLint 플러그인 구성 (eslint-plugin-react-hooks, eslint-plugin-react-refresh)
