@@ -23,7 +23,7 @@ function JSX_Markup() {
       <DataBinding statusMessages={statusMessages} />
       <ConditionalRendering imageType={imageType} />
       <ConditionalDisplay isShowImage={isShowReactImage} />
-      <RenderLists />
+      <RenderLists items={statusMessages} />
     </dl>
   );
 }
