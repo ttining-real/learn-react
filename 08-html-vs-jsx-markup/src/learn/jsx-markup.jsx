@@ -11,7 +11,7 @@ function JSX_Markup() {
 
   // learnData 구조 분해 할당
   // onst statusMessages = learnData.statusMessages;
-  const { statusMessages, imageType } = learnData;
+  const { statusMessages, imageType, isShowReactImage } = learnData;
 
   // {'JSX'}
   // {/*` `*/}
@@ -22,7 +22,7 @@ function JSX_Markup() {
       {/* {React.createElement(DataBinding, { statusMessages: statusMessages })} */}
       <DataBinding statusMessages={statusMessages} />
       <ConditionalRendering imageType={imageType} />
-      <ConditionalDisplay />
+      <ConditionalDisplay isShowImage={isShowReactImage} />
       <RenderLists />
     </dl>
   );
