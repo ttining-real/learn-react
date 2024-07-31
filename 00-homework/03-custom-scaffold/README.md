@@ -16,6 +16,7 @@
 
 - Vite 패키지 설치 (node_modules, package.json, pnpm-lock.yaml)
 - 명령어 인터페이스
+- Vite 플러그인 구성 (vitejs, vite.config.js)
 
 <br>
 
