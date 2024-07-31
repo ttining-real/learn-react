@@ -1,8 +1,9 @@
 import { typeOf } from '../utils';
 import reactImagePath from '../assets/react.svg?url';
 import viteImagePath from '../assets/vite.svg?url';
+import nextJsImagePath from '../assets/next-js.svg?url';
 
-const IMAGE_TYPES = ['react', 'vite'];
+const IMAGE_TYPES = ['react', 'vite', 'next.js'];
 
 function ConditionalRendering({ imageType }) {
   // 조건부 렌더링
@@ -11,14 +12,19 @@ function ConditionalRendering({ imageType }) {
   let imagePath = '';
   let printText = '';
 
-  if (imageType.includes('react')) {
+  if (imageType.toLowerCase().includes('react')) {
     imagePath = reactImagePath;
     printText = 'React';
   }
 
-  if (imageType.includes('vite')) {
+  if (imageType.toLowerCase().includes('vite')) {
     imagePath = viteImagePath;
     printText = 'Vite';
+  }
+
+  if (imageType.toLowerCase().includes('next.js')) {
+    imagePath = nextJsImagePath;
+    printText = 'Next.js';
   }
 
   return (
