@@ -33,3 +33,10 @@
 - eslint.config.js 설정 (plugins, languageOptions-parserOptions, rules)
 - 명령어 인터페이스
 - ESLint 플러그인 구성 (eslint-plugin-react-hooks, eslint-plugin-react-refresh)
+
+<br>
+
+### 절대 경로 설정
+
+- fileURLToPath, URL (Node.js)
+- jsconfig.json
