@@ -2,6 +2,8 @@ import { typeOf } from '../utils';
 import reactImagePath from '../assets/react.svg?url';
 import viteImagePath from '../assets/vite.svg?url';
 
+const IMAGE_TYPES = ['react', 'vite'];
+
 function ConditionalRendering({ imageType }) {
   // 조건부 렌더링
   // 함수 몸체 (function body) 영역 안에서
@@ -49,12 +51,19 @@ ConditionalRendering.propTypes = {
     const propValue = props[propName];
     const propType = typeOf(propValue);
     const allowedType = 'string';
+    const typeMatchString = IMAGE_TYPES.reduce((result, type, index, array) => {
+      const divider = index < array.length - 1 ? '|' : '';
+      return result + type + divider;
+    }, '');
+
+    const typeMatch = new RegExp(`^(${typeMatchString})$`, 'i');
 
     // 타입 검사
-    if (propType !== allowedType) {
+    if (propType !== allowedType || !typeMatch.test(propValue)) {
       // 타입이 다르면 오류 처리
       throw new Error(
-        `${componentName} 컴포넌트 ${propName} 속성 타입은 "${allowedType}" 타입이 요구되나, 실제 전달된 타입은 "${propType}"입니다.`
+        // `${componentName} 컴포넌트 ${propName} 속성 타입은 "${allowedType}" 타입이 요구되나, 실제 전달된 타입은 "${propType}"입니다.`
+        `${componentName} 컴포넌트 ${propName} 속성에 설정 가능한 값은 "[${IMAGE_TYPES.toString()}]" 중 하나가 요구되나, 실제 전달된 속성 값은 "${propValue}"입니다.`
       );
     }
 
