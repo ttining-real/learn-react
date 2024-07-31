@@ -11,7 +11,7 @@ function JSX_Markup() {
 
   // learnData 구조 분해 할당
   // onst statusMessages = learnData.statusMessages;
-  const { statusMessages } = learnData;
+  const { statusMessages, imageType } = learnData;
 
   // {'JSX'}
   // {/*` `*/}
@@ -21,7 +21,7 @@ function JSX_Markup() {
     <dl className="descriptionList">
       {/* {React.createElement(DataBinding, { statusMessages: statusMessages })} */}
       <DataBinding statusMessages={statusMessages} />
-      <ConditionalRendering />
+      <ConditionalRendering imageType={imageType} />
       <ConditionalDisplay />
       <RenderLists />
     </dl>
