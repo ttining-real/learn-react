@@ -4,9 +4,10 @@ import { typeOf } from '../utils';
 import reactImagePath from '../assets/react.svg?url';
 import viteImagePath from '../assets/vite.svg?url';
 import nextJsImagePath from '../assets/next-js.svg?url';
+import kakaoTalkImagePath from '../assets/kakao-talk.svg?url';
 
 // 이미지 타입 배열 관리
-const IMAGE_TYPES = ['react', 'vite', 'next.js'];
+const IMAGE_TYPES = ['react', 'vite', 'next.js', 'kakao talk'];
 
 // 컴포넌트
 function ConditionalRendering({ imageType }) {
@@ -29,6 +30,11 @@ function ConditionalRendering({ imageType }) {
   if (imageType.toLowerCase().includes('next.js')) {
     imagePath = nextJsImagePath;
     printText = 'Next.js';
+  }
+
+  if (imageType.toLowerCase().includes('kakao talk')) {
+    imagePath = kakaoTalkImagePath;
+    printText = 'Kakao Talk';
   }
 
   // JSX 반환 (마크업 생성)
