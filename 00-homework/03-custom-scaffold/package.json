@@ -1,0 +1,15 @@
+{
+	"type": "module",
+	"private": true,
+	"name": "vite-custom-template-react",
+	"version": "0.0.1",
+	"description": "Vite 커스텀 템플릿을 사용해 React 프로젝트 스캐폴딩",
+	"scripts": {
+		"dev": "vite",
+		"build": "vite build",
+		"preview": "vite preview"
+	},
+	"devDependencies": {
+		"vite": "^5.3.5"
+	}
+}

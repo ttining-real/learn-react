@@ -9,3 +9,10 @@
 
 - README.md 생성
 - .gitignore 생성
+
+<br>
+
+### Vite
+
+- Vite 패키지 설치 (node_modules, package.json, pnpm-lock.yaml)
+- 명령어 인터페이스
