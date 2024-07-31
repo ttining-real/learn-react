@@ -24,3 +24,11 @@
 
 - React 패키지 설치 (React, ReactDOM)
 - 타입 선언 패키지 설치 (React Type, ReactDOM Type, Node Type) ➡️optional
+
+<br>
+
+### ESLint (v.9+)
+
+- ESLint 설치
+- eslint.config.js 설정 (plugins, languageOptions-parserOptions, rules)
+- 명령어 인터페이스
