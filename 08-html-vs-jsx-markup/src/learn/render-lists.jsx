@@ -35,9 +35,40 @@ function RenderLists({ items /* string[], Array<string> */ }) {
 
   // const reversedList = renderList().toReversed();
 
+  // 문
+  let demoListUsingStatement = [];
+
+  for (let item of items) {
+    demoListUsingStatement.push(<li key={item.toString()}>{item}</li>);
+  }
+
+  // 식
+  const demoList = items.map((item, index) => {
+    return <li key={index.toString()}>{item}</li>;
+  });
+
+  const renderDemoList = () =>
+    items.map((item, index) => {
+      return <li key={index.toString()}>{item}</li>;
+    });
+
   return (
     <>
       <dt>리스트 렌더링(list rendering)</dt>
+      <dd>
+        {/* 직접 포함 */}
+        <ul>
+          {items.map((item, index) => {
+            return <li key={index.toString()}>{item}</li>;
+          })}
+        </ul>
+        {/* 문에서 처리된 결과 값을 할당받은 지역 변수 참조 */}
+        <ul>{demoListUsingStatement}</ul>
+        {/* 함수 몸체의 지역 변수 참조 */}
+        <ul>{demoList}</ul>
+        {/* 함수 실행 결과 값 활용 */}
+        <ul>{renderDemoList()}</ul>
+      </dd>
       <dd>
         <p>상태 메시지(status messages) 배열을 리스트 렌더링합니다.</p>
         {/* 함수 실행 -> 결과 값 반환 (식에서 사용 가능) */}
