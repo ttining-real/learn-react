@@ -1,4 +1,4 @@
-import { createElement as h } from 'https://esm.sh/react';
+import { createElement as h } from "https://esm.sh/react";
 
 /* 
   <figure class='card-thumbnail'>
@@ -17,18 +17,18 @@ import { createElement as h } from 'https://esm.sh/react';
 */
 function Thumbnail({ id, text, width = 260, height = 410 }) {
   return h(
-    'figure',
+    "figure",
     {
-      className: 'card-thumbnail',
-      'aria-label': '썸네일 이미지',
+      className: "card-thumbnail",
+      "aria-label": "썸네일 이미지",
     },
-    h('img', {
+    h("img", {
       src: `onepiece/thumbnail-${id}.jpg`,
-      alt: `${text}`,
+      alt: ``,
       width: `${width}`,
       height: `${height}`,
     }),
-    h('figcaption', { className: 'a11yHidden' }, `${text}`)
+    h("figcaption", { className: "a11yHidden" }, `${text}`)
   );
 }
 
