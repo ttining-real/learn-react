@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
-import { typeOf } from '../utils';
+import { bool } from 'prop-types';
 
-function ConditionalDisplay({ isShowImage }) {
+function ConditionalDisplay({ isShowImage = true }) {
   // 조건부 렌더링
   // - JavaScript 로직
   // - if 문
@@ -65,15 +65,17 @@ function ConditionalDisplay({ isShowImage }) {
 export default ConditionalDisplay;
 
 ConditionalDisplay.propTypes = {
-  isShowImage(props, propName, componentName) {
-    const propValue = props[propName];
-    const propType = typeOf(propValue);
-    const allowedType = 'boolean';
+  isShowImage: bool,
+  // 사용자가 직접 컴포넌트 속성 검사 코드
+  // isShowImage(props, propName, componentName) {
+  //   const propValue = props[propName];
+  //   const propType = typeOf(propValue);
+  //   const allowedType = 'boolean';
 
-    if (propType !== allowedType) {
-      throw new Error(
-        `${componentName} 컴포넌트 ${propName} 속성 타입은 "${allowedType}" 타입이 요구되나, 실제 전달된 타입은 "${propType}"입니다.`
-      );
-    }
-  },
+  //   if (propType !== allowedType) {
+  //     throw new Error(
+  //       `${componentName} 컴포넌트 ${propName} 속성 타입은 "${allowedType}" 타입이 요구되나, 실제 전달된 타입은 "${propType}"입니다.`
+  //     );
+  //   }
+  // },
 };

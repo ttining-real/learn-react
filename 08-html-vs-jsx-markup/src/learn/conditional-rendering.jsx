@@ -1,16 +1,12 @@
+import { oneOf } from 'prop-types';
 import { isTrueOrFalse } from '../utils';
-import PropTypes from '../utils/prop-types';
-
-// console.log(PropTypes);
+import { IMAGE_TYPES } from '../data/learn';
 
 // 이미지 경로 불러오기
 import kakaoTalkImagePath from '../assets/kakao-talk.svg?url';
 import nextJsImagePath from '../assets/next-js.svg?url';
 import reactImagePath from '../assets/react.svg?url';
 import viteImagePath from '../assets/vite.svg?url';
-
-// 이미지 타입 배열 관리
-const IMAGE_TYPES = ['react', 'vite', 'next.js', 'kakao talk'];
 
 // 컴포넌트
 function ConditionalRendering({ imageType }) {
@@ -126,5 +122,5 @@ ConditionalRendering.propTypes = {
   // 배열에 포함된 것 중 하나를 확인하는 검사
   // ['react', 'vite', 'next.js', 'kakao talk']
   // imageType: oneOf(['react', 'vite', 'next.js', 'kakao talk']),
-  imageType: PropTypes.oneOf(IMAGE_TYPES),
+  imageType: oneOf(IMAGE_TYPES).isRequired,
 };
