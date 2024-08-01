@@ -1,3 +1,15 @@
+// JSX Runtime Mode [CLASSIC] 직접 주입
+// import React from 'react';
+// JSX => React.createElement(type, props, ...children);
+
+// JSX Runtime Mode [AUTOMATIC] 자동 주입
+// import { jsx } from 'react/jsx-runtime';
+// JSX => jsx(type, props);
+
+// React.Fragment 컴포넌트 사용이 필요할 때
+// 자동 주입이 없음, 그래서 직접 주입 필요
+// import { Fragment } from 'react';
+// <Fragment> 컴포넌트 사용 가능
 import { Fragment } from 'react';
 import { array, exact, string } from 'prop-types';
 
@@ -60,6 +72,36 @@ function RenderLists({
       return <li key={id}>{message}</li>;
     });
 
+  // JSX 클린 코드를 위해 => 함수 몸체에 함수 정의 후 반환 값 활용
+  const renderDefinitionList = (objectData) => {
+    const definitionItems = Object.entries(objectData).map(([key, value]) => {
+      // key, value => JSX (Markup 생성)
+      // <React.Fragment></React.Fragment>
+      // <></>
+      // - React.Fragment 컴포넌트 & 리스트 렌더링
+      // - Fragment 컴포넌트에 key 설정 필요
+      // - 그러므로 <></> 표기법은 사용 X
+      return (
+        <Fragment key={key}>
+          <dt>{key}</dt>
+          <dd>{value}</dd>
+        </Fragment>
+      );
+    });
+
+    {
+      /* 객체 데이터를 순환해 설명 목록으로 리스트 렌더링 합니다. */
+    }
+    {
+      /* JavaScript에서 객체 순환하려면?
+        - [1] for ~ in 문 순환 -> 배열 객체 정의해서 리스트 렌더링 (문이기 때문에 함수 몸체에서 사용해야 함)
+        - [2] Object.entries() 메서드 활용 (식이므로 JSX 안에서 사용 가능)
+        - [3] JSX 클린 코드를 위해 함수 컴포넌트 몸체에 함수를 정의하여 반환 값 활용
+    */
+    }
+    return <dl className="reactLibrary">{definitionItems}</dl>;
+  };
+
   return (
     <>
       <dt>리스트 렌더링(list rendering)</dt>
@@ -103,27 +145,7 @@ function RenderLists({
           React 라이브러리(reactLibrary) 객체의 키, 값을 <q>설명 목록</q>으로
           렌더링합니다.
         </p>
-        <dl className="reactLibrary">
-          {/* 객체 데이터를 순환해 설명 목록으로 리스트 렌더링 합니다. */}
-          {/* JavaScript에서 객체 순환하려면?
-              - [1] for ~ in 문 순환 -> 배열 객체 정의해서 리스트 렌더링 (문이기 때문에 함수 몸체에서 사용해야 함)
-              - [2] Object.entries() 메서드 활용 (식이므로 JSX 안에서 사용 가능)
-          */}
-          {Object.entries(reactLibrary).map(([key, value]) => {
-            // key, value => JSX (Markup 생성)
-            // <React.Fragment></React.Fragment>
-            // <></>
-            // - React.Fragment 컴포넌트 & 리스트 렌더링
-            // - Fragment 컴포넌트에 key 설정 필요
-            // - 그러므로 <></> 표기법은 사용 X
-            return (
-              <Fragment key={key}>
-                <dt>{key}</dt>
-                <dd>{value}</dd>
-              </Fragment>
-            );
-          })}
-        </dl>
+        {renderDefinitionList(reactLibrary)}
       </dd>
     </>
   );
