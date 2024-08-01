@@ -24,7 +24,7 @@ function JSX_Markup() {
       {/* <DataBinding statusMessages={['hi', 'react', 'prop-types']} /> */}
       <DataBinding statusMessages={statusMessages} />
       <ConditionalRendering imageType={imageType} />
-      <ConditionalDisplay />
+      {/* <ConditionalDisplay /> */}
       <ConditionalDisplay isShowImage={isShowReactImage} />
       <RenderLists reactLibrary={reactLibrary} items={statusMessagesWithID} />
     </dl>

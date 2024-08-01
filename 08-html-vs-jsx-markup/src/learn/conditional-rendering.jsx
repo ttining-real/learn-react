@@ -1,6 +1,5 @@
-import { oneOf } from 'prop-types';
 import { isTrueOrFalse } from '../utils';
-import { IMAGE_TYPES } from '../data/learn';
+import { ImagesType } from '../@types/types.d';
 
 // 이미지 경로 불러오기
 import kakaoTalkImagePath from '../assets/kakao-talk.svg?url';
@@ -17,26 +16,6 @@ function ConditionalRendering({ imageType }) {
   let printText = '';
 
   // 조건 "문"
-  // if (imageType.toLowerCase().includes('react')) {
-  //   imagePath = reactImagePath;
-  //   printText = 'React';
-  // }
-
-  // if (imageType.toLowerCase().includes('vite')) {
-  //   imagePath = viteImagePath;
-  //   printText = 'Vite';
-  // }
-
-  // if (imageType.toLowerCase().includes('next.js')) {
-  //   imagePath = nextJsImagePath;
-  //   printText = 'Next.js';
-  // }
-
-  // if (imageType.toLowerCase().includes('kakao talk')) {
-  //   imagePath = kakaoTalkImagePath;
-  //   printText = 'Kakao Talk';
-  // }
-
   // if 문 => switch 문으로 변경
   switch (imageType.toLowerCase()) {
     case 'react':
@@ -62,13 +41,6 @@ function ConditionalRendering({ imageType }) {
   // 값을 반환하는 함수 실행
   // const isShowSpinner = isTrueOrFalse(); // 참 또는 거짓
 
-  // const spinnerOrVite =
-  //   randomNumber(0, 1) > 0.5 ? (
-  //     <img className="spinner" src="/icons/spinner.svg" alt="로딩 중..." />
-  //   ) : (
-  //     <img src="/vite.svg" alt="Vite" style={{ height: 42 }} />
-  //   );
-
   // 3항 연산자 (표현) "식"
   const spinnerOrVite = isTrueOrFalse() ? (
     <img className="spinner" src="/icons/spinner.svg" alt="로딩 중..." />
@@ -83,8 +55,8 @@ function ConditionalRendering({ imageType }) {
   // const spinnerMessage = !isShowSpinner || '스피너 표시';
 
   // JSX 반환 (마크업 생성)
-  // Q. JSX는 문(statement)이다? 표현식(expression)이다? => 표현식이다.
-  //    JSX 내부에서는 오직 '식'만 사용 가능하다!!!
+  // Q. JSX는 문(statement)이다? 아니, 표현식(expression)이다!
+  //    JSX 내부에서는 오직 식만 사용 가능하다!!!
   return (
     <>
       {/* <dt>조건부 렌더링(conditional rendering) ({spinnerMessage})</dt> */}
@@ -105,8 +77,15 @@ function ConditionalRendering({ imageType }) {
         <p>spinner 또는 vite 이미지가 랜덤으로 화면에 렌더링 되도록 합니다.</p>
         <div className="conditionalRendering">
           {spinnerOrVite}
-          {/* <img className="spinner" src="/icons/spinner.svg" alt="로딩 중..." />
-          <img src="/vite.svg" alt="Vite" style={{ height: 42 }} /> */}
+          {/* {randomNumber(0, 1) > 0.5 ? (
+            <img
+              className="spinner"
+              src="/icons/spinner.svg"
+              alt="로딩 중..."
+            />
+          ) : (
+            <img src="/vite.svg" alt="Vite" style={{ height: 42 }} />
+          )} */}
         </div>
       </dd>
     </>
@@ -122,5 +101,5 @@ ConditionalRendering.propTypes = {
   // 배열에 포함된 것 중 하나를 확인하는 검사
   // ['react', 'vite', 'next.js', 'kakao talk']
   // imageType: oneOf(['react', 'vite', 'next.js', 'kakao talk']),
-  imageType: oneOf(IMAGE_TYPES).isRequired,
+  imageType: ImagesType.isRequired,
 };
