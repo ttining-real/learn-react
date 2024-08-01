@@ -71,6 +71,8 @@ export function oneOf(types /* type[] */) {
 }
 
 // export function arrayOf(type) {}
+// export function shape(type) {}
+// export function exact(type) {}
 
 const PropTypes = Object.freeze({
   string,

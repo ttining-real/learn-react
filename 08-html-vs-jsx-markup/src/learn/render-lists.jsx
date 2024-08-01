@@ -1,9 +1,12 @@
-import { array } from '../utils/prop-types';
+import PropTypes, { array, exact, string } from 'prop-types';
+
+console.log(PropTypes);
 
 function RenderLists({
   reactLibrary,
   items /* { id: string, message: string }[] */,
 }) {
+  console.log(reactLibrary);
   // 함수 내부에 리스트 렌더링 코드를 작성해보세요.
   // react.d.ts
   // { @@typeof: 'Symbol(react.element)', ... }
@@ -111,5 +114,12 @@ export default RenderLists;
 RenderLists.propTypes = {
   // items: oneOf(statusMessages)
   items: array, // [권장] arrayOf(string) | arrayOf(number)
-  // reactLibrary: shape() // [권장] shape({ name: stirng, author: string, writtenIn: string, type: string, license: string })
+
+  reactLibrary: exact({
+    name: string,
+    author: string,
+    writtenIn: string,
+    type: string,
+    license: string,
+  }), // [권장] shape()
 };
