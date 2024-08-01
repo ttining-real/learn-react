@@ -1,8 +1,8 @@
+import * as learnData from '@/data/learn';
 import DataBinding from './data-binding';
 import ConditionalRendering from './conditional-rendering';
 import ConditionalDisplay from './conditional-display';
 import RenderLists from './render-lists';
-import * as learnData from '../data/learn';
 
 function JSX_Markup(): JSX.Element {
   let {

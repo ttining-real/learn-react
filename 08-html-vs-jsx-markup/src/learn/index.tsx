@@ -1,4 +1,4 @@
-import JSX_Markup from './jsx-markup.tsx';
+import JSX_Markup from './jsx-markup';
 
 function Learn(): JSX.Element {
   return (

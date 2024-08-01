@@ -1,4 +1,4 @@
-import { randomNumber } from '../utils';
+import { randomNumber } from '@/utils';
 
 // 사용자 정의 타입 알리아스(별칭)
 // 1. type (primitives, interface + type)

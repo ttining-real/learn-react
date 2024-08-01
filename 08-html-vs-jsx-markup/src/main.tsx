@@ -1,7 +1,7 @@
-import './styles/globals.css';
+import '@/styles/globals.css';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import Learn from './learn/index';
+import Learn from '@/learn';
 
 const container = document.getElementById('react-app');
 

@@ -1,8 +1,8 @@
-import { isTrueOrFalse } from '../utils';
-import kakaoTalkImagePath from '../assets/kakao-talk.svg?url';
-import nextJsImagePath from '../assets/next-js.svg?url';
-import reactImagePath from '../assets/react.svg?url';
-import viteImagePath from '../assets/vite.svg?url';
+import { isTrueOrFalse } from '@/utils';
+import kakaoTalkImagePath from '@/assets/kakao-talk.svg?url';
+import nextJsImagePath from '@/assets/next-js.svg?url';
+import reactImagePath from '@/assets/react.svg?url';
+import viteImagePath from '@/assets/vite.svg?url';
 
 interface Props {
   imageType: ImageType;

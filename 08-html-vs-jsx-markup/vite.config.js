@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite';
+import { fileURLToPath, URL } from 'node:url';
 import react from '@vitejs/plugin-react';
 
 const viteConfig = defineConfig({
@@ -9,6 +10,11 @@ const viteConfig = defineConfig({
     open: false,
   },
   plugins: [react()],
+  resolve: {
+    alias: {
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
+    },
+  },
 });
 
 export default viteConfig;
