@@ -1,13 +1,13 @@
 import { isTrueOrFalse } from '../utils';
 import PropTypes from '../utils/prop-types';
 
-console.log(PropTypes);
+// console.log(PropTypes);
 
 // 이미지 경로 불러오기
+import kakaoTalkImagePath from '../assets/kakao-talk.svg?url';
+import nextJsImagePath from '../assets/next-js.svg?url';
 import reactImagePath from '../assets/react.svg?url';
 import viteImagePath from '../assets/vite.svg?url';
-import nextJsImagePath from '../assets/next-js.svg?url';
-import kakaoTalkImagePath from '../assets/kakao-talk.svg?url';
 
 // 이미지 타입 배열 관리
 const IMAGE_TYPES = ['react', 'vite', 'next.js', 'kakao talk'];
@@ -91,7 +91,7 @@ function ConditionalRendering({ imageType }) {
   //    JSX 내부에서는 오직 '식'만 사용 가능하다!!!
   return (
     <>
-      {/* <dt>조건부 렌더링(conditional rendering)</dt> */}
+      {/* <dt>조건부 렌더링(conditional rendering) ({spinnerMessage})</dt> */}
       <dt>
         조건부 렌더링(conditional rendering) ({isTrueOrFalse() && '스피너 표시'}
         )

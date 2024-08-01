@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { typeOf } from '../utils';
 
 function ConditionalDisplay({ isShowImage }) {
@@ -14,8 +15,8 @@ function ConditionalDisplay({ isShowImage }) {
   // - className 또는 style 속성 활용
   // - HTML 요소 hidden 속성 활용
 
-  const pictureClassName = `Picture ${isShowImage ? '' : 'hidden'}`.trim();
-  console.log(pictureClassName);
+  const pictureClassNames = `Picture ${isShowImage ? '' : 'hidden'}`.trim();
+  // console.log(pictureClassNames);
 
   const pictureStyles = {
     display: isShowImage ? 'inline-block' : 'none',
@@ -23,7 +24,7 @@ function ConditionalDisplay({ isShowImage }) {
     lineHeight: 2.4,
     letterSpacing: '2px',
   };
-  console.log(pictureStyles);
+  // console.log(pictureStyles);
 
   return (
     <>

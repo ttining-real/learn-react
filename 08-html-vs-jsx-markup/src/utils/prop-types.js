@@ -37,7 +37,7 @@ export const func = generateTypeValidation('function');
 export const array = generateTypeValidation('array');
 export const object = generateTypeValidation('object');
 
-// 집합의 특정 값중 하나와 일치하는 경우를 검사하는 함수 (재사용)
+/**@type{(types: any[]) => void | Error} */
 export function oneOf(types /* type[] */) {
   // JavaScript Closure
   return function innerFunction(props, propName, componentName) {
@@ -69,6 +69,8 @@ export function oneOf(types /* type[] */) {
     // 타입이 동일하고 속성 값이 매칭(일치)되면? 통과
   };
 }
+
+// export function arrayOf(type) {}
 
 const PropTypes = Object.freeze({
   string,
