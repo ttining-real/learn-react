@@ -21,6 +21,7 @@ function JSX_Markup() {
   return (
     <dl className="descriptionList">
       {/* {React.createElement(DataBinding, { statusMessages: statusMessages })} */}
+      {/* <DataBinding statusMessages={['hi', 'react', 'prop-types']} /> */}
       <DataBinding statusMessages={statusMessages} />
       <ConditionalRendering imageType={imageType} />
       <ConditionalDisplay isShowImage={isShowReactImage} />
