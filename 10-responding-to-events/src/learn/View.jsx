@@ -17,7 +17,7 @@ function RespondingToEvents() {
 
   const updateMessage = (addMessage) => {
     message += addMessage;
-    console.log(message);
+    // console.log(message);
   };
 
   return (

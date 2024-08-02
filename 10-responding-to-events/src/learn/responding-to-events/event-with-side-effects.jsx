@@ -21,7 +21,7 @@ function EventWithSideEffects() {
       }
 
       countElement.value = nextCountValue.toString();
-    }, 10);
+    });
   };
 
   return (
