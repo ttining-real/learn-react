@@ -1,8 +1,9 @@
+// import './learn/about-purity.js';
+// import './learn/about-side-effects.js';
+
 import '@/styles/main.css';
 // import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-// import './learn/about-purity.js';
-import './learn/about-side-effects.js';
 import App from './App';
 
 const container = document.getElementById('react-app');
