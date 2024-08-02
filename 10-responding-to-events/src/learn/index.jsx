@@ -12,7 +12,11 @@ import View from './View';
 import NavContents from './NavContents';
 import ScrollUpAndDown from './responding-to-events/scroll-up-and-down';
 
+let mountCount = 0;
+
 function Learn() {
+  console.log('마운트 횟수', ++mountCount);
+
   return (
     <div className="Learn">
       <NavContents />
