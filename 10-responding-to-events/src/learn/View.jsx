@@ -9,17 +9,23 @@ import EventWithSideEffects from './responding-to-events/event-with-side-effects
 // 하위 컴포넌트
 function RespondingToEvents() {
   // 함수 지역 변수 (데이터)
-  const message = '김사부! "집중~~"';
+  let message = '김사부! "집중~~"';
 
   // 함수 내부의 지역 함수 (데이터)
+  // eslint-disable-next-line no-unused-vars
   const printMessage = () => console.log(message);
+
+  const updateMessage = (addMessage) => {
+    message += addMessage;
+    console.log(message);
+  };
 
   return (
     <div className="ViewRespondingToEvent">
       <h1>이벤트에 응답</h1>
       <p>사용자와 상호작용하도록 이벤트를 구성합니다.</p>
       <hr />
-      <EventHandlerProp onPrintMessage={printMessage} />
+      <EventHandlerProp onPrintMessage={updateMessage} />
       <hr />
       <EventPropagation />
       <hr />

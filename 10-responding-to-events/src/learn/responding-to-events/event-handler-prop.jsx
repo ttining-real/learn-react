@@ -8,7 +8,7 @@ EventHandlerProp.propTypes = {
 function EventHandlerProp({ onPrintMessage }) {
   const handleEnter = () => {
     console.log('enter');
-    onPrintMessage?.();
+    onPrintMessage?.(' ⭐️');
   };
 
   const handleLeave = () => console.log('leave');
