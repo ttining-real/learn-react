@@ -4,7 +4,7 @@
 // - [x] 데이터 분리
 // - [x] 리스트 렌더링
 // - [x] 컴포넌트 속성 검사
-// - [ ] 컴포넌트 순수성 진단
+// - [x] 컴포넌트 순수성 진단
 // --------------------------------------------------------------------------
 import { arrayOf } from 'prop-types';
 import Avatar from '@/components/Avatar';
@@ -39,11 +39,11 @@ function AvatarListPage(props) {
   // 부수 효과(side effects)
   // DOM 요소에 대한 접근/조작
   // 타이머 API 활용
-  let renderCount = 0;
-  setInterval(() => {
-    console.log(renderCount);
-    document.getElementById('react-app').dataset.render = ++renderCount;
-  }, 1000);
+  // let renderCount = 0;
+  // setInterval(() => {
+  //   console.log(renderCount);
+  //   document.getElementById('react-app').dataset.render = ++renderCount;
+  // }, 1000);
 
   return (
     <ul className="AvatarList">
