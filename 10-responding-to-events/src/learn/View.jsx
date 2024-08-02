@@ -25,6 +25,17 @@ function RespondingToEvents() {
       <h1>이벤트에 응답</h1>
       <p>사용자와 상호작용하도록 이벤트를 구성합니다.</p>
       <hr />
+      <form
+        action="/?submitted"
+        onSubmit={(e) => {
+          e.preventDefault();
+          console.log(e.target);
+        }}
+      >
+        <input type="text" aria-label="사용자 이름" placeholder="박혁거세" />
+        <button type="submit">보내기</button>
+      </form>
+      <hr />
       <EventHandlerProp onPrintMessage={updateMessage} />
       <hr />
       <EventPropagation />

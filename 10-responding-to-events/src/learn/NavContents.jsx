@@ -9,12 +9,16 @@ function NavContents() {
 
   // 1. 컴포넌트 바디(함수 몸체) 내부
   // 이벤트 핸들러 정의
-  const handleClickFirstLink = () => {
+  const handleClickFirstLink = (e) => {
+    e.preventDefault();
+
     const firstLink = document.querySelector('[href="#jsx-markup"]');
     firstLink.dataset.element = 'jsx-markup';
   };
 
-  const handleClickLastLink = () => {
+  const handleClickLastLink = (e) => {
+    e.preventDefault();
+
     // 사이드 이펙트(부수 효과) 처리 함수
     // 사이드 이펙트: 리액트 렌더링 프로세스와 연관이 없는 것을 처리
     // console.log('이벤트 응답');
