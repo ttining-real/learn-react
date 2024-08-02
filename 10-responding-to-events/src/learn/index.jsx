@@ -12,15 +12,20 @@
 import View from './View';
 import NavContents from './NavContents';
 import ScrollUpAndDown from './responding-to-events/scroll-up-and-down';
+import { number } from 'prop-types';
 
-// eslint-disable-next-line no-unused-vars
-let mountCount = 0;
+Learn.propTypes = {
+  count: number,
+};
 
-function Learn() {
+function Learn({ count }) {
   // console.log('마운트 횟수', ++mountCount);
+
+  console.log({ count });
 
   return (
     <div className="Learn">
+      <output style={{ fontSize: 101 }}>{count}</output>
       <NavContents />
       <View.HTMLvsJSX />
       <View.RespondingToEvents />
