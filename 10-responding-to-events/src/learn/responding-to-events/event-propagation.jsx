@@ -18,36 +18,35 @@ import LayoutBox from './LayoutBox';
 // event.stopPropagation(); // 이벤트 전파 중지
 
 function EventPropagation() {
+  // const returnHandlePrint = (color) => (e) => {
+  //   console.log(color, e.target);
+  // };
+
+  function returnHandlePrint(color) {
+    return function handlePrint(e) {
+      console.log(color, e.target);
+    };
+  }
+
   return (
     <details>
       <summary>
         <b>이벤트 전파 &amp; 기본 작동 방지</b>
       </summary>
       {/* 상위 컴포넌트 : 정민 */}
-      <LayoutBox
-        style={styles.cyan}
-        onClick={(e) => {
-          console.log('cyan', e.target);
-        }}
-      >
+      <LayoutBox style={styles.cyan} onClick={returnHandlePrint('cyan')}>
         <LayoutBox
           style={styles.magenta}
-          onClick={(e) => {
-            console.log('magenta', e.target);
-          }}
+          onClick={returnHandlePrint('magenta')}
         >
           <LayoutBox
             style={styles.yellow}
-            onClick={(e) => {
-              console.log('yellow', e.target);
-            }}
+            onClick={returnHandlePrint('yellow')}
           >
             <LayoutBox
               style={styles.purple}
-              onClick={(e) => {
-                console.log('purple', e.target);
-              }}
-            ></LayoutBox>
+              onClick={returnHandlePrint('purple')}
+            />
           </LayoutBox>
         </LayoutBox>
       </LayoutBox>
