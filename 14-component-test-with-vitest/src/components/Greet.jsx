@@ -15,6 +15,7 @@ Greet.propTypes = {
   name: string,
 };
 
+/**@type {({ name }: { name: string }) => JSX.Element} */
 function Greet({ name }) {
   if (name) {
     return <h1>안녕! {name} 😊</h1>;

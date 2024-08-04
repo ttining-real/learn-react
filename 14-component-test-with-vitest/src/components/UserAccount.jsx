@@ -15,6 +15,7 @@ UserAccount.propTypes = {
   user: UserType,
 };
 
+/**@type {({ user }: { user: { id: string, name: string, isAdmin?: boolean } }) => JSX.Element} */
 function UserAccount({ user }) {
   return (
     <>

@@ -14,6 +14,7 @@ Avatar.propTypes = {
   size: number,
 };
 
+/**@type {({ name, photo, status, size }: { name: string, photo: string, status?: 'offline' | 'online' | 'dont-disturb' | 'away', size?: number }) => JSX.Element} */
 function Avatar({ name, photo, status = 'offline', size = 64 }) {
   let iconPath = '';
   let statusMessage = '';
