@@ -1,0 +1,13 @@
+@use './../utils' as *;
+@use './../components/buttons';
+
+.ButtonList {
+  @include padding-inline-start(0);
+  @include marginY(0);
+  @include flexbox($gap: 2rem);
+  list-style-type: none;
+
+  li {
+    @include flexbox($gap: 1rem);
+  }
+}

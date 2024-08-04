@@ -1,0 +1,77 @@
+@use './../utils' as *;
+
+.Button {
+  @include radius(xs);
+
+  // default
+  $default-color: $gray-900;
+  $default-bg: $white;
+  $default-hover: $gray-100;
+  $default-bd: $gray-500;
+  // positive
+  $positive-color: $white;
+  $positive-bg: $confirm;
+  $positive-hover: $confirm-deep;
+  // negative
+  $negative-color: $white;
+  $negative-bg: $error;
+  $negative-hover: $error-deep;
+  // font
+  $font-family-sm: $font-family-light;
+  $font-family-md: $font-family-medium;
+  $font-size-sm: 0.8125rem;
+  $font-size-md: 1rem;
+  $font-size-lg: 1.25rem;
+
+  border: 0.0625rem;
+  border-style: solid;
+  font-size: 0.8125rem;
+  font-family: $font-family-sm;
+  margin: 3px;
+
+  &.default {
+    color: $default-color;
+    border-color: $default-bd;
+    background-color: $default-bg;
+    &:hover {
+      background-color: $default-hover;
+    }
+  }
+  &.positive {
+    color: $positive-color;
+    border-color: $positive-bg;
+    background-color: $positive-bg;
+    &:hover {
+      background-color: $positive-hover;
+    }
+  }
+  &.negative {
+    color: $negative-color;
+    border-color: $negative-bg;
+    background-color: $negative-bg;
+    &:hover {
+      background-color: $negative-hover;
+    }
+    &:focus-visible {
+      outline: 2.5px solid $negative-bg;
+    }
+  }
+
+  &.sm {
+    @include paddingX(0.5rem);
+    @include block-size(2rem);
+    font-size: $font-size-sm;
+  }
+  &.md {
+    @include paddingX(0.75rem);
+    @include block-size(3rem);
+    font-size: $font-size-md;
+    font-family: $font-family-md;
+  }
+  &.lg {
+    @include paddingX(1rem);
+    @include block-size(3.75rem);
+    font-size: $font-size-lg;
+    font-family: $font-family-md;
+  }
+}

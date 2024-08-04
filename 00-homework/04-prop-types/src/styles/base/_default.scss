@@ -1,0 +1,21 @@
+@use './../utils/variables' as var;
+@use './../utils/mixins' as mix;
+
+$base-font-family: 'SUIT Variable', sans-serif;
+
+body *,
+body *::before,
+body *::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var.$base-font-family;
+  line-height: 1.15;
+  margin: 0;
+}
+
+/* 숨김 콘텐츠 */
+.sr-only {
+  @include mix.a11yHidden;
+}
