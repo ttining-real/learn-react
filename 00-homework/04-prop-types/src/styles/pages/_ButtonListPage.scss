@@ -4,7 +4,7 @@
 .ButtonList {
   @include padding-inline-start(0);
   @include marginY(0);
-  @include flexbox($gap: 2rem);
+  @include flexbox($align: center, $gap: 2rem);
   list-style-type: none;
 
   li {

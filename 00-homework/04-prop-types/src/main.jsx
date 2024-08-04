@@ -1,8 +1,8 @@
+import '@/styles/main.scss';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-// import App from '@/test/App.jsx';
-import '@/styles/main.scss';
 import ButtonListPage from '@/pages/ButtonListPage';
+import CardListPage from '@/pages/CardListPage';
 
 const container = document.getElementById('react-app');
 
@@ -18,6 +18,7 @@ function render(label) {
   reactDOMRoot.render(
     <StrictMode>
       <ButtonListPage />
+      <CardListPage />
     </StrictMode>
   );
 }

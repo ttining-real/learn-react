@@ -1,1 +1,15 @@
 @forward './ButtonListPage';
+@forward './CardListPage';
+@use './../utils' as *;
+
+body {
+  background-color: $white;
+  @media (prefers-color-scheme: dark) {
+    background-color: $gray-900;
+  }
+}
+
+#react-app {
+  @include flexbox($direction: column, $gap: 1.5rem);
+  @include padding(1.5rem);
+}

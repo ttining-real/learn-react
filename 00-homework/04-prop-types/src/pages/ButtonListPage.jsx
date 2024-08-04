@@ -2,7 +2,7 @@ import Button from '@/components/Button';
 
 function ButtonListPage() {
   return (
-    <ul className="ButtonList">
+    <ul className="ButtonList" aria-label="버튼 컴포넌트 리스트">
       <li className="ButtonListItem" aria-label="작은 크기의 상태별 버튼">
         <Button status="default" size="sm" text={'기본 버튼'} />
         <Button status="positive" size="sm" text={'긍정 버튼'} />

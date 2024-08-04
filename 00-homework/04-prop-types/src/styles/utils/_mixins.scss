@@ -82,14 +82,14 @@ $breakpoints: (
 @mixin flexbox(
   $direction: row,
   $wrap: nowrap,
-  $items: null,
+  $align: null,
   $justify: null,
   $gap: null
 ) {
   display: flex;
   flex-direction: $direction;
   flex-wrap: $wrap;
-  align-items: $items;
+  align-items: $align;
   justify-content: $justify;
   gap: $gap;
 }

@@ -1,0 +1,9 @@
+@use './../utils' as *;
+@use './../components/card';
+
+.CardList {
+  @include margin-block-start(0);
+  @include padding-inline-start(0);
+  @include flexbox($wrap: wrap, $gap: 1.5rem);
+  list-style-type: none;
+}

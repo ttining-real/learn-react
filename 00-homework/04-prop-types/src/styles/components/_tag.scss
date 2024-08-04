@@ -1,0 +1,18 @@
+@use './../utils' as *;
+.tag {
+  $tag-bg: $gray-100;
+  $tag-text: $gray-900;
+
+  padding: 0.3rem 0.4rem;
+  font-size: 0.8125rem;
+  font-family: $font-family-light;
+  color: $tag-text;
+  border-radius: $rounded-sm;
+  background-color: $tag-bg;
+  @media (prefers-color-scheme: dark) {
+    $tag-bg: $gray-700;
+    $tag-text: $white;
+    color: $tag-text;
+    background-color: $tag-bg;
+  }
+}

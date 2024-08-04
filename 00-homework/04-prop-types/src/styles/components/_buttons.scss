@@ -23,11 +23,12 @@
   $font-size-md: 1rem;
   $font-size-lg: 1.25rem;
 
-  border: 0.0625rem;
-  border-style: solid;
+  margin: 3px;
+  white-space: nowrap;
   font-size: 0.8125rem;
   font-family: $font-family-sm;
-  margin: 3px;
+  border: 0.0625rem;
+  border-style: solid;
 
   &.default {
     color: $default-color;
@@ -73,5 +74,20 @@
     @include block-size(3.75rem);
     font-size: $font-size-lg;
     font-family: $font-family-md;
+  }
+  @media (prefers-color-scheme: dark) {
+    // default
+    $default-color: $gray-100;
+    $default-bg: $gray-700;
+    $default-hover: $gray-600;
+    $default-bd: $gray-700;
+    &.default {
+      color: $default-color;
+      border-color: $default-bd;
+      background-color: $default-bg;
+      &:hover {
+        background-color: $default-hover;
+      }
+    }
   }
 }
