@@ -5,6 +5,7 @@
 // - [ ] 사용자가 이용 약관에 동의하지 않으면 확인 버튼 비활성화
 // --------------------------------------------------------------------------
 import { Component } from 'react';
+import './TermAndConditions.css';
 
 class TermAndConditions extends Component {
   render() {
