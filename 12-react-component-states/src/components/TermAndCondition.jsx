@@ -5,7 +5,7 @@
 // - [ ] 사용자가 이용 약관에 동의하지 않으면 확인 버튼 비활성화
 // --------------------------------------------------------------------------
 import './TermAndConditions.css';
-import React from 'react';
+import { useState } from 'react';
 
 // [2018] React Hooks (functions) API 공개
 //        - const [state, setState] = React.useState(initialState);
@@ -15,7 +15,7 @@ function TermAndConditions() {
   // let checked = false;
 
   // 리액트의 훅 API를 사용해 (함수형) 컴포넌트의 상태 선언
-  const [checked, setChecked] = React.useState(false);
+  const [checked, setChecked] = useState(false);
   // console.log(checked, typeof setChecked);
 
   // 데이터를 변경하는 함수
