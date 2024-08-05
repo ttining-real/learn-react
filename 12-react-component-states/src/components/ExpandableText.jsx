@@ -23,7 +23,10 @@ ExpandableText.propTypes = {
 // ClassComponent [render method]
 function ExpandableText({ children, limit = 255 }) {
   // 컴포넌트 상태 선언(정의)
-  const [isExpand, setIsExpand] = useState(false);
+  // const [isExpand, setIsExpand] = useState(false);
+  const [state, setState] = useState({
+    isExpand: false,
+  });
 
   // 파생된 상태 (from props)
   // isExpandable: boolean;
@@ -35,7 +38,7 @@ function ExpandableText({ children, limit = 255 }) {
     renderText = children.slice(0, limit) + '...';
   }
 
-  const buttonLabel = isExpand ? '축소' : '확장';
+  const buttonLabel = state.isExpand ? '축소' : '확장';
 
   // ClassComponent instance methods
   // this.handleExpand
@@ -43,15 +46,17 @@ function ExpandableText({ children, limit = 255 }) {
     // update component state
     // ClassComponent
     // this.setState(nextState)
-    const nextExpandValue = !isExpand;
+    const nextExpandValue = !state.isExpand;
     console.log('컴포넌트 상태 업데이트 요청');
-    setIsExpand(nextExpandValue);
+    setState({
+      isExpand: nextExpandValue,
+    });
   };
 
   // ClassComponent JSX (Markup)
   return (
     <div className="ExpandableText">
-      <p>{isExpand ? children : renderText}</p>
+      <p>{state.isExpand ? children : renderText}</p>
       {isExpandable && (
         <button type="button" onClick={handleExpand}>
           {buttonLabel}
