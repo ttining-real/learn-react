@@ -2,9 +2,9 @@
 // ✅ ExpandableText 컴포넌트
 // --------------------------------------------------------------------------
 // - [x] `children` 속성(prop) 길이에 따라 확장 가능한 텍스트 렌더링
-// - [ ] `limit` 속성(기본 값: 255) 값보다 `children` 길이가 짧은 경우 텍스트만 표시
-// - [ ] `limit` 속성 값보다 `children` 길이가 긴 경우 텍스트 말줄임(...) 표시
-// - [ ] `limit` 속성 값보다 `children` 길이가 긴 경우 확장 or 축소 버튼 표시
+// - [x] `limit` 속성(기본 값: 255) 값보다 `children` 길이가 짧은 경우 텍스트만 표시
+// - [x] `limit` 속성 값보다 `children` 길이가 긴 경우 텍스트 말줄임(...) 표시
+// - [x] `limit` 속성 값보다 `children` 길이가 긴 경우 확장 or 축소 버튼 표시
 // - [ ] 확장 or 축소 버튼을 사용자가 클릭하면 텍스트 확장 또는 축소되어 표시
 // --------------------------------------------------------------------------
 
@@ -36,12 +36,14 @@ class ExpandableText extends Component {
       renderText = children.toString().slice(0, limit) + '...';
     }
 
+    const buttonLabel = isExpand ? '축소' : '확장';
+
     return (
       <div className="ExpandableText" {...restProps}>
-        <p>{renderText}</p>
+        <p>{isExpand ? children : renderText}</p>
         {isExpandable && (
           <button type="button" onClick={this.handleExpand}>
-            {isExpand ? '축소' : '확장'}
+            {buttonLabel}
           </button>
         )}
       </div>
@@ -50,6 +52,9 @@ class ExpandableText extends Component {
 
   handleExpand = () => {
     // 상태 업데이트 기능 추가
+    this.setState({
+      isExpand: !this.state.isExpand,
+    });
   };
 }
 
