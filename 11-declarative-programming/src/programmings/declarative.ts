@@ -36,6 +36,11 @@ const update = (globalThis.update = (value: boolean): void => {
   setState("checked", value);
 });
 
+// React 상태 선언 코드
+// const [state, setState] = React.useState(data);
+// render = ReactDOM.createRoot(domNode).render(ReactRootElement)
+
+// 임의로 작성한 상태 선언 코드
 const [state, setState] = createState(data, render);
 
 // 최초 렌더링
