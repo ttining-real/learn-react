@@ -1,4 +1,4 @@
-import ExpandableText from '@/components/ExpandableText.class';
+import ExpandableText from '@/components/ExpandableText';
 
 function Playground() {
   return (
