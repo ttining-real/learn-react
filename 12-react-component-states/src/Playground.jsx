@@ -1,9 +1,8 @@
-import TermAndConditions from '@/components/TermAndCondition.class';
+import TermAndConditions from '@/components/TermAndCondition';
 
 function Playground() {
   return (
     <>
-      {/* <div>Playground</div> */}
       <TermAndConditions />
     </>
   );
