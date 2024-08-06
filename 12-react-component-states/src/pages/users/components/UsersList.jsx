@@ -1,18 +1,15 @@
 import { UsersListType } from '@/@types/type.d';
+import UserDetail from './UserDetail';
 
 UsersList.propTypes = {
   users: UsersListType.isRequired,
 };
 
 function UsersList({ users }) {
-  console.log(users);
-
   return (
     <ul className="UsersList">
       {users.map((user) => (
-        <li key={user.id}>
-          {user.name} (<a href={`mailto:${user.email}`}>{user.email}</a>)
-        </li>
+        <UserDetail key={user.id} user={user} />
       ))}
     </ul>
   );
