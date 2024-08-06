@@ -5,7 +5,7 @@ import Counter from '@/components/Counter';
 function Playground() {
   return (
     <div style={styles}>
-      <Counter min={0} count={3} max={5} />
+      <Counter min={-50} count={3} max={50} />
       {/* <UsersPage /> */}
     </div>
   );
