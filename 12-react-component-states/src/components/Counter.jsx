@@ -11,6 +11,12 @@
 // - [x] 사용자가 증가 버튼을 클릭했을 때 `count` 값이 `max` 보다 크거나 같을 경우 증가 버튼 비활성화
 // ------------------------------------------------------------------------------
 
+// ------------------------------------------------------------------------------
+// ✅ 리액트 상태 업데이트에 대한 이해
+// ------------------------------------------------------------------------------
+// - [ ] 상태는 스냅샷처럼 즉시 업데이트 되지 않음.
+// - [ ] 상태를 업데이트하는 2가지 방법 (Queue 활용)
+
 import { useState } from 'react';
 import { number } from 'prop-types';
 import './Counter.css';
@@ -24,9 +30,9 @@ Counter.propTypes = {
 
 /**@type {({ count?: number, step?: number, min?: number, max?: number }) => JSX.Element} */
 function Counter({ count: initialCount = 1, step = 1, min = 1, max = 1000 }) {
-  // only state
-  // 참고: https://react.dev/reference/react/useState#usestate
   const [count, setCount] = useState(() => {
+    // 초기화 함수 활용
+    // 참고: https://ko.react.dev/reference/react/useState#avoiding-recreating-the-initial-state
     if (initialCount < min || initialCount > max) {
       throw new Error(`count 값이 min 보다 작거나, max보다 큽니다.`);
     }
@@ -38,16 +44,54 @@ function Counter({ count: initialCount = 1, step = 1, min = 1, max = 1000 }) {
   // const [, setCount] = useState(initialCount);
   // console.log(count, setCount);
 
+  // 함수 내부의 지역 변수
+  // 리액트 월드에서는 상태로 사용할 수 없다!!
+  // 함수는 실행 이후 지역 변수를 메모리 상에서 지우기 때문 (가비지 컬렉터)
+  let number = 0;
+
   const handleDecrease = () => {
-    // console.log('decrease count');
+    // ----------------------------------------------------------------------
+    console.group('지역 변수');
+    console.log(`[-] number = ${number}`);
+    number -= 1;
+    // 함수 내부의 지역 변수는 즉시 값이 변경 됨!
+    console.log(`[-] number = ${number}`); // 함수 내부의 지역 변수는 즉시 값이 변경 됨!
+    console.groupEnd('지역 변수');
+    // ----------------------------------------------------------------------
+
+    // ----------------------------------------------------------------------
+    console.group('컴포넌트 상태');
+    console.log(`[-] count = ${count}`);
     const nextCount = count - step;
     setCount(nextCount);
+    // 컴포넌트의 상태는 리액트가 관리 (JavaScript가 아니라)
+    // - 동일 입력, 동일 출력 조건이 충족되면 순수 함수이다.
+    // - 상태는 불변 데이터(Immutable Data)로 관리된다.
+    // 컴포넌트의 상태는 즉시 값이 변경되지 않음!
+    console.log(`[-] count = ${count}`);
+    console.groupEnd('컴포넌트 상태');
+    // ----------------------------------------------------------------------
   };
 
   const handleIncrease = () => {
-    // console.log('increase count');
+    // ----------------------------------------------------------------------
+    console.group('지역 변수');
+    console.log(`[+] number = ${number}`);
+    number += 1;
+    // 함수 내부의 지역 변수는 즉시 값이 변경 됨!
+    console.log(`[+] number = ${number}`);
+    console.groupEnd('지역 변수');
+    // ----------------------------------------------------------------------
+
+    // ----------------------------------------------------------------------
+    console.group('컴포넌트 상태');
+    console.log(`[+] count = ${count}`);
     const nextCount = count + step;
     setCount(nextCount);
+    // 컴포넌트의 상태는 즉시 값이 변경되지 않음!
+    console.log(`[+] count = ${count}`);
+    console.groupEnd('컴포넌트 상태');
+    // ----------------------------------------------------------------------
   };
 
   // 파생된 상태 (Derived States)
