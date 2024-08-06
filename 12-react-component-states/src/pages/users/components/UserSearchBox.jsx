@@ -16,9 +16,11 @@ function UserSearchBox({ searchTerm, onSearch }) {
     const input = document.getElementById(id);
     const value = input.value.trim();
 
-    if (value.length > 0) {
-      onSearch?.(value);
-    }
+    onSearch?.(value);
+    // if (value.length > 0) {
+    // } else {
+    //   alert('검색어를 입력해주세요.');
+    // }
   };
 
   return (
