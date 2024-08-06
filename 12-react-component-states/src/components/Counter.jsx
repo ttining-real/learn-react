@@ -64,6 +64,16 @@ function Counter({ count: initialCount = 1, step = 1, min = 1, max = 1000 }) {
     console.log(`[-] count = ${count}`);
     const nextCount = count - step;
     setCount(nextCount);
+
+    // 클래스 컴포넌트
+    // this.setState(nextState, callback?)
+
+    // 함수 컴포넌트
+    // const [state, setState] = useState() (상태 관리)
+    // setState(nextState)
+    //     +
+    // useEffect (이펙트 관리)
+
     // 컴포넌트의 상태는 리액트가 관리 (JavaScript가 아니라)
     // - 동일 입력, 동일 출력 조건이 충족되면 순수 함수이다.
     // - 상태는 불변 데이터(Immutable Data)로 관리된다.
