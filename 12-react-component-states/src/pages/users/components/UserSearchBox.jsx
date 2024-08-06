@@ -20,7 +20,10 @@ function UserSearchBox() {
         <label htmlFor={id}>사용자 검색</label>
         <input
           id={id}
-          onChange={handleChange}
+          // value={searchTerm}
+          defaultValue={searchTerm}
+          // readOnly
+          // onChange={handleChange}
           type="search"
           placeholder="사용자 이름 입력"
         />
