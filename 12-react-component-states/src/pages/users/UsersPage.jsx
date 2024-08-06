@@ -17,6 +17,12 @@ import UsersList from './components/UsersList';
 function UsersPage() {
   // 리액트 컴포넌트 상태 관리
   const [users] = useState(usersData);
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const handleSearch = (userInput) => {
+    console.log('clicked button');
+    setSearchTerm(userInput);
+  };
 
   // 포함 가능한 로직
   // 상태 쓰기(C)/읽기(R)/수정(U)/삭제(D)
@@ -24,7 +30,7 @@ function UsersPage() {
 
   return (
     <div className="UsersPage">
-      <UserSearchBox />
+      <UserSearchBox searchTerm={searchTerm} onSearch={handleSearch} />
       <UsersList users={users} />
       <UserListCount />
     </div>
