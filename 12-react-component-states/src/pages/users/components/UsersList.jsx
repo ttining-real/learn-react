@@ -1,5 +1,6 @@
 import { UsersListType } from '@/@types/type.d';
 import UserDetail from './UserDetail';
+import './UsersList.css';
 
 UsersList.propTypes = {
   users: UsersListType.isRequired,
