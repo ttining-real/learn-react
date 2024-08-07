@@ -1,6 +1,6 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import App from '@/test/App.jsx';
+import App from '@/pages/App.jsx';
 import '@/style/main.scss';
 
 const domNode = document.getElementById('react-app');
