@@ -1,4 +1,4 @@
-import { UsersListType } from '@/@types/type.d';
+import { UsersListType } from '../types/user';
 import UserDetail from './UserDetail';
 import './UsersList.css';
 
