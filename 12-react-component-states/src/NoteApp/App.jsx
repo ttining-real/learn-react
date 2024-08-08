@@ -71,7 +71,12 @@ function NoteApp() {
         />
       );
     case ROUTES.detail:
-      return <NoteDetailPage noteId={routeInfo.noteId} />;
+      return (
+        <NoteDetailPage
+          noteId={routeInfo.noteId}
+          onChangeRoute={handleChangeRoute}
+        />
+      );
     case ROUTES.edit:
       return <NoteEditPage noteId={routeInfo.noteId} />;
   }
