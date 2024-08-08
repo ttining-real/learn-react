@@ -14,6 +14,7 @@ const userList = getUserList();
 NoteForm.propTypes = {
   newNoteId: number,
   onCreate: func,
+  onEdit: func,
   onBackToList: func,
   mode: oneOf(['create', 'edit']),
   note: NoteType, // optional
@@ -23,6 +24,7 @@ function NoteForm({
   mode = 'create',
   newNoteId,
   onCreate,
+  onEdit,
   onBackToList,
   note,
 }) {
@@ -31,10 +33,27 @@ function NoteForm({
   const userId = useId();
 
   // [상태 선언]
-  const [formData, setFormData] = useState({
-    title: '',
-    content: '',
-    userId: 0,
+  const [formData, setFormData] = useState(() => {
+    // 초기화 함수 실행
+    // 노트 생성 모드인 경우
+    if (mode === 'create') {
+      return {
+        title: '',
+        content: '',
+        userId: 0,
+      };
+    }
+
+    // 노트 데이터가 존재하고, 편집 모드인 경우
+    if (mode === 'edit' && note) {
+      return {
+        title: note.title,
+        content: convertHTMLToText(note.content),
+        userId: note.userId,
+      };
+    } else {
+      throw new Error('노트(note) 데이터가 존재하지 않습니다.');
+    }
   });
 
   // [상태 업데이트 기능]
@@ -54,7 +73,7 @@ function NoteForm({
   };
 
   // 노트 생성 기능
-  const handleSubmit = (e) => {
+  const handleCreateNote = (e) => {
     e.preventDefault();
 
     const { title, content, userId } = formData;
@@ -85,6 +104,19 @@ function NoteForm({
     onBackToList?.();
   };
 
+  // 노트 수정 기능
+  const handleEditNote = (e) => {
+    e.preventDefault();
+
+    const willEditNote = {
+      ...note,
+      ...formData,
+    };
+
+    onEdit?.(willEditNote);
+    onBackToList?.();
+  };
+
   // 노트 초기화 기능
   const handleReset = (e) => {
     e.preventDefault();
@@ -101,10 +133,7 @@ function NoteForm({
   // "생성" 또는 "수정" 모드에 따라 화면에 표시될 버튼 레이블 설정
   const submitButtonLabel = isCreateMode ? '추가' : '수정';
 
-  //
-  // if (note) {
-  //   note.content;
-  // }
+  const handleSubmit = isCreateMode ? handleCreateNote : handleEditNote;
 
   return (
     <form className="NoteForm" onSubmit={handleSubmit} onReset={handleReset}>
@@ -116,7 +145,6 @@ function NoteForm({
           name="title"
           value={formData.title}
           onChange={handleUpdateFormData}
-          // defaultValue={note?.title}
         />
       </div>
 
@@ -127,7 +155,6 @@ function NoteForm({
           name="content"
           value={formData.content}
           onChange={handleUpdateFormData}
-          // defaultValue={note && convertHTMLToText(note.content)}
         />
       </div>
 

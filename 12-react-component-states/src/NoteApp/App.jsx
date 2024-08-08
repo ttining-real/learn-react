@@ -49,7 +49,13 @@ function NoteApp() {
   };
 
   // 노트 수정 기능
-  // const handleEditNote = () => {}
+  const handleEditNote = (willEditNote) => {
+    const nextList = list.map((item) =>
+      item.id === willEditNote.id ? willEditNote : item
+    );
+
+    setList(nextList);
+  };
 
   // 노트 삭제 기능
   // const handleDeleteNote = () => {}
@@ -78,7 +84,13 @@ function NoteApp() {
         />
       );
     case ROUTES.edit:
-      return <NoteEditPage noteId={routeInfo.noteId} />;
+      return (
+        <NoteEditPage
+          noteId={routeInfo.noteId}
+          onChangeRoute={handleChangeRoute}
+          onEdit={handleEditNote}
+        />
+      );
   }
 }
 
