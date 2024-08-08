@@ -29,8 +29,18 @@ function UserSearchBox({ searchTerm, onSearch, onReset }) {
     }
   };
 
+  const handleReset = () => {
+    onReset?.();
+    const input = document.getElementById(id);
+    input.focus();
+  };
+
   return (
-    <form className="UserSearchBox" onSubmit={handleSearch} onReset={onReset}>
+    <form
+      className="UserSearchBox"
+      onSubmit={handleSearch}
+      onReset={handleReset}
+    >
       <div className="control">
         <label htmlFor={id}>사용자 검색</label>
         <input
