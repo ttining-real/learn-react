@@ -1,14 +1,20 @@
 import { useId } from 'react';
-import { string, func } from 'prop-types';
+import { string, bool, func } from 'prop-types';
 import './UserSearchBox.css';
 
 UserSearchBox.propTypes = {
   searchTerm: string.isRequired,
+  isInstantSearch: bool,
   onSearch: func,
   onReset: func,
 };
 
-function UserSearchBox({ searchTerm, onSearch, onReset }) {
+function UserSearchBox({
+  searchTerm,
+  isInstantSearch = false,
+  onSearch,
+  onReset,
+}) {
   const id = useId();
 
   const handleSearch = (e) => {
@@ -35,6 +41,8 @@ function UserSearchBox({ searchTerm, onSearch, onReset }) {
     input.focus();
   };
 
+  const handleChange = (e) => onSearch?.(e.target.value);
+
   return (
     <form
       className="UserSearchBox"
@@ -49,12 +57,26 @@ function UserSearchBox({ searchTerm, onSearch, onReset }) {
           placeholder="사용자 정보 입력"
           defaultValue={searchTerm}
           // value={searchTerm}
-          // onChange={handleChange}
+          onChange={handleChange}
           // readOnly
         />
       </div>
-      <button type="submit">찾기</button>
-      <button type="reset">목록 초기화</button>
+
+      {/* 조건부 표시가 더 나은 선택 */}
+      <button hidden={isInstantSearch} type="submit">
+        찾기
+      </button>
+      <button hidden={isInstantSearch} type="reset">
+        목록 초기화
+      </button>
+
+      {/* 조건부 렌더링은 토글이 잦을 경우, 렌더링 비용 발생 */}
+      {/* {isInstantSearch ? null : (
+        <>
+          <button type="submit">찾기</button>
+          <button type="reset">목록 초기화</button>
+        </>
+      )} */}
     </form>
   );
 }
