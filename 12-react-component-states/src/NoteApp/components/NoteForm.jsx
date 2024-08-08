@@ -1,19 +1,31 @@
 import { useId, useState } from 'react';
-import { oneOf } from 'prop-types';
+import { oneOf, func, number } from 'prop-types';
 import { NoteType } from '../types/note';
-import { getUserList } from '../api/getUser';
-import { convertHTMLToText } from '@/utils/convertTextToHTMLString';
+import { getUserList, getUser } from '../api/getUser';
+import {
+  convertHTMLToText,
+  convertTextToHTMLString,
+} from '@/utils/convertTextToHTMLString';
 import './NoteForm.css';
 
 // 데이터를 1회 가져오도록 설정
 const userList = getUserList();
 
 NoteForm.propTypes = {
+  newNoteId: number,
+  onCreate: func,
+  onBackToList: func,
   mode: oneOf(['create', 'edit']),
   note: NoteType, // optional
 };
 
-function NoteForm({ mode = 'create', note }) {
+function NoteForm({
+  mode = 'create',
+  newNoteId,
+  onCreate,
+  onBackToList,
+  note,
+}) {
   const titleId = useId();
   const contentId = useId();
   const userId = useId();
@@ -26,6 +38,9 @@ function NoteForm({ mode = 'create', note }) {
   });
 
   // [상태 업데이트 기능]
+  // 폼의 데이터 관리 방식 선택
+  // - [x] 폼의 데이터를 리액트로 관리할 것인가? (객체 타입으로 관리: 성능 이슈 주의!!!!!)
+  // - [ ] 아니면 네이티브(웹)로 관리할 것인가? (성능 이슈 없어요~)
   // - 노트 제목, 내용, 작성자 정보를 하나의 핸들러를 사용해 업데이트 수행해야 함
   const handleUpdateFormData = (e) => {
     const { name, value } = e.target;
@@ -42,9 +57,32 @@ function NoteForm({ mode = 'create', note }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // 폼의 데이터 관리 방식 선택
-    // - [x] 폼의 데이터를 리액트로 관리할 것인가? (객체 타입으로 관리: 성능 이슈 주의!!!!!)
-    // - [ ] 아니면 네이티브(웹)로 관리할 것인가? (성능 이슈 없어요~)
+    const { title, content, userId } = formData;
+
+    // 유효성 검사 (클라이언트 측)
+    // if (title.trim().length === 0) {
+    //   console.error('title 정보가 비었습니다.');
+    // }
+
+    // 상태 업데이트 요청
+    // 추가할 사용자 정보
+
+    const newUserId = Number(userId);
+
+    const newNote = {
+      id: newNoteId,
+      title: title.trim(),
+      content: convertTextToHTMLString(content),
+      userId: newUserId,
+      expand: {
+        user: getUser(newUserId),
+      },
+    };
+
+    // 리액트의 상태 업데이트 요청
+    onCreate?.(newNote);
+    // 상태 업데이트 후에 리스트 페이지로 이동
+    onBackToList?.();
   };
 
   // 노트 초기화 기능

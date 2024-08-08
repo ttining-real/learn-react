@@ -14,6 +14,7 @@ import NoteListPage from './pages/NoteListPage';
 import NoteCreatePage from './pages/NoteCreatePage';
 import NoteDetailPage from './pages/NoteDetailPage';
 import NoteEditPage from './pages/NoteEditPage';
+import { getNoteList } from './api/getNote';
 
 function NoteApp() {
   // [상태 선언]
@@ -23,7 +24,10 @@ function NoteApp() {
     route: ROUTES.list,
     // 선택된 노트의 ID 식별자 (노트 자세히 보기 페이지, 노트 수정 페이지)
     noteId: null,
-  });
+  }); // 객체 타입
+
+  // 화면에 표시할 노트의 목록 상태
+  const [list, setList] = useState(() => getNoteList()); // 배열 타입
 
   // [상태 업데이트 기능]
   const handleChangeRoute = (nextRoute) => {
@@ -36,13 +40,29 @@ function NoteApp() {
     });
   };
 
+  // 노트 생성 기능
+  const handleCreateNote = (newNoteItem) => {
+    setList([...list, newNoteItem]);
+  };
+  // 노트 수정 기능
+  // 노트 삭제 기능
+
+  // [파생된 상태]
+  const newNoteId = list.length + 1;
+
   // 페이지 경로에 따라 페이지 마크업(JSX) 반환
   switch (routeInfo.route) {
     default:
     case ROUTES.list:
-      return <NoteListPage onChangeRoute={handleChangeRoute} />;
+      return <NoteListPage list={list} onChangeRoute={handleChangeRoute} />;
     case ROUTES.create:
-      return <NoteCreatePage onChangeRoute={handleChangeRoute} />;
+      return (
+        <NoteCreatePage
+          newNoteId={newNoteId}
+          onCreate={handleCreateNote}
+          onChangeRoute={handleChangeRoute}
+        />
+      );
     case ROUTES.detail:
       return <NoteDetailPage noteId={routeInfo.noteId} />;
     case ROUTES.edit:
