@@ -1,3 +1,4 @@
+// enum type
 export const ROUTES = {
   list: 'list',
   create: 'create',

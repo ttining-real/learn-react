@@ -48,11 +48,11 @@ function UserSearchBox({
     // 잦은 리-렌더 유발
     // (e) => onSearch?.(e.target.value)
 
-    // 리-렌더 쓰로틀링 처리 (사용자가 입력 중이더라도 0.8초마다 검색 실행)
-    handleChange = throttle((e) => onSearch?.(e.target.value), 800);
+    // 리-렌더 쓰로틀링 처리 (사용자가 입력 중이더라도 0.6초마다 검색 실행)
+    handleChange = throttle((e) => onSearch?.(e.target.value), 600);
 
-    // 리-렌더 디바운싱 처리 (사용자가 0.1초라도 멈침하면 검색 실행)
-    // handleChange = debounce((e) => onSearch?.(e.target.value), 100);
+    // 리-렌더 디바운싱 처리 (사용자가 0.2초라도 멈칫하면 검색 실행)
+    // handleChange = debounce((e) => onSearch?.(e.target.value), 200);
   }
 
   return (
