@@ -17,7 +17,7 @@ function NoteListPage({ list, onChangeRoute }) {
 
   return (
     <div className="NoteListPage">
-      <NoteList list={list} />
+      <NoteList list={list} onChangeRoute={onChangeRoute} />
       <a onClick={handleClick} className="createNoteLink" href="#create-note">
         노트 작성
       </a>

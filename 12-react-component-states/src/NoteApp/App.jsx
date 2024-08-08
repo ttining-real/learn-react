@@ -24,19 +24,22 @@ function NoteApp() {
     route: ROUTES.list,
     // 선택된 노트의 ID 식별자 (노트 자세히 보기 페이지, 노트 수정 페이지)
     noteId: null,
-  }); // 객체 타입
+  });
 
-  // 화면에 표시할 노트의 목록 상태
-  const [list, setList] = useState(() => getNoteList()); // 배열 타입
+  // 화면에 표시할 노트의 목록 상태 (데이터 타입: 배열)
+  const [list, setList] = useState(() => getNoteList());
 
   // [상태 업데이트 기능]
-  const handleChangeRoute = (nextRoute) => {
+
+  // 루트(경로) 변경 기능
+  const handleChangeRoute = (nextRoute, pickNoteId) => {
     // useState 훅에서 반환된 상태 업데이트 함수는 상태를 교체한다. (합성하지 않음)
     // 그러므로 객체 또는 배열 타입의 데이터를 상태로 관리할 경우 주의가 요구된다.
     // 해결책: 개발자가 직접 객체를 합성해야 한다.
     setRouteInfo({
       ...routeInfo,
       route: nextRoute,
+      noteId: pickNoteId ? pickNoteId : routeInfo.noteId,
     });
   };
 
@@ -44,8 +47,12 @@ function NoteApp() {
   const handleCreateNote = (newNoteItem) => {
     setList([...list, newNoteItem]);
   };
+
   // 노트 수정 기능
+  // const handleEditNote = () => {}
+
   // 노트 삭제 기능
+  // const handleDeleteNote = () => {}
 
   // [파생된 상태]
   const newNoteId = list.length + 1;
