@@ -1,8 +1,8 @@
 import { func } from 'prop-types';
+import { ROUTES } from '../constants/routes';
 import BackLink from '../components/BackLink';
 import NoteForm from '../components/NoteForm';
 import './NoteCreatePage.css';
-import { ROUTES } from '../constants/routes';
 
 NoteCreatePage.propTypes = {
   onChangeRoute: func.isRequired,
