@@ -58,7 +58,10 @@ function NoteApp() {
   };
 
   // 노트 삭제 기능
-  // const handleDeleteNote = () => {}
+  const handleDeleteNote = (willDeleteNoteId) => {
+    const nextList = list.filter((item) => item.id !== willDeleteNoteId);
+    setList(nextList);
+  };
 
   // [파생된 상태]
   const newNoteId = list.length + 1;
@@ -89,6 +92,7 @@ function NoteApp() {
           noteId={routeInfo.noteId}
           onChangeRoute={handleChangeRoute}
           onEdit={handleEditNote}
+          onDelete={handleDeleteNote}
         />
       );
   }

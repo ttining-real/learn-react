@@ -10,9 +10,10 @@ NoteEditPage.propTypes = {
   noteId: number.isRequired,
   onChangeRoute: func,
   onEdit: func,
+  onDelete: func,
 };
 
-function NoteEditPage({ noteId, onChangeRoute, onEdit }) {
+function NoteEditPage({ noteId, onChangeRoute, onEdit, onDelete }) {
   const note = getNoteItem(noteId);
   const handleBackToList = () => onChangeRoute(ROUTES.list);
 
@@ -27,6 +28,7 @@ function NoteEditPage({ noteId, onChangeRoute, onEdit }) {
             mode="edit"
             note={note}
             onEdit={onEdit}
+            onDelete={onDelete}
             onBackToList={handleBackToList}
           />
         </>

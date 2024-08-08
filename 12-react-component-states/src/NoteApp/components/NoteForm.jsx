@@ -15,6 +15,7 @@ NoteForm.propTypes = {
   newNoteId: number,
   onCreate: func,
   onEdit: func,
+  onDelete: func,
   onBackToList: func,
   mode: oneOf(['create', 'edit']),
   note: NoteType, // optional
@@ -25,6 +26,7 @@ function NoteForm({
   newNoteId,
   onCreate,
   onEdit,
+  onDelete,
   onBackToList,
   note,
 }) {
@@ -124,7 +126,8 @@ function NoteForm({
 
   // 노트 삭제 기능
   const handleDelete = () => {
-    console.log('delete');
+    onDelete?.(note.id);
+    onBackToList?.();
   };
 
   // [파생된 상태]
