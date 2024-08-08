@@ -41,7 +41,11 @@ function UserSearchBox({
     input.focus();
   };
 
-  const handleChange = (e) => onSearch?.(e.target.value);
+  let handleChange = null;
+
+  if (isInstantSearch) {
+    handleChange = (e) => onSearch?.(e.target.value);
+  }
 
   return (
     <form
