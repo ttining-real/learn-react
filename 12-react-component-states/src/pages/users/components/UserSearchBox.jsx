@@ -1,6 +1,7 @@
 import { useId } from 'react';
 import { string, bool, func } from 'prop-types';
 import './UserSearchBox.css';
+import { debounce } from '@/utils';
 
 UserSearchBox.propTypes = {
   searchTerm: string.isRequired,
@@ -44,7 +45,13 @@ function UserSearchBox({
   let handleChange = null;
 
   if (isInstantSearch) {
-    handleChange = (e) => onSearch?.(e.target.value);
+    // 잦은 리-렌더 유발
+    // (e) => onSearch?.(e.target.value)
+
+    // 리-렌더 디바운싱 처리
+    handleChange = debounce((e) => {
+      onSearch?.(e.target.value);
+    }, 100);
   }
 
   return (

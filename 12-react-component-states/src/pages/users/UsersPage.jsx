@@ -16,12 +16,12 @@
 // - [x] 사용자 목록 초기화 후, 검색 필드에 초점 이동
 // - [x] 사용자 입력 즉시, 찾기 기능 추가 (HINT: 리액트 상태 관리)
 // - [x] 실시간 검색 체크박스 기능 추가 (찾기, 목록 초기화 버튼 토글)
-// - [ ] 잦은 상태 업데이트, 리-렌더 이슈
-// - [ ] 사용자 입력 디바운싱 or 쓰로틀링
+// - [x] 잦은 상태 업데이트, 리-렌더 이슈 (확인 후, 조치)
+// - [x] 사용자 입력 디바운싱(debouncing) or 쓰로틀링 (throttling)
 // --------------------------------------------------------------------------
 
 import { useState } from 'react';
-import usersData from '@/data/users.json';
+import usersData from '@/data/users';
 import InstantSearchSwitch from './components/InstantSearchSwitch';
 import UserListCount from './components/UserListCount';
 import UserSearchBox from './components/UserSearchBox';
