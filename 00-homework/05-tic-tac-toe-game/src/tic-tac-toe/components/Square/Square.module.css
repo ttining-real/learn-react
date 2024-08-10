@@ -1,0 +1,12 @@
+.component {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: var(--square-size, 42px);
+  height: var(--square-size, 42px);
+  padding: 0;
+  color: var(--primary-color);
+  font-size: 20px;
+  border: 0.1px solid var(--primary-color, #111);
+  background: #fff;
+}
