@@ -13,6 +13,7 @@ import {
   PLAYER_COUNT,
   INITIAL_SQUARES,
   checkeWinner,
+  WINNERS_COLOR,
 } from '@/tic-tac-toe/constants';
 import Square from '../Square/Square';
 
@@ -27,13 +28,6 @@ function Squares() {
 
   // 게임을 진행하는 함수
   const handlePlayGame = (index) => () => {
-    // 게임이 끝났는가? 아니면 아직 진행 중인가?
-    // 게임이 끝났다면? 게임이 끝났음을 사용자에게 고하게!
-    // 반환 값에 따라 게임을 진행할 지, 아닐 지 결정
-    // squares?, isPlayerOneTurn?, gameIndex?, currentPlayer?
-    const result = checkeWinner('????');
-    console.log({ result });
-
     // 아직 진행 중이라면? 게임 진행 (리액트에게 렌더 요청 -> 화면 변경)
     setSquares((prevSquares) => {
       const nextSquares = prevSquares.map((square, idx) => {
@@ -45,6 +39,15 @@ function Squares() {
   };
 
   // [게임 파생된 상태] ----------------------------------------------------------
+
+  // 게임이 끝났는가? 아니면 아직 진행 중인가?
+  // 게임이 끝났다면? 게임이 끝났음을 사용자에게 고하게!
+  // 반환 값에 따라 게임을 진행할 지, 아닐 지 결정
+  // squares?, isPlayerOneTurn?, gameIndex?, currentPlayer?
+  // const winner = checkeWinner(squares);
+  // console.log('승자는?', winner);
+  const winnerInfo = checkeWinner(squares);
+  console.log('승자는?', winnerInfo);
 
   // 게임 순서 (0, 1, 2, 3, ...)
   const gameIndex = squares.filter(Boolean).length; // 0
@@ -59,8 +62,29 @@ function Squares() {
     <div className={S.component}>
       {/* 리액트 (JSX) 마크업 : 리스트 렌더링 */}
       {squares.map((square, index) => {
+        // 배경 색칠 공부를 위한 스타일 객체를 정의해봐요!
+        const winnerStyles = {
+          backgroundColor: null,
+        };
+
+        // 리액트~ 게임 승자가 있나요?
+        // winnerInfo는 null 또는 { winner, condition } 둘 중 하나!
+        if (winnerInfo) {
+          // 오호? 승자가 있군요! 승자의 조건을 알려주세요!
+          const [x, y, z] = winnerInfo.condition;
+
+          // 그럼 승자의 스퀘어(말판)에 색칠을 할께요!
+          if (index === x || index === y || index === z) {
+            winnerStyles.backgroundColor = WINNERS_COLOR;
+          }
+        }
+
         return (
-          <Square key={index} onPlay={handlePlayGame(index)}>
+          <Square
+            key={index}
+            style={winnerStyles}
+            onPlay={handlePlayGame(index)}
+          >
             {square}
           </Square>
         );

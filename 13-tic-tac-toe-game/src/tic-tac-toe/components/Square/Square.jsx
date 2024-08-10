@@ -10,20 +10,26 @@
 // --------------------------------------------------------------------------
 
 import S from './Square.module.css';
-import { node, func } from 'prop-types';
+import { node, func, object } from 'prop-types';
 
 Square.propTypes = {
   children: node,
   onPlay: func,
+  style: object,
 };
 
 // 상태를 가지지 않는(Stateless) 컴포넌트
-function Square({ children, onPlay }) {
+function Square({ children, onPlay, style }) {
   // [파생된 상태]
   const isDisabled = !!children;
 
   return (
-    <button className={S.component} onClick={onPlay} disabled={isDisabled}>
+    <button
+      className={S.component}
+      style={style}
+      onClick={onPlay}
+      disabled={isDisabled}
+    >
       {children}
     </button>
   );

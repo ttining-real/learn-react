@@ -28,7 +28,34 @@ const WINNER_CONDITIONS = [
   [2, 4, 6],
 ];
 
+// 승리자의 색상
+export const WINNERS_COLOR = '#fff047';
+
 // 게임이 끝났는 지, 아직 게임 중인지 확인해 결과를 반환하는 함수
-export const checkeWinner = () => {
-  // ...
+// 게임판 정보와 승리 조건 비교해 결과 반환
+export const checkeWinner = (squares) => {
+  // 문을 사용해 배열을 순환해보자!
+  // 이터레이션 프로토콜
+  // - 이터러블(반복 가능한) 프로토콜
+  // - 이터레이터(반복자) 프로토콜
+  // for문, for~in 문 말고 / [ for ~ of ] 문을 사용해 이터러블 프로토콜을 순환할 수 있다!
+
+  let winnerInfo = null;
+
+  for (const [x, y, z] of WINNER_CONDITIONS) {
+    // console.log({ x, y, z });
+    const winner = squares[x];
+
+    if (winner && winner === squares[y] && winner === squares[z]) {
+      console.log('GAME OVER');
+      winnerInfo = {
+        winner,
+        condition: [x, y, z],
+      };
+
+      break;
+    }
+  }
+
+  return winnerInfo;
 };
