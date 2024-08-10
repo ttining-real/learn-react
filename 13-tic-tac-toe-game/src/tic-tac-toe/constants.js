@@ -6,6 +6,9 @@ export const PLAYER = {
   TWO: '🐭',
 };
 
+// 게임 플레이어 집합
+export const PLAYER_LIST = Object.values(PLAYER);
+
 // 게임 플레이어의 수
 export const PLAYER_COUNT = Object.keys(PLAYER).length;
 
