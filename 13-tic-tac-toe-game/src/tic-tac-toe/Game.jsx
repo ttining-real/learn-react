@@ -70,11 +70,22 @@ function Game() {
 
     // [ [null, ..., null] ]
     // [ [null, ..., null], ['one', ..., null] ]
-    const nextGameHistory = [...gameHistory, nextSquares];
+    // 게임의 히스토리(기억) 또한 되돌려야 함
+    // 선택된 게임의 인덱스 정보를 사용해 게임 히스토리를 잘라야 한다.
+    const nextGameHistory = [
+      ...gameHistory.slice(0, nextGameIndex),
+      nextSquares,
+    ];
 
     setGameHistory(nextGameHistory);
 
     // ---------------------------------------------------------------
+  };
+
+  // 시간 여행 기능(함수)
+  const handleTimeTravel = (index) => {
+    // 되돌리고 싶은 시간의 기억으로 게임 인덱스를 업데이트 요청
+    setGameIndex(index);
   };
 
   // [게임 파생된 상태] ----------------------------------------------------------
@@ -113,7 +124,11 @@ function Game() {
         onPlay={handlePlayGame}
         isDraw={isDraw}
       />
-      <History gameHistory={gameHistory} />
+      <History
+        onTimeTravel={handleTimeTravel}
+        gameHistory={gameHistory}
+        gameIndex={gameIndex}
+      />
     </div>
   );
 }
