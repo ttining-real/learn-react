@@ -1,4 +1,4 @@
-.Squares {
+.component {
   --board-size: calc(var(--square-size) * 3);
   width: var(--board-size);
   height: var(--board-size);

@@ -1,8 +1,9 @@
+import S from './Squares.module.css';
 import Square from '../Square/Square';
 
 function Squares() {
   return (
-    <div className="Squares">
+    <div className={S.component}>
       <Square />
       <Square />
       <Square />

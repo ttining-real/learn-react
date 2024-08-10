@@ -1,6 +1,8 @@
+import S from './Square.module.css';
+
 function Square() {
   return (
-    <button className="Square" disabled>
+    <button className={S.component} disabled>
       🟨
     </button>
   );
