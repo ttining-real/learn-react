@@ -4,19 +4,19 @@
 // - [x] squares 배열 데이터를 게임의 상수로 설정합니다.
 // - [x] squares 배열 데이터의 초기 상태 값은 9개의 `null`로 구성합니다.
 // - [x] squares 배열 데이터 모듈을 불러온 후, 순환해 Sqaure 컴포넌트를 리스트 렌더링 합니다.
+// - [x] 게임 진행을 처리하는 함수 로직을 작성하고, 리액트에게 다음 상태 변경에 대해 말해주세요.
+// - [x] 게임이 이겼는 지, 졌는 지 확인하는 승리 조건을 게임의 상수로 선언합니다.
+// - [x] Squares 컴포넌트 속성 타입 검사 (with 타입 모듈 분리)
 // --------------------------------------------------------------------------
 
 import S from './Squares.module.css';
-import { arrayOf, func, number, oneOf, shape } from 'prop-types';
-import { PLAYER_LIST, WINNERS_COLOR } from '@/tic-tac-toe/constants';
+import { func } from 'prop-types';
+import { WINNERS_COLOR } from '@/tic-tac-toe/constants';
+import {
+  OneOfPlayerListType,
+  WinnerInfoType,
+} from '@/tic-tac-toe/types/type.d';
 import Square from '../Square/Square';
-
-const OneOfPlayerType = oneOf(PLAYER_LIST);
-const OneOfPlayerListType = arrayOf(OneOfPlayerType);
-const WinnerInfoType = shape({
-  winner: OneOfPlayerType,
-  condition: arrayOf(number),
-});
 
 Squares.propTypes = {
   squares: OneOfPlayerListType.isRequired,
