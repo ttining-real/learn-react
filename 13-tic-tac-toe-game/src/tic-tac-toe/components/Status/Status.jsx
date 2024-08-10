@@ -15,15 +15,12 @@ Status.propTypes = {
 };
 
 function Status({ winner, nextPlayer, isDraw = false }) {
-  if (winner) {
-    return <h2 className={S.component}>위너!! {winner}</h2>;
-  }
+  // 기본적인 메시지는 다음 플레이어 표시
+  let statusMessage = `다음 플레이어 : ${nextPlayer}`;
+  if (winner) statusMessage = `위너!! ${winner}`;
+  if (isDraw) statusMessage = '음... 비겼네. 😩 한 판 더?!';
 
-  if (isDraw) {
-    return <h2 className={S.component}>웁스... 비겼네... 😩 한 판 더?!</h2>;
-  }
-
-  return <h2 className={S.component}>다음 플레이어 : {nextPlayer}</h2>;
+  return <h2 className={S.component}>{statusMessage}</h2>;
 }
 
 export default Status;
