@@ -17,6 +17,7 @@ Square.propTypes = {
   onPlay: func,
 };
 
+// 상태를 가지지 않는(Stateless) 컴포넌트
 function Square({ children, onPlay }) {
   // [파생된 상태]
   const isDisabled = !!children;
