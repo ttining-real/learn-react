@@ -9,13 +9,6 @@
 
 ---
 
-### 초기 구성
-
-- Vite 커스텀 템플릿 스캐폴딩
-- `createElement` ➡️ `jsx`로 변경
-
----
-
 ### 컴포넌트
 
 - Board : Status와 Squares 공유
