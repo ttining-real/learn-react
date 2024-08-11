@@ -8,7 +8,9 @@ History.propTypes = {
   onTimeTravel: func,
 };
 
-function History({ gameIndex, gameHistory = [] }) {
+function History({ gameIndex, gameHistory = [], onTimeTravel }) {
+  const handleClick = (index) => () => onTimeTravel(index);
+
   return (
     <div className={S.component}>
       <ol>
@@ -18,7 +20,11 @@ function History({ gameIndex, gameHistory = [] }) {
 
           return (
             <li key={index}>
-              <button type="button" disabled={isDisabled}>
+              <button
+                type="button"
+                disabled={isDisabled}
+                onClick={handleClick(index)}
+              >
                 {buttonLabel}
               </button>
             </li>

@@ -38,6 +38,10 @@ function Game() {
     setGameHistory(nextGameHistory);
   };
 
+  const handleTimeTravel = (index) => {
+    setGameIndex(index);
+  };
+
   const currentSquares = gameHistory[gameIndex];
 
   const winnerInfo = checkedWinner(currentSquares);
@@ -66,7 +70,11 @@ function Game() {
         onPlay={handlePlayGame}
         isDraw={isDraw}
       />
-      <History gameHistory={gameHistory} gameIndex={gameIndex} />
+      <History
+        gameHistory={gameHistory}
+        gameIndex={gameIndex}
+        onTimeTravel={handleTimeTravel}
+      />
     </div>
   );
 }
