@@ -2,6 +2,7 @@ import { bool } from 'prop-types';
 import { CardLinkItemType } from '../types/CardLinkList';
 import S from './CardLinkItem.module.css';
 import VanillaTilt from 'vanilla-tilt';
+import { useRef } from 'react';
 
 const TILT_CONFIG = {
   // 기울이는 방향을 반대로 변경
@@ -69,6 +70,10 @@ function CardLinkItem({ item, popup = false, external = false }) {
     };
   }
 
+  // useRef() 훅을 사용해 리액트 렌더링 프로세스와 상관없는 뭔가를 기억하고자 한다.
+  // 여기서 뭔가란? DOM 요소 참조 (with useRef() 훅)
+  const titleRef = useRef(null); // { current: null }
+
   // React 탈출구 방식
   // 실제 DOM에 렌더링 된 이후, HTML 요소에 접근 가능
   // 리액트 -> 렌더 트리 생성 -> 리액트 돔 => 실제 DOM 렌더링 -> [마운트] ref 콜백 함수 실행
@@ -77,10 +82,30 @@ function CardLinkItem({ item, popup = false, external = false }) {
     // 실제 DOM 요소 노드 접근 가능!!!
     // Vanilla Tilt 이펙트 적용
 
-    // const vanillaTiltInstance = new VanillaTilt(el);
+    if (el) {
+      // 리-렌더 없이 DOM 요소 참조
+      titleRef.current = el.querySelector(`.${S.title}`);
+      // console.log({ titleElement: titleRef.current });
 
-    VanillaTilt.init(el, TILT_CONFIG);
-    // console.log(el.vanillaTilt);
+      titleRef.current.style.opacity = '0';
+
+      // const vanillaTiltInstance = new VanillaTilt(el);
+      // console.log('Vanilla Tilt 이펙트 적용!');
+      VanillaTilt.init(el, TILT_CONFIG);
+      // console.log(el.vanillaTilt);
+    }
+  };
+
+  // 이벤트 핸들러
+  // 외부 시스템인 DOM 요소에 접근, 조작
+  // 사용자 액션이 요구에 반응
+  const handleEnter = () => {
+    // 리액트의 방식이 아닌, 바닐라 스크립트 방식!
+    titleRef.current.style.opacity = '1';
+  };
+
+  const handleLeave = () => {
+    titleRef.current.style.opacity = '0';
   };
 
   return (
@@ -93,6 +118,8 @@ function CardLinkItem({ item, popup = false, external = false }) {
       aria-label={label}
       title={label}
       href={href}
+      onPointerEnter={handleEnter}
+      onPointerLeave={handleLeave}
       {...externalLinkProps}
     >
       <figure className={cardClassNames}>
