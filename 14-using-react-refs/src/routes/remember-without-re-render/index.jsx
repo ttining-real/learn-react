@@ -32,8 +32,8 @@ function RememberWithoutReRender() {
   //
   // 2. useRef() 훅 함수 사용 (메모이제이션, 외부에 데이터 기억 저장/읽기)
   //    현재(current) 기억된 값이 변경되더라도 기억은 하지만, 리-렌더하도록 요청하지 않음
-  // const messageRef = useRef('멋사! 광화문으로 가자!'); // return Plain Object { current: value } [Mutable]
-  const [messageRef] = useState({ current: '값의 기억과 리-렌더' }); // state { current: mutableValue }
+  const messageRef = useRef('값의 기억과 리-렌더'); // return Plain Object { current: value } [Mutable]
+  // const [messageRef] = useState({ current: '값의 기억과 리-렌더' }); // state { current: mutableValue }
 
   // 이벤트 핸들러 (사용자 입력에 의해 실행되는 함수)
   const handleRefChange = ({ target: { value } }) => {
