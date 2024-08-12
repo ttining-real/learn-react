@@ -14,6 +14,8 @@
   --gray-900: #1F1F1F;
   --gray-950: #0d0d0e;
 
+  --accent-color: #440fbf;
+
   --background: var(--gray-900);
   --forground: var(--gray-50);
   --border-color: var(--gray-700);
