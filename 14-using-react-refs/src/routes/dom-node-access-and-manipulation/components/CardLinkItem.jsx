@@ -84,10 +84,10 @@ function CardLinkItem({ item, popup = false, external = false }) {
 
     if (el) {
       // 리-렌더 없이 DOM 요소 참조
-      titleRef.current = el.querySelector(`.${S.title}`);
+      // titleRef.current = el.querySelector(`.${S.title}`);
       // console.log({ titleElement: titleRef.current });
 
-      titleRef.current.style.opacity = '0';
+      // titleRef.current.style.opacity = '0';
 
       // const vanillaTiltInstance = new VanillaTilt(el);
       // console.log('Vanilla Tilt 이펙트 적용!');
@@ -101,7 +101,10 @@ function CardLinkItem({ item, popup = false, external = false }) {
   // 사용자 액션이 요구에 반응
   const handleEnter = () => {
     // 리액트의 방식이 아닌, 바닐라 스크립트 방식!
-    titleRef.current.style.opacity = '1';
+    const title = titleRef.current;
+    title.style.opacity = '1';
+    // 접근성 관점에서 매우 중요!!!
+    // title.closest('a').focus();
   };
 
   const handleLeave = () => {
@@ -126,7 +129,7 @@ function CardLinkItem({ item, popup = false, external = false }) {
         <div className={S.wrapper}>
           <img className={S.coverImage} src={images.cover} alt="" />
         </div>
-        <img className={S.title} src={images.title} alt="" />
+        <img ref={titleRef} className={S.title} src={images.title} alt="" />
         <img className={S.character} src={images.character} alt="" />
       </figure>
     </a>
