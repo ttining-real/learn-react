@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { animate, inView } from 'motion';
+import { inView, timeline } from 'motion';
 import { exact, number, string } from 'prop-types';
 import S from './ScrollTriggerItem.module.css';
 
@@ -30,20 +30,26 @@ function ScrollTriggerItem({ item }) {
     // 문서에 inView() 함수를 적용할 요소가 있을 경우
     if (element) {
       // 스크롤 트리거 설정
-      inView(element, ({ target }) => {
+      inView(/* info */ element, ({ target }) => {
         // console.log(target, isIntersecting);
-        // 애니메이션 설정
-        animate(
-          target,
-          { opacity: 1 },
-          { duration: 0.5, easing: 'ease-in-out' }
+        // 타임라인 애니메이션 설정
+        const animation = timeline(
+          [
+            [target, { opacity: [0, 1] }, { duration: 0.6 }],
+            [
+              pRef.current,
+              { opacity: [0, 1], y: [20, 0] },
+              { duration: 0.4, at: '+0.8' },
+            ],
+          ],
+          { easing: 'ease-out' }
         );
 
-        animate(
-          pRef.current,
-          { y: [20, 0], opacity: [0, 1] },
-          { duration: 0.4, easing: 'ease-out', delay: 1 }
-        );
+        // inView() 함수에 설정된 콜백 함수가 반환하는 함수는
+        // 엘리먼트가 뷰포트를 벗어났을 때 실행
+        return () => {
+          animation.stop();
+        };
       });
     }
   };

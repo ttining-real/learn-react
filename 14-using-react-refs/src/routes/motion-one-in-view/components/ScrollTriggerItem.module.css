@@ -1,15 +1,10 @@
 .component {
-  opacity: 0;
-
   scroll-snap-align: start;
-
   user-select: none;
   overflow: hidden;
   position: relative;
-
   block-size: 100vh;
   inline-size: 100vw;
-
   display: flex;
   align-items: center;
 
