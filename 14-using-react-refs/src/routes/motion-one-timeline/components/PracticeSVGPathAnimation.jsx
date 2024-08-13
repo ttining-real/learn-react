@@ -10,40 +10,39 @@
 //   - [x] visibility
 //   - [x] pathLength
 // --------------------------------------------------------------------------
-import { number, string } from 'prop-types';
-import S from './PracticeSVGPathAnimation.module.css';
 import { timeline } from 'motion';
 import { useRef } from 'react';
+import CircleLine from './CircleLine';
+import S from './PracticeSVGPathAnimation.module.css';
 
-PracticeSVGPathAnimation.propTypes = {
-  strokeColor: string,
-  strokeWidth: number,
-};
-
-function PracticeSVGPathAnimation({
-  strokeColor = '#4729B4',
-  strokeWidth = 4,
-}) {
+function PracticeSVGPathAnimation() {
   const svgRef = useRef(null);
 
-  const handleSVGPathAnimation = () => {
+  const handleSVGPathAnimation = async () => {
     const { current: el } = svgRef;
 
     const [circle1, circle2] = Array.from(el.querySelectorAll('circle'));
     const line = el.querySelector('line');
 
-    timeline(
+    const animationControls = timeline(
       [
-        [circle1, { strokeDashoffset: [1, 0], visibility: ['visible'] }],
-        [line, { strokeDashoffset: [1, 0], visibility: ['visible'] }],
-        [circle2, { strokeDashoffset: [1, 0], visibility: ['visible'] }],
+        [circle1, { strokeDashoffset: [1, 0], visibility: 'visible' }],
+        [line, { strokeDashoffset: [1, 0], visibility: 'visible' }],
+        [circle2, { strokeDashoffset: [1, 0], visibility: 'visible' }],
       ],
       {
-        duration: 1.8,
-        delay: 0.2,
+        duration: 1,
         easing: 'cubic-bezier(0.79,0.14,0.15,0.86)',
       }
     );
+
+    await animationControls.finished;
+
+    // 모든 타임라인 애니메이션이 종료된 이후, 정리(cleanup)가 필요하다. (디자이너의 수정 요청)
+    // circle1, line, circle2 요소에 visibility: hidden
+    Array.from(el.children).forEach((child) => {
+      child.style.visibility = 'hidden';
+    });
   };
 
   return (
@@ -57,46 +56,7 @@ function PracticeSVGPathAnimation({
       </button>
 
       <div className={S.component}>
-        <svg
-          ref={svgRef}
-          width={212}
-          height={41}
-          viewBox="0 0 210 41"
-          fill="none"
-        >
-          <circle
-            cx="20.5"
-            cy="20.5"
-            r="17.5"
-            stroke={strokeColor}
-            strokeDasharray={1}
-            strokeDashoffset={0}
-            strokeWidth={strokeWidth}
-            pathLength={1}
-          />
-          <line
-            x1={36}
-            y1={20}
-            x2={173}
-            y2={20}
-            stroke={strokeColor}
-            strokeDasharray={1}
-            strokeDashoffset={0}
-            strokeWidth={strokeWidth}
-            pathLength={1}
-          />
-          <circle
-            cx="189.5"
-            cy="20.5"
-            r="17.5"
-            stroke={strokeColor}
-            strokeDasharray={1}
-            strokeDashoffset={0}
-            strokeWidth={strokeWidth}
-            pathLength={1}
-            style={{ transform: 'rotateX(180deg) rotateY(180deg)' }}
-          />
-        </svg>
+        <CircleLine ref={svgRef} />
       </div>
     </>
   );
