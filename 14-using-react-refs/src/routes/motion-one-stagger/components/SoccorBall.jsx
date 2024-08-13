@@ -15,6 +15,7 @@ function SoccorBall({
 }) {
   return (
     <svg
+      data-testid="soccor-ball"
       ref={moundedRef}
       className={S.component}
       viewBox="-105 -105 210 210"

@@ -1,19 +1,32 @@
 // --------------------------------------------------------------------------
 // ✅ 스태거 애니메이션
 // --------------------------------------------------------------------------
-// - [ ] stagger() 함수를 사용해 스태거 애니메이션을 적용합니다.
+// - [x] stagger() 함수를 사용해 스태거 애니메이션을 적용합니다.
 // - [ ] getMap 함수를 작성해 참조 객체의 current 값으로 Map 객체를 반환하도록 합니다.
 // - [ ] <SoccorBall /> 요소에 mountedRef 속성을 사용해 맵(map) 데이터로 수집합니다.
-// - [ ] 사용자가 버튼을 누르면 스태거 애니메이션이 적용되도록 구현합니다.
+// - [x] 사용자가 버튼을 누르면 스태거 애니메이션이 적용되도록 구현합니다.
 // --------------------------------------------------------------------------
 import { useState } from 'react';
 import SoccorBall from './components/SoccorBall';
 import S from './style.module.css';
+import { animate, stagger } from 'motion';
 
 function MotionOneStagger() {
   const [balls] = useState(Array(4).fill(null));
 
-  const handleAnimateBalls = () => {};
+  const handleAnimateBalls = () => {
+    // 사커볼 객체 참조
+    const balls = Array.from(
+      document.querySelectorAll('[data-testid="soccor-ball"]')
+    );
+
+    // animate()
+    animate(
+      balls,
+      { x: [0, 400, 0], rotate: [0, 360, -360 * 2] },
+      { duration: 2, delay: stagger(0.3) }
+    );
+  };
 
   return (
     <main className={S.component}>
