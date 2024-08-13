@@ -1,4 +1,6 @@
 .component {
+  opacity: 0;
+
   scroll-snap-align: start;
 
   user-select: none;
