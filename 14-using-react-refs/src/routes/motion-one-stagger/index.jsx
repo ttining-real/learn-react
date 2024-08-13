@@ -6,26 +6,85 @@
 // - [ ] <SoccorBall /> 요소에 mountedRef 속성을 사용해 맵(map) 데이터로 수집합니다.
 // - [x] 사용자가 버튼을 누르면 스태거 애니메이션이 적용되도록 구현합니다.
 // --------------------------------------------------------------------------
-import { useState } from 'react';
+import { animate, stagger } from 'motion';
+import { useRef, useState } from 'react';
 import SoccorBall from './components/SoccorBall';
 import S from './style.module.css';
-import { animate, stagger } from 'motion';
 
 function MotionOneStagger() {
-  const [balls] = useState(Array(4).fill(null));
+  const [balls] = useState(Array(6).fill(null));
+
+  // const handleAnimateBallsUsingTestId = () => {
+  //   // 사커볼 객체 참조
+  //   const balls = Array.from(
+  //     document.querySelectorAll('[data-testid="soccor-ball"]')
+  //   );
+
+  //   if (balls.length > 0) {
+  //     // animate()
+  //     animate(
+  //       balls,
+  //       { x: [0, 400, 0], rotate: [0, 360, -360 * 2] },
+  //       { duration: 2, delay: stagger(0.3) }
+  //     );
+  //   }
+  // };
+
+  const soccorBallsRef = useRef(null); // { current: null }
+
+  const getMap = () => {
+    if (!soccorBallsRef.current) {
+      soccorBallsRef.current = new Map();
+    }
+
+    return soccorBallsRef.current;
+  };
 
   const handleAnimateBalls = () => {
-    // 사커볼 객체 참조
-    const balls = Array.from(
-      document.querySelectorAll('[data-testid="soccor-ball"]')
-    );
+    // Map 활용 예시 코드 (공식 문서에서 기술하는 방법)
+    const map = getMap();
+    const mapArray = Array.from(map.values());
 
-    // animate()
-    animate(
-      balls,
-      { x: [0, 400, 0], rotate: [0, 360, -360 * 2] },
-      { duration: 2, delay: stagger(0.3) }
-    );
+    if (mapArray.length > 0) {
+      animate(
+        mapArray,
+        { x: [0, 400, 0], rotate: [0, 360, -360] },
+        {
+          delay: stagger(0.3),
+          duration: 2,
+        }
+      );
+    }
+
+    // Array 활용 예시 코드
+    // const soccorBalls = Array.from(new Set(soccorBallsRef.current));
+
+    // if (soccorBalls.length > 0) {
+    //   animate(
+    //     soccorBalls,
+    //     { x: [0, 400, 0], rotate: [0, 360, -360] },
+    //     {
+    //       delay: stagger(0.3),
+    //       duration: 2,
+    //     }
+    //   );
+    // }
+  };
+
+  const mountedCallback = (index, el) => {
+    // Map 활용
+    const map = getMap();
+
+    if (el) {
+      map.set(index, el);
+    } else {
+      map.delete(index);
+    }
+
+    // Array 활용
+    // 참조 객체의 current 값에 담긴 객체 (얼마든지 수정)
+    // const soccorBalls = soccorBallsRef.current;
+    // soccorBalls.push(soccorBallElement);
   };
 
   return (
@@ -64,7 +123,9 @@ function MotionOneStagger() {
 
       <div className={S.balls}>
         {balls.map((color, index) => {
-          return <SoccorBall moundedRef={null} key={index} />;
+          return (
+            <SoccorBall ref={mountedCallback.bind(null, index)} key={index} />
+          );
         })}
       </div>
     </main>
