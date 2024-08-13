@@ -1,11 +1,23 @@
-/* eslint-disable react/prop-types */
-import { forwardRef } from 'react';
+// import { forwardRef } from 'react';
+import { any, exact, number, string } from 'prop-types';
 import S from './CircleLine.module.css';
 
-function CircleLine({ strokeColor = '#4729B4', strokeWidth = 6 }, ref) {
+CircleLine.propTypes = {
+  strokeColor: string,
+  strokeWidth: number,
+  forwardRef: exact({
+    current: any,
+  }),
+};
+
+function CircleLine({
+  forwardRef = { current: null },
+  strokeColor = '#4729B4',
+  strokeWidth = 6,
+}) {
   return (
     <svg
-      ref={ref}
+      ref={forwardRef}
       className={S.component}
       width={212}
       height={41}
@@ -48,4 +60,5 @@ function CircleLine({ strokeColor = '#4729B4', strokeWidth = 6 }, ref) {
   );
 }
 
-export default forwardRef(CircleLine);
+// export default forwardRef(CircleLine);
+export default CircleLine;

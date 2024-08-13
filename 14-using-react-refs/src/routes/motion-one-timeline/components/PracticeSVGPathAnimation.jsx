@@ -31,7 +31,7 @@ function PracticeSVGPathAnimation() {
         [circle2, { strokeDashoffset: [1, 0], visibility: 'visible' }],
       ],
       {
-        duration: 1,
+        duration: 1.45,
         easing: 'cubic-bezier(0.79,0.14,0.15,0.86)',
       }
     );
@@ -56,7 +56,7 @@ function PracticeSVGPathAnimation() {
       </button>
 
       <div className={S.component}>
-        <CircleLine ref={svgRef} />
+        <CircleLine forwardRef={svgRef} />
       </div>
     </>
   );
