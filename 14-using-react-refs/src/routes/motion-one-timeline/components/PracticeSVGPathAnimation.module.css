@@ -4,7 +4,36 @@
   border-radius: 6px;
   padding: 40px;
 
+  display: grid;
+  place-content: center;
+
   &:hover {
     border-color: var(--accent-color);
+  }
+
+  svg {
+
+    * {
+      visibility: hidden;
+    }
+
+    circle {
+      transform-origin: 189px center;
+    }
+  }
+}
+
+.button {
+  opacity: 0.9;
+  margin-block-end: 20px;
+  border: 0;
+  border-radius: 6px;
+  padding: 12px 32px;
+  font-weight: 800;
+  background-color: var(--accent-color);
+  color: var(--white);
+
+  &:hover {
+    opacity: 1;
   }
 }
