@@ -16,22 +16,48 @@ import S from './AnimateDemo.module.css';
 import { animate } from 'motion';
 
 function AnimateDemo() {
-  const lollipopRef = useRef(null); // { current: null }
+  const lollipopRef = useRef(null); // { current: HTMLFigureElement }
 
-  const handleMoveAnimate = () => {
+  const handleMoveAnimation = () => {
     // const lollipopElement = lollipopRef.current;
     const { current: element } = lollipopRef;
 
-    // animate(target, props, options?)
-    // animate(element, { transform: 'translateX(400px) rotate(360deg)' })
-    animate(element, { x: 400, rotate: 360 }, { duration: 4 });
+    // animate(selector or HTMLElement or NodeList, props, options?)
+    // animate(
+    //   element,
+    //   { transform: 'translateX(400px) rotate(-360deg)' },
+    //   { duration: 4 }
+    // );
+    animate(element, { y: -100, x: 400, rotate: 360 * 7 }, { duration: 4 });
   };
 
-  const handleProgressAnimate = () => {};
+  const progressRef = useRef(null); // React Component { current: null } → DOM Mount → { current: HTMLOutputElement }
+
+  const handleProgressAnimation = () => {
+    // console.log(progressRef);
+
+    const { current: element } = progressRef;
+
+    const progressAnimation = (progress) => {
+      // console.log(progress);
+      // 진행률 애니메이션 로직 작성
+      const animationValue = Math.round(progress * 100) + '%';
+      element.value = animationValue;
+    };
+
+    const animationOptions = {
+      duration: 2,
+      easing: 'ease-in-out',
+    };
+
+    animate(progressAnimation, animationOptions);
+  };
+
+  // console.log(progressRef);
 
   return (
     <div className={S.component}>
-      <button className={S.button} type="button" onClick={handleMoveAnimate}>
+      <button className={S.button} type="button" onClick={handleMoveAnimation}>
         무빙 애니메이션
       </button>
 
@@ -41,11 +67,13 @@ function AnimateDemo() {
         <button
           type="button"
           className={S.button}
-          onClick={handleProgressAnimate}
+          onClick={handleProgressAnimation}
         >
           진행률 애니메이션
         </button>
-        <output className={S.output}>0%</output>
+        <output ref={progressRef} className={S.output}>
+          0%
+        </output>
       </div>
     </div>
   );
