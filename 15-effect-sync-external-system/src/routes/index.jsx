@@ -1,6 +1,6 @@
 import SyncDocumentTitle from './sync-document-title';
 import SyncWebStorage from './sync-web-storage';
-import SyncAndCleanUpMousePosition from './sync-and-cleanup-mouse-position';
+import EffectSyncAndCleanup from './effect-sync-and-cleanup';
 import ScrollTriggerEffect from './scroll-trigger-effect';
 import SyncBackend from './sync-backend';
 
@@ -16,9 +16,9 @@ const routes = [
     element: <SyncWebStorage />,
   },
   {
-    title: '마우스 위치 동기화 / 정리',
-    path: '/sync-and-cleanup-mouse-position',
-    element: <SyncAndCleanUpMousePosition />,
+    title: '이펙트 동기화 / 정리',
+    path: '/effects-sync-and-cleanup',
+    element: <EffectSyncAndCleanup />,
   },
   {
     title: '스크롤 트리거 이펙트',

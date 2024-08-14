@@ -1,4 +1,4 @@
-import TodoList from './components/TodoList';
+import TodayDoit from './components/TodayDoit';
 
 function SyncBackend() {
   return (
@@ -63,7 +63,7 @@ function SyncBackend() {
         <p>이후 강사와 함께 실습하며 주요 개념을 정리합니다.</p>
       </div>
 
-      <TodoList />
+      <TodayDoit />
     </main>
   );
 }

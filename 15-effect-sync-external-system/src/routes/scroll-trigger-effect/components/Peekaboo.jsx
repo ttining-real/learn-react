@@ -13,7 +13,9 @@ import S from './Peekaboo.module.css';
 
 function Peekaboo() {
   const [sections] = useState(Array(9).fill(null));
+
   const [peekaboo] = useState(false);
+
   const [randomIndex] = useState(() => {
     const min = 4;
     const max = sections.length;
@@ -37,14 +39,14 @@ function Peekaboo() {
     if (peekaboo) {
       animate(
         peekabooCharacter,
-        { x: [1000, 0] },
+        { x: [1000, 0], opacity: 1 },
         {
           delay: 0.5,
           easing: spring({ stiffness: 800, damping: 15, mass: 2 }),
         }
       );
     } else {
-      animate(peekabooCharacter, { x: [0, 1000] });
+      animate(peekabooCharacter, { x: [0, 1000], opacity: 0 });
     }
   }, [peekaboo]);
 
