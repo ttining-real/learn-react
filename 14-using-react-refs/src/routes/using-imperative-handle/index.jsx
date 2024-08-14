@@ -24,8 +24,8 @@ const INITIAL_CHAT_MESSAGES = [
 function UsingImperativeHandle() {
   // [상태] 채팅 메시지 목록 데이터
   const [chatMessages, setChatMessages] = useState(INITIAL_CHAT_MESSAGES);
-  // 하위 컴포넌트 내부 DOM 엘리먼트 참조 객체
-  const chatListRef = useRef(null); // { current: null }
+  // 하위 컴포넌트의 명령형 핸들에 접근 가능한 객체 참조
+  const imperativeHandleRef = useRef(null); // { current: null }
 
   // [상태 업데이트] 채팅 메시지 목록에 새 메시지 추가 기능
   const handleAddMessage = (message) => {
@@ -46,10 +46,8 @@ function UsingImperativeHandle() {
   // 이펙트 콜백 함수
 
   const mountedMainElement = () => {
-    // 실제 DOM 완성된 이후
-    // 컴포넌트 마운트 시점에 <ol> 요소의 스크롤을 끌어내려라!
-    const ol = chatListRef.current;
-    setTimeout(() => ol.scrollTo(0, ol.scrollHeight));
+    const { scrollDownList } = imperativeHandleRef.current;
+    scrollDownList?.();
   };
 
   return (
@@ -86,7 +84,7 @@ function UsingImperativeHandle() {
         </p>
       </div>
       <ChatWindow
-        $$ref={chatListRef}
+        $$ref={imperativeHandleRef}
         messages={chatMessages}
         onAddMessage={handleAddMessage}
       />
