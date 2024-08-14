@@ -1,3 +1,10 @@
+// ---------------------------------------------------------------------------
+// ✅ 컴포넌트 내부에 명령형 핸들이 없을 경우 문제 해결
+// ---------------------------------------------------------------------------
+// - [ ] 컴포넌트 DOM 엘리먼트 참조를 외부에 노출: forwardRef()
+// - [ ] 컴포넌트 DOM 엘리먼트를 제어할 수 있는 명령형 핸들 외부에 노출: useImperativeHandle()
+// ---------------------------------------------------------------------------
+
 import { useId, useRef } from 'react';
 import { arrayOf, bool, exact, func, string } from 'prop-types';
 import S from './ChatWindow.module.css';
@@ -45,7 +52,7 @@ function ChatWindow({ messages, onAddMessage }) {
 
   const sendMessage = (newMessage) => {
     const textarea = textareaRef.current;
-    const ol = olRef.current;
+    // const ol = olRef.current;
 
     if (newMessage.length <= 0) {
       alert('메시지 내용을 입력하세요!');
@@ -65,19 +72,19 @@ function ChatWindow({ messages, onAddMessage }) {
 
     // 타이머 (우회적으로 리액트의 권장 방법이 아닌 방법으로 문제 해결)
     // setTimeout(() => ol.scrollTo(0, ol.scrollHeight));
-    scrollDownList(ol);
+    // scrollDownList(ol);
   };
 
-  const scrollDownList = (el) => {
-    // 타이머 (우회적으로 리액트의 권장 방법이 아닌 방법으로 문제 해결)
-    if (el) {
-      setTimeout(() => el.scrollTo(0, el.scrollHeight));
-    }
-  };
+  // const scrollDownList = (el) => {
+  //   // 타이머 (우회적으로 리액트의 권장 방법이 아닌 방법으로 문제 해결)
+  //   if (el) {
+  //     setTimeout(() => el.scrollTo(0, el.scrollHeight));
+  //   }
+  // };
 
   const mountedList = (el) => {
     olRef.current = el;
-    scrollDownList(el);
+    // scrollDownList(el);
   };
 
   return (
