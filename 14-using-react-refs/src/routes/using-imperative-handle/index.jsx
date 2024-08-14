@@ -46,8 +46,8 @@ function UsingImperativeHandle() {
   // 이펙트 콜백 함수
 
   const mountedMainElement = () => {
-    const { scrollDownList } = imperativeHandleRef.current;
-    scrollDownList?.();
+    const imperativeHandles = imperativeHandleRef.current;
+    imperativeHandles?.scrollDownList?.();
   };
 
   return (
