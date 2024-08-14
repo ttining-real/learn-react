@@ -1,12 +1,12 @@
 // ---------------------------------------------------------------------------
 // ✅ 컴포넌트 내부에 명령형 핸들이 없을 경우 문제 해결
 // ---------------------------------------------------------------------------
-// - [ ] 컴포넌트 DOM 엘리먼트 참조를 외부에 노출: forwardRef()
+// - [x] 컴포넌트 DOM 엘리먼트 참조를 외부에 노출: forwardRef() / React v19 ($$ref prop)
 // - [ ] 컴포넌트 DOM 엘리먼트를 제어할 수 있는 명령형 핸들 외부에 노출: useImperativeHandle()
 // ---------------------------------------------------------------------------
 
 import { useId, useRef } from 'react';
-import { arrayOf, bool, exact, func, string } from 'prop-types';
+import { any, arrayOf, bool, exact, func, string } from 'prop-types';
 import S from './ChatWindow.module.css';
 
 const MessageType = exact({
@@ -20,11 +20,14 @@ const MessageListType = arrayOf(MessageType);
 ChatWindow.propTypes = {
   messages: MessageListType.isRequired,
   onAddMessage: func,
+  $$ref: exact({
+    current: any,
+  }),
 };
 
-function ChatWindow({ messages, onAddMessage }) {
+function ChatWindow({ $$ref, messages, onAddMessage }) {
   const id = useId();
-  const olRef = useRef(null);
+  // const olRef = useRef(null);
   const textareaRef = useRef(null);
 
   const handleSendMessage = (e) => {
@@ -82,16 +85,22 @@ function ChatWindow({ messages, onAddMessage }) {
   //   }
   // };
 
-  const mountedList = (el) => {
-    olRef.current = el;
-    // scrollDownList(el);
-  };
+  // const mountedList = (el) => {
+  //   olRef.current = el;
+  //   // scrollDownList(el);
+  // };
 
   return (
     <section className={S.component}>
       <h2 className="sr-only">채팅 화면</h2>
 
-      <ol ref={mountedList} className={S.chats}>
+      <ol
+        // ref={mountedList}
+        // 외부의 컴포넌트에 <ol> 엘리먼트 접근 권한 모두 부여!!!!!
+        // 그래 네 맘대로 해라!! 전권 위임~
+        ref={$$ref}
+        className={S.chats}
+      >
         {messages.map(({ id, isMe, message }) => {
           const classNames = `${S.chat} ${isMe ? S.me : ''}`.trim();
 
