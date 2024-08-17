@@ -17,26 +17,74 @@
 // - [ ] 사용자 액션에 의해 실행되는 기능 (이벤트 사용)
 // --------------------------------------------------------------------------
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import S from './DataFetching.module.css';
 
-// eslint-disable-next-line no-unused-vars
 const ENDPOINT = '//yamoo9.pockethost.io/api/collections/olive_oil/records';
 
 function DataFetching() {
   // 서버에 요청해서 데이터를 가져올 때
   // 클라이언트 환경에 리액트를 사용해 고려해야할 상태는 무엇 무엇을 선언해야 할까요?
 
+  // [상태 선언] -----------------------------------------------------
+
+  // [상태를 개별적으로 관리할 때]
   // 로딩 중인지 아닌지 여부 상태
-  const [isLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false); // boolean
 
   // 응답이 실패한 경우, 오류 상태
-  const [error] = useState(null);
+  const [error, setError] = useState(null); // null | Error
 
   // 응답이 성공한 경우, 앱에 설정할 데이터 상태
-  const [data] = useState(null);
+  const [data, setData] = useState(null); // null | any
 
-  // 조건부 렌더링
+  // [이펙트를 사용해 백엔드 환경과 동기화]
+  useEffect(
+    // 이펙트 콜백
+    // 백엔드 환경에 요청/응답 코드 로직
+    () => {
+      // 로딩 상태 업데이트
+      setIsLoading(true);
+
+      // Fetch API or axios 활용
+      // 비동기 요청 (Promise)
+      console.log('백엔드 환경에 요청 및 응답 처리');
+      fetch(ENDPOINT)
+        .then((response) => {
+          // 요청 성공했을 때
+          return response.json();
+        })
+        .then((responseData) => {
+          // 오류가 발생한 경우 감지
+          if ('code' in responseData && 'message' in responseData) {
+            throw new Error(responseData.message);
+          }
+
+          // 상태 업데이트 시도
+          setData(responseData);
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          // 요청 실패했을 때
+          // 상태 업데이트 시도
+          setError(error);
+          setIsLoading(false);
+        });
+    },
+    // 서버에 반복 요청하지 않으려면
+    // 처음 마운트 당시에 1회만 서버에 요청/응답 받아야 한다.
+    []
+  );
+
+  // [상태를 하나의 객체로 관리할 때]
+  // Immer 라이브러리 활용
+  // const [state, setState] = useState({
+  //   loading: false,
+  //   error: null,
+  //   data: null
+  // });
+
+  // [조건부 렌더링] -------------------------------------------------
 
   // 로딩 중인가? 로딩 스피너 표시하기
   if (isLoading) {
@@ -45,12 +93,17 @@ function DataFetching() {
 
   // 오류가 발생했는가? 오류 메시지 표시하기
   if (error) {
-    return <p role="alert">오류 발생! "{error.message}"</p>;
+    return (
+      <p role="alert">
+        오류 발생!{' '}
+        <span style={{ fontWeight: 500, color: 'red' }}>"{error.message}"</span>
+      </p>
+    );
   }
 
   // 데이터가 존재하는가? 데이터 표시하기
   if (data) {
-    console.log(data.items.length);
+    console.log(data?.items?.length);
   }
 
   return (
