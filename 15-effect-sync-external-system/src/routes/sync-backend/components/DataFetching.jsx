@@ -11,27 +11,37 @@ function DataFetching() {
   const [error, setError] = useState(null);
   const [data, setData] = useState(null);
 
+  // 마운트 -> 언마운트 -> 리-마운트
+  // 중복된 네트워크 요청 중단
+  // 네트워크 요청 1회 성공 시
+  // 상태 업데이트 1회 진행
   useEffect(() => {
-    // 지역 변수 설정
-    // 무시(ignore)할 것인가?
-    let ignore = false;
+    const abortController = new AbortController();
 
     setIsLoading(true);
 
     const fetchOliveOil = async () => {
-      const response = await fetch(ENDPOINT);
-      const responseData = await response.json();
+      try {
+        const response = await fetch(ENDPOINT, {
+          signal: abortController.signal,
+        });
 
-      if (response.ok) {
-        if (!ignore) {
-          console.log('성공적으로 응답 받은 데이터를 상태로 업데이트');
-          setData(responseData);
+        const responseData = await response.json();
+
+        if (!response.ok) {
+          throw new Error(responseData.message);
         }
-      } else {
-        setError(responseData);
-      }
 
-      setIsLoading(false);
+        setData(responseData);
+        setIsLoading(false);
+      } catch (error) {
+        // 중복된 요청 취소를 오류로 보지 않음
+        // 그 이외의 오류가 발생한 경우 오류로 봄
+        if (!(error instanceof DOMException)) {
+          setError(error);
+          setIsLoading(false);
+        }
+      }
     };
 
     fetchOliveOil();
@@ -39,11 +49,15 @@ function DataFetching() {
     // 클린업 함수
     // 마운트(이펙트 콜백 실행) -> 언마운트(클린업 실행) -> 리-마운트(이펙트 콜백 실행)
     return () => {
-      ignore = true;
+      // AbortController 인스턴스(객체)의
+      // abort() 메서드를 사용해 이전 요청을 중단
+      abortController.abort();
     };
   }, []);
 
   if (isLoading) {
+    console.log('isLoading');
+
     return <LoadingMessage />;
   }
 
