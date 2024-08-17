@@ -11,12 +11,15 @@ const COUNTER_COUNT = '@counter/count';
 const COUNTER_STEP = '@counter/step';
 
 // - [x] [이펙트] 문서 제목 - 웹 스토리지 동기화
-// - [ ] [이벤트] 사용자 액션 → 스토리지에 데이터 동기화
+// - [x] [이벤트] 사용자 액션 → 스토리지에 데이터 동기화
+// - [x] [스토리지 타입] 로컬 또는 세션 스토리지 선택
 
 function Counter() {
   const id = useId();
 
-  const [count, setCount] = useState(() => getStorageData(COUNTER_COUNT, 0));
+  const [count, setCount] = useState(() =>
+    getStorageData(COUNTER_COUNT, 0, 'session')
+  );
   useEffect(() => {
     // 브라우저 윈도우 동기화
     document.title = `(${count}) ` + DOCUMENT_INITIAL_TITLE;
@@ -24,7 +27,9 @@ function Counter() {
     //   setStorageData(COUNTER_COUNT, count);
   }, [count]);
 
-  const [step, setStep] = useState(() => getStorageData(COUNTER_STEP, 1));
+  const [step, setStep] = useState(() =>
+    getStorageData(COUNTER_STEP, 1, 'session')
+  );
   // useEffect(() => {
   //   // 브라우저 웹 스토리지 동기화
   //   setStorageData(COUNTER_STEP, step);
@@ -47,8 +52,8 @@ function Counter() {
   // 이벤트를 사용해 사용자 액션이 감지되면
   // 웹 스토리지에 데이터 저장
   const handleSaveToStorage = () => {
-    setStorageData(COUNTER_COUNT, count);
-    setStorageData(COUNTER_STEP, step);
+    setStorageData(COUNTER_COUNT, count, 'session');
+    setStorageData(COUNTER_STEP, step, 'session');
   };
 
   const isDisabled = count <= 1;
