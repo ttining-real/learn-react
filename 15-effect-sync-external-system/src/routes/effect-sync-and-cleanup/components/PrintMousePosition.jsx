@@ -7,6 +7,7 @@
 
 import { useEffect, useState } from 'react';
 import S from './PrintMousePosition.module.css';
+import { throttle } from '@/utils';
 
 function PrintMousePosition() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -22,6 +23,7 @@ function PrintMousePosition() {
   useEffect(
     // 1. 이펙트 콜백 추가
     () => {
+      console.log('이벤트 연결');
       // [이벤트 연결]
       // 사용자가 화면에서 마우스를 움직이면 이를 추적해
       // 마우스의 x, y 좌표 값을 읽어온다.
@@ -30,12 +32,13 @@ function PrintMousePosition() {
         setMousePosition({ x, y });
       };
 
-      document.addEventListener('mousemove', handleMove);
-    }
+      document.addEventListener('mousemove', throttle(handleMove, 100));
+    },
     // 2. 종속성 설정
     //    가급적 종속성 설정은 필요
     //    설정하지 않은 경우 문제가 발생 (예: 성능)
-    // []
+    // 마운트 시점 이후 1회 실행
+    []
   );
 
   return (
