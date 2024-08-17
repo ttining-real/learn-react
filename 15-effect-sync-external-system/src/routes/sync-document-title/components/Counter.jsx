@@ -4,8 +4,14 @@ import { getStorageData, setStorageData } from '@/utils';
 
 const DOCUMENT_INITIAL_TITLE = '문서 제목 동기화';
 
+// 스토리지 저장할 키
+// - @counter/count
 const COUNTER_COUNT = '@counter/count';
+// - @counter/step
 const COUNTER_STEP = '@counter/step';
+
+// - [x] [이펙트] 문서 제목 - 웹 스토리지 동기화
+// - [ ] [이벤트] 사용자 액션 → 스토리지에 데이터 동기화
 
 function Counter() {
   const id = useId();
@@ -14,15 +20,15 @@ function Counter() {
   useEffect(() => {
     // 브라우저 윈도우 동기화
     document.title = `(${count}) ` + DOCUMENT_INITIAL_TITLE;
-    // 브라우저 웹 스토리지 동기화
-    setStorageData(COUNTER_COUNT, count);
+    //   // 브라우저 웹 스토리지 동기화
+    //   setStorageData(COUNTER_COUNT, count);
   }, [count]);
 
   const [step, setStep] = useState(() => getStorageData(COUNTER_STEP, 1));
-  useEffect(() => {
-    // 브라우저 웹 스토리지 동기화
-    setStorageData(COUNTER_STEP, step);
-  }, [step]);
+  // useEffect(() => {
+  //   // 브라우저 웹 스토리지 동기화
+  //   setStorageData(COUNTER_STEP, step);
+  // }, [step]);
 
   const handleDecrease = () => {
     let nextCount = count - step;
@@ -38,11 +44,24 @@ function Counter() {
     setStep(Number(e.target.value));
   };
 
+  // 이벤트를 사용해 사용자 액션이 감지되면
+  // 웹 스토리지에 데이터 저장
+  const handleSaveToStorage = () => {
+    setStorageData(COUNTER_COUNT, count);
+    setStorageData(COUNTER_STEP, step);
+  };
+
   const isDisabled = count <= 1;
 
   return (
     <>
       <div className={S.component}>
+        <div style={{ marginBlockEnd: 20 }}>
+          <button type="button" onClick={handleSaveToStorage}>
+            이벤트로 웹 스토리지 동기화
+          </button>
+        </div>
+
         <button
           type="button"
           aria-label="카운트 감소"
