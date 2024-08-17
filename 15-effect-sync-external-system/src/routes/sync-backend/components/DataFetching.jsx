@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 // --------------------------------------------------------------------------
 // ✅ 데이터 패칭
 // --------------------------------------------------------------------------
@@ -16,12 +17,42 @@
 // - [ ] 사용자 액션에 의해 실행되는 기능 (이벤트 사용)
 // --------------------------------------------------------------------------
 
+import { useState } from 'react';
 import S from './DataFetching.module.css';
 
 // eslint-disable-next-line no-unused-vars
 const ENDPOINT = '//yamoo9.pockethost.io/api/collections/olive_oil/records';
 
 function DataFetching() {
+  // 서버에 요청해서 데이터를 가져올 때
+  // 클라이언트 환경에 리액트를 사용해 고려해야할 상태는 무엇 무엇을 선언해야 할까요?
+
+  // 로딩 중인지 아닌지 여부 상태
+  const [isLoading] = useState(false);
+
+  // 응답이 실패한 경우, 오류 상태
+  const [error] = useState(null);
+
+  // 응답이 성공한 경우, 앱에 설정할 데이터 상태
+  const [data] = useState(null);
+
+  // 조건부 렌더링
+
+  // 로딩 중인가? 로딩 스피너 표시하기
+  if (isLoading) {
+    return <p>데이터 로딩 중...</p>;
+  }
+
+  // 오류가 발생했는가? 오류 메시지 표시하기
+  if (error) {
+    return <p role="alert">오류 발생! "{error.message}"</p>;
+  }
+
+  // 데이터가 존재하는가? 데이터 표시하기
+  if (data) {
+    console.log(data.items.length);
+  }
+
   return (
     <div className={S.component}>
       <p>서버에 데이터 가져오기 요청 후, 앱 화면 업데이트</p>
