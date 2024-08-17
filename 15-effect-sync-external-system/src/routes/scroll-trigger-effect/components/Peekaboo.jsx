@@ -17,10 +17,10 @@ function Peekaboo() {
 
   // 스크롤 영역에 랜덤 인덱스의 섹션이 보이면 까꿍~!
   // peekaboo 상태가 true가 되면 유령이 등장!
-  const [peekaboo] = useState(false);
+  const [peekaboo, setPeekaboo] = useState(false);
 
   const [randomIndex] = useState(() => {
-    const min = 4;
+    const min = 1;
     const max = sections.length; // 9
     const randomIndex = getRandomMinMax(min, max);
     // console.log(randomIndex);
@@ -36,6 +36,7 @@ function Peekaboo() {
       </span>
     ) : null;
 
+  // 피카부 애니메이션 이펙트
   useEffect(() => {
     const peekabooCharacter = peekabooRef.current;
 
@@ -68,8 +69,10 @@ function Peekaboo() {
       // 교차했는가? 즉, 뷰포트 안에 관찰 대상이 진입한 상태인가? true or false
       if (entry.isIntersecting) {
         console.log('뷰포트 안에 관찰 대상이 보인다.');
+        setPeekaboo(true);
       } else {
         console.log('뷰포트 안에 관찰 대상이 안보인다.');
+        setPeekaboo(false);
       }
     });
 
