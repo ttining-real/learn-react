@@ -23,7 +23,7 @@ function Peekaboo() {
     const min = 4;
     const max = sections.length; // 9
     const randomIndex = getRandomMinMax(min, max);
-    console.log(randomIndex);
+    // console.log(randomIndex);
     return randomIndex;
   });
 
@@ -53,9 +53,39 @@ function Peekaboo() {
     }
   }, [peekaboo]);
 
+  // 스크롤 트리거 이펙트
+  useEffect(() => {
+    console.log({ randomIndex });
+
+    const targetIndex = randomIndex - 1;
+    const targetSectionElements = Array.from(sectionsRef.current.values());
+    const targetSectionElement = targetSectionElements.at(targetIndex);
+
+    // 인터섹션 옵저버 객체 생성
+    const intersectionObserver = new IntersectionObserver((entries) => {
+      const entry = entries[0];
+
+      // 교차했는가? 즉, 뷰포트 안에 관찰 대상이 진입한 상태인가? true or false
+      if (entry.isIntersecting) {
+        console.log('뷰포트 안에 관찰 대상이 보인다.');
+      } else {
+        console.log('뷰포트 안에 관찰 대상이 안보인다.');
+      }
+    });
+
+    // 인터섹션 옵저버 객체 관찰 대상 설정
+    // 뷰포트 안에 관찰 대상이 진입(enter)했는 지, 진출(leave)했는 지 감지
+    intersectionObserver.observe(targetSectionElement);
+
+    // 클린업(정리)
+    return () => {
+      // 인터섹션 옵저버 객체가 관찰하는 것을 중단 설정
+      intersectionObserver.unobserve(targetSectionElement);
+    };
+  }, [randomIndex]);
+
   // ref 참조 { current: 섹션 집합 수집 }
-  // 1. Map
-  // 2. Array
+  // - Map 데이터 활용
 
   const sectionsRef = useRef(null); // { current: null }
 
