@@ -17,7 +17,7 @@ function Peekaboo() {
 
   // 스크롤 영역에 랜덤 인덱스의 섹션이 보이면 까꿍~!
   // peekaboo 상태가 true가 되면 유령이 등장!
-  const [peekaboo] = useState(true);
+  const [peekaboo] = useState(false);
 
   const [randomIndex] = useState(() => {
     const min = 4;
@@ -27,7 +27,7 @@ function Peekaboo() {
     return randomIndex;
   });
 
-  const peekabooRef = useRef(null);
+  const peekabooRef = useRef(null); // { current: null }
 
   const renderPeekaboo = (idx) =>
     idx === randomIndex ? (
@@ -53,6 +53,29 @@ function Peekaboo() {
     }
   }, [peekaboo]);
 
+  // ref 참조 { current: 섹션 집합 수집 }
+  // 1. Map
+  // 2. Array
+
+  const sectionsRef = useRef(null); // { current: null }
+
+  const getSectionMap = () => {
+    if (!sectionsRef.current) {
+      sectionsRef.current = new Map();
+    }
+    return sectionsRef.current;
+  };
+
+  const collectSections = (key, sectionElement) => {
+    const sectionMap = getSectionMap();
+
+    if (sectionElement) {
+      sectionMap.set(key, sectionElement);
+    } else {
+      sectionMap.delete(key);
+    }
+  };
+
   return (
     <div className={S.component}>
       {sections.map((section, index) => {
@@ -60,7 +83,12 @@ function Peekaboo() {
         const styles = { backgroundColor: `var(--purple-${idx}00)` };
 
         return (
-          <section key={index} className={S.section} style={styles}>
+          <section
+            key={index}
+            ref={collectSections.bind(null, index)}
+            className={S.section}
+            style={styles}
+          >
             {idx}
             {renderPeekaboo(idx)}
           </section>
