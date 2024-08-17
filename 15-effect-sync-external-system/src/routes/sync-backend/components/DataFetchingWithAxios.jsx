@@ -1,5 +1,4 @@
-/* eslint-disable react/no-unescaped-entities */
-
+import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { exact, string } from 'prop-types';
 import S from './DataFetching.module.css';
@@ -7,10 +6,6 @@ import S from './DataFetching.module.css';
 const ENDPOINT = '//yamoo9.pockethost.io/api/collections/olive_oil/records';
 
 function DataFetching() {
-  // const [isLoading, setIsLoading] = useState(false);
-  // const [error, setError] = useState(null);
-  // const [data, setData] = useState(null);
-
   const [state, setState] = useState({
     isLoading: false,
     error: null,
@@ -20,16 +15,6 @@ function DataFetching() {
   useEffect(() => {
     const abortController = new AbortController();
 
-    // API 1
-    // setState(nextState);
-    // setState({ ...state, key: value });
-
-    // setIsLoading(true);
-
-    // API 2
-    // setState((previousState) => nextState);
-    // setState((prevState) => ({ ...prevState, key: value }));
-
     setState((prevState) => ({
       ...prevState,
       isLoading: true,
@@ -37,39 +22,17 @@ function DataFetching() {
 
     const fetchOliveOil = async () => {
       try {
-        const response = await fetch(ENDPOINT, {
+        const response = await axios.get(ENDPOINT, {
           signal: abortController.signal,
         });
 
-        const responseData = await response.json();
-
-        if (!response.ok) {
-          throw new Error(responseData.message);
-        }
-
-        // setData(responseData);
-        // setIsLoading(false);
-        // setState({
-        //   ...state,
-        //   data: responseData,
-        //   isLoading: false,
-        // });
-
         setState((prevState) => ({
           ...prevState,
-          data: responseData,
+          data: response.data,
           isLoading: false,
         }));
       } catch (error) {
-        if (!(error instanceof DOMException)) {
-          // setError(error);
-          // setIsLoading(false);
-          // setState({
-          //   ...state,
-          //   error,
-          //   isLoading: false,
-          // });
-
+        if (error.name !== 'CanceledError') {
           setState((prevState) => ({
             ...prevState,
             error,
@@ -121,7 +84,7 @@ function PrintError({ error }) {
   return (
     <p role="alert">
       오류 발생!{' '}
-      <span style={{ fontWeight: 500, color: 'red' }}>"{error.message}"</span>
+      <span style={{ fontWeight: 500, color: 'red' }}>{error.message}</span>
     </p>
   );
 }

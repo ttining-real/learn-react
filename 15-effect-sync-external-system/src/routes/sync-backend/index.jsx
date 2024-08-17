@@ -2,7 +2,7 @@
 // ✅ 백엔드 환경과 리액트 앱 동기화
 // --------------------------------------------------------------------------
 
-import DataFetching from './components/DataFetching';
+import DataFetching from './components/DataFetchingWithAxios';
 import DataMutation from './components/DataMutation';
 
 function SyncBackend() {
