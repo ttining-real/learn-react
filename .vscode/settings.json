@@ -30,6 +30,12 @@
     ".npmrc": "dotenv"
   },
 
+  // Path Autocomplete 설정
+  "path-autocomplete.extensionOnImport": false,
+  "path-autocomplete.pathMappings": {
+    "@": "${folder}/src"
+  },
+
   // 언어 별, 포멧터 설정
   "[html]": {
     "editor.defaultFormatter": "vscode.html-language-features"
@@ -78,8 +84,7 @@
   "html.format.indentInnerHtml": true,
   "html.format.indentHandlebars": true,
   "html.format.maxPreserveNewLines": 1,
-  // "html.format.wrapAttributes": "force-expand-multiline",
-  "html.format.wrapAttributes": "auto",
+  "html.format.wrapAttributes": "force-expand-multiline",
 
   // CSS 설정
   "css.validate": true,
