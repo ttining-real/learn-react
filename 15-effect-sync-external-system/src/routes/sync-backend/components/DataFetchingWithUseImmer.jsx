@@ -6,6 +6,7 @@ import S from './DataFetching.module.css';
 const ENDPOINT = '//yamoo9.pockethost.io/api/collections/olive_oil/records';
 
 function DataFetching() {
+  // 네트워크 요청/응답 처리를 위한 상태 선언
   const [state, setState] = useImmer({
     keyPoint: '상태가 복잡해지면 관리도 덩달아 어려워진다.',
     stateData: {
@@ -24,6 +25,7 @@ function DataFetching() {
     },
   });
 
+  // 이펙트를 사용해 외부 시스템과 동기화 설정
   useEffect(() => {
     const abortController = new AbortController();
 
@@ -105,6 +107,7 @@ function DataFetching() {
     };
   }, [setState]);
 
+  // 네트워크 응답에 따른 조건부 렌더링
   if (state.stateData.one.isLoading) {
     return <LoadingMessage />;
   }
