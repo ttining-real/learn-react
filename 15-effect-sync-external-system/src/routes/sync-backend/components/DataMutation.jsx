@@ -7,17 +7,12 @@
 // - [ ] 데이터 뮤테이션 요청 응답에 문제가 발생한 경우, 오류 메시지를 렌더링합니다.
 // --------------------------------------------------------------------------
 
-import { createNote, readNotes } from '@/api/notes';
+import { createNote, readNoteOne, readNotes } from '@/api/notes';
 import S from './DataMutation.module.css';
 import { useRef } from 'react';
 
 function DataMutation() {
   const formRef = useRef(null);
-
-  const handleReadNotes = async () => {
-    const responseData = await readNotes();
-    console.log(responseData);
-  };
 
   const handleCreate = async () => {
     // 폼 요소에 접근 => 폼 데이터 객체 생성
@@ -37,6 +32,16 @@ function DataMutation() {
 
     // 응답이 성공하면 폼 초기화
     formElement.reset();
+  };
+
+  const handleReadNotes = async () => {
+    const responseData = await readNotes();
+    console.log(responseData);
+  };
+
+  const handleReadNoteOne = async () => {
+    const responseData = await readNoteOne('lncedwlukp5s0js');
+    console.log(responseData);
   };
 
   return (
@@ -68,6 +73,9 @@ function DataMutation() {
         </button>
         <button type="button" onClick={handleReadNotes}>
           노트 읽기
+        </button>
+        <button type="button" onClick={handleReadNoteOne}>
+          노트 ID <code>lncedwlukp5s0js</code> 데이터 가져오기
         </button>
       </div>
     </div>

@@ -67,7 +67,22 @@ export async function readNotes(page = 1, perPage = 10) {
   return responseData;
 }
 
-export async function readNoteOne() {}
+/** @type {(noteId: string) => Promise<any>} */
+export async function readNoteOne(noteId) {
+  const REQUEST_URL = `${ENDPOINT}/api/collections/notes/records/${noteId}`;
+  const response = await fetch(REQUEST_URL);
+
+  if (!response.ok) {
+    throw new Response(
+      JSON.stringify({ message: '서버에서 요청에 응답하지 않습니다.' }),
+      { status: 500 }
+    );
+  }
+
+  const responseData = await response.json();
+
+  return responseData;
+}
 
 // Update
 export async function updateNote() {}
