@@ -3,6 +3,7 @@ import ClockOnOff from './components/ClockOnOff';
 import PrintMousePosition from './components/PrintMousePosition';
 import UselessCheckbox from './components/UselessCheckbox';
 import S from './style.module.css';
+import useDocumentTitle from '@/hooks/useDocumentTitle';
 
 const SUBJECTS = {
   MOUSE: '마우스 위치 추적',
@@ -11,6 +12,8 @@ const SUBJECTS = {
 };
 
 function EffectSyncAndCleanup() {
+  useDocumentTitle('이펙트 동기화 & 정리');
+
   const [subject, setSubject] = useState(SUBJECTS.MOUSE);
 
   const [isClockOn, setIsClockOn] = useState(false);

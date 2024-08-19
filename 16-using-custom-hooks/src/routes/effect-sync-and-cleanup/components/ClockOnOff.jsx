@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { bool, func } from 'prop-types';
 import S from './ClockOnOff.module.css';
+import useDocumentTitle from '@/hooks/useDocumentTitle';
 
 ClockOnOff.propTypes = {
   isOn: bool,
@@ -8,6 +9,10 @@ ClockOnOff.propTypes = {
 };
 
 function ClockOnOff({ isOn = false, onToggle }) {
+  const documentTitle = '시계 ON/OFF ← 이펙트 동기화 & 정리';
+
+  useDocumentTitle(documentTitle);
+
   const buttonLabel = isOn ? 'OFF' : 'ON';
   const [time, setTime] = useState(new Date());
 

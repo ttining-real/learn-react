@@ -1,7 +1,11 @@
 import { useEffect, useId, useState } from 'react';
 import S from './UselessCheckbox.module.css';
+import useDocumentTitle from '@/hooks/useDocumentTitle';
 
 function UselessCheckbox() {
+  const documentTitle = '쓸모없는 체크박스 ← 이펙트 동기화 & 정리';
+  useDocumentTitle(documentTitle);
+
   const id = useId();
 
   const [checked, setChecked] = useState(false);

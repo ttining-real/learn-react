@@ -1,7 +1,10 @@
+import useDocumentTitle from '@/hooks/useDocumentTitle';
 import DataFetching from './components/DataFetching';
 import DataMutation from './components/DataMutation';
 
 function SyncBackend() {
+  useDocumentTitle('백엔드 환경 동기화');
+
   return (
     <main id="page">
       <h1 className="headline">백엔드 환경과 동기화</h1>
