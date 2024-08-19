@@ -3,8 +3,8 @@
 // --------------------------------------------------------------------------
 // - [x] 생성(Create)
 // - [x] 읽기(Read)
-// - [ ] 수정(Update)
-// - [ ] 삭제(Delete)
+// - [x] 수정(Update)
+// - [x] 삭제(Delete)
 // --------------------------------------------------------------------------
 
 // 백엔드 API 엔드포인트
@@ -85,7 +85,48 @@ export async function readNoteOne(noteId) {
 }
 
 // Update
-export async function updateNote() {}
+/** @type { (editNote: { id: string, title: string, description: string }) => Promise<any>} */
+export async function updateNote(editNote) {
+  const REQUEST_URL = `${ENDPOINT}/api/collections/notes/records/${editNote.id}`;
+  const body = JSON.stringify({
+    title: editNote.title,
+    description: editNote.description,
+  });
+
+  const response = await fetch(REQUEST_URL, {
+    method: 'PATCH',
+    body,
+    ...REQUEST_OPTIONS,
+  });
+
+  if (!response.ok) {
+    throw new Response(
+      JSON.stringify({ message: '서버에서 요청에 응답하지 않습니다.' }),
+      { status: 500 }
+    );
+  }
+
+  const responseData = await response.json();
+
+  return responseData;
+}
 
 // Delete
-export async function deleteNote() {}
+/** @type { (deleteId: string) => Promise<any> } */
+export async function deleteNote(deleteId) {
+  const REQUEST_URL = `${ENDPOINT}/api/collections/notes/records/${deleteId}`;
+
+  const response = await fetch(REQUEST_URL, {
+    method: 'DELETE',
+    ...REQUEST_OPTIONS,
+  });
+
+  if (!response.ok) {
+    throw new Response(
+      JSON.stringify({ message: '서버에서 요청에 응답하지 않습니다.' }),
+      { status: 500 }
+    );
+  }
+
+  return response;
+}
