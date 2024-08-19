@@ -1,3 +1,4 @@
+import { Outlet } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
 
@@ -6,7 +7,7 @@ function RootLayout() {
     <>
       <Header />
       <main>
-        <p>페이지 컴포넌트 교체</p>
+        <Outlet />
       </main>
       <Footer />
     </>
