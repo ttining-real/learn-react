@@ -12,6 +12,7 @@ import SyncWebStorage from './sync-web-storage';
 import EffectSyncAndCleanup from './effect-sync-and-cleanup';
 import ScrollTriggerEffect from './scroll-trigger-effect';
 import SyncBackend from './sync-backend';
+import CheckOnOffline from './check-on-offline';
 
 // 루트(경로 집합)
 const routes = [
@@ -24,6 +25,7 @@ const routes = [
       { path: 'effect-sync-and-cleanup', element: <EffectSyncAndCleanup /> },
       { path: 'scroll-trigger-effect', element: <ScrollTriggerEffect /> },
       { path: 'sync-backend', element: <SyncBackend /> },
+      { path: 'check-on-offline', element: <CheckOnOffline /> },
     ],
   },
 ];
