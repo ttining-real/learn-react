@@ -1,4 +1,4 @@
-import DataFetching from './components/DataFetchingWithUseImmer';
+import DataFetching from './components/DataFetching';
 import DataMutation from './components/DataMutation';
 
 function SyncBackend() {

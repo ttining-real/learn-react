@@ -1,3 +1,5 @@
+import { exact, string } from 'prop-types';
+
 PrintError.propTypes = {
   error: exact({
     message: string.isRequired,

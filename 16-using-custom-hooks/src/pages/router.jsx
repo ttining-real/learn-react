@@ -1,12 +1,12 @@
 import { createBrowserRouter } from 'react-router-dom';
 
 import RootLayout from '@/pages/layout/RootLayout';
-import NotesLayout from '@/pages/layout/NoteLayout';
-
 import HomePage from '@/pages/Home';
+
+import NotesLayout from '@/pages/layout/NoteLayout';
+import NoteListPage from '@/pages/NoteList';
 import NewNotePage from '@/pages/NewNote';
 import NoteDetailPage from '@/pages/NoteDetail';
-import NoteListPage from '@/pages/NoteList';
 
 // React Router v6.4+ (data APIs ✅)
 const routes = [

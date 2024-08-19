@@ -33,7 +33,7 @@
   }
 
   a {
-    opacity: 0.75;
+    opacity: 0.85;
     display: flex;
     margin-inline: -4px;
     padding: 4px;
@@ -41,6 +41,16 @@
 
     &:hover {
       opacity: 1;
+    }
+
+    &.active {
+      display: block;
+      margin-inline-start: -12px;
+      border-radius: 4px;
+      padding-inline-start: 12px;
+      background-color: #562ec6;
+      color: #fff;
+      font-weight: 900;
     }
   }
 }

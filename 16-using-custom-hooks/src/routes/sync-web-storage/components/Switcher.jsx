@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import { animate, spring } from 'motion';
 import { bool, func } from 'prop-types';
 import S from './Switcher.module.css';
@@ -14,6 +14,8 @@ function Switcher({ value = false, onToggle, ...restProps }) {
   const ballRef = useRef(null);
 
   useEffect(() => {
+    const el = ballRef.current;
+
     if (value) {
       animate(el, { x: 50 }, { easing: springAnimation });
     } else {
