@@ -11,9 +11,9 @@ function Navigation() {
         <li>
           <Link to="/notes">노트 목록</Link>
         </li>
-        <li>
+        {/* <li>
           <Link to="/notes/new">노트 생성</Link>
-        </li>
+        </li> */}
       </ul>
     </nav>
   );
