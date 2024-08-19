@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import NavLink from '../NavLink';
 import S from './Navigation.module.css';
 
 function Navigation() {
@@ -6,14 +6,16 @@ function Navigation() {
     <nav className={S.component}>
       <ul>
         <li>
-          <Link to="/">홈</Link>
+          <NavLink to="/">홈</NavLink>
         </li>
         <li>
-          <Link to="/notes">노트 목록</Link>
+          <NavLink to="/notes" end>
+            노트 목록
+          </NavLink>
         </li>
-        {/* <li>
-          <Link to="/notes/new">노트 생성</Link>
-        </li> */}
+        <li>
+          <NavLink to="/notes/new">노트 생성</NavLink>
+        </li>
       </ul>
     </nav>
   );

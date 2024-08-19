@@ -15,7 +15,7 @@ const routes = [
     element: <RootLayout />,
     children: [
       {
-        index: true,
+        index: true, // '/'
         element: <HomePage />,
       },
       {
