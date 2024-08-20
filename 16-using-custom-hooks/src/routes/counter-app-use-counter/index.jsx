@@ -1,9 +1,11 @@
 import { VscChevronUp, VscChevronDown } from 'react-icons/vsc';
 import useCounter from '@/hooks/useCounter';
 import S from './style.module.css';
+import useRenderCountLog from '@/hooks/useRenderCountLog';
 
 function CounterApp() {
   const C = useCounter({ count: 1, max: 10, step: 2 });
+  useRenderCountLog('CounterApp', 'text-decoration: underline; color: red');
 
   return (
     <main id="page" className={S.component}>
