@@ -22,6 +22,7 @@ import PrintMousePosition from './effect-sync-and-cleanup/components/PrintMouseP
 import ClockOnOffWrapper from './effect-sync-and-cleanup/components/ClockOnOffWrapper';
 import UselessCheckbox from './effect-sync-and-cleanup/components/UselessCheckbox';
 import ClockOnOff from './effect-sync-and-cleanup/components/ClockOnOff';
+import DataFetchUsingUseFetchHook from './data-fetch-using-use-fetch-hook';
 
 // 루트(경로 집합)
 // eslint-disable-next-line no-unused-vars
@@ -73,6 +74,7 @@ const routes = createRoutesFromElements(
     <Route path="scroll-trigger-effect" element={<ScrollTriggerEffect />} />
     <Route path="sync-backend" element={<SyncBackend />} />
     <Route path="check-on-offline" element={<CheckOnOffline />} />
+    <Route path="data-fetching" element={<DataFetchUsingUseFetchHook />} />
   </Route>
 );
 

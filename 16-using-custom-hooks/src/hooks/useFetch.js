@@ -36,7 +36,7 @@ function useFetch(url) {
 
     // 상태 업데이트 (대기 -> 로딩 중...)
     setState((draft) => {
-      draft.status === 'loading';
+      draft.status = 'loading';
     });
 
     // 이펙트 내부의 비동기 함수
@@ -66,14 +66,16 @@ function useFetch(url) {
         // 응답이 성공한 경우
         // 상태 업데이트 (로딩 중... -> 성공)
         setState((draft) => {
-          draft.status === 'success', (draft.data = responseData);
+          draft.status = 'success';
+          draft.data = responseData;
         });
       } catch (error) {
         if (!(error instanceof DOMException)) {
           // 응답이 실패한 경우
           // 상태 업데이트 (로딩 중... -> 실패)
           setState((draft) => {
-            draft.status === 'error', (draft.error = error);
+            draft.status = 'error';
+            draft.error = error;
           });
         }
       }
