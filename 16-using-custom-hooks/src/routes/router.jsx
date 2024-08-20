@@ -22,6 +22,7 @@ import CheckOnOffline from './check-on-offline';
 import PrintMousePosition from './effect-sync-and-cleanup/components/PrintMousePosition';
 import ClockOnOffWrapper from './effect-sync-and-cleanup/components/ClockOnOffWrapper';
 import UselessCheckbox from './effect-sync-and-cleanup/components/UselessCheckbox';
+import ClockOnOff from './effect-sync-and-cleanup/components/ClockOnOff';
 
 // 루트(경로 집합)
 // eslint-disable-next-line no-unused-vars
@@ -66,7 +67,7 @@ const routes = createRoutesFromElements(
       {/* /effect-sync-and-cleanup  →  마우스 위치 추적 */}
       <Route index element={<PrintMousePosition />} />
       {/* /effect-sync-and-cleanup/clock  →  시계 ON/OFF */}
-      <Route path="clock" element={<ClockOnOffWrapper />} />
+      <Route path="clock" element={<ClockOnOff />} />
       {/* /effect-sync-and-cleanup/useless-checkbox  →  쓸모없는 체크박스 */}
       <Route path="useless-checkbox" element={<UselessCheckbox />} />
     </Route>
