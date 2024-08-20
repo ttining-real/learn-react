@@ -9,6 +9,7 @@ NavLink.propTypes = {
 function NavLink({ className = '', ...restProps }) {
   return (
     <RRNavLink
+      aria-current="location"
       className={({ isActive }) => {
         const classNames = `${isActive ? S.active : ''} ${className}`.trim();
         return classNames;

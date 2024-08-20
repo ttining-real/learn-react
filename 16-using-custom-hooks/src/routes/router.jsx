@@ -1,7 +1,11 @@
 // React Router 라이브러리를 사용한 싱글 페이지 앱 제작
 // 실습 진행 (30분까지 진행)
 
-import { createBrowserRouter } from 'react-router-dom';
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+} from 'react-router-dom';
 
 // 레이아웃
 import RootLayout from '@/components/RootLayout';
@@ -20,12 +24,8 @@ import ClockOnOffWrapper from './effect-sync-and-cleanup/components/ClockOnOffWr
 import UselessCheckbox from './effect-sync-and-cleanup/components/UselessCheckbox';
 
 // 루트(경로 집합)
-
-// [중첩된 루트 설정]
-// /effect-sync-and-cleanup                   : index - 마우스 위치 추적
-// /effect-sync-and-cleanup/clock             : clock - 시계 ON/OFF
-// /effect-sync-and-cleanup/useless-checkbox  : useless-checkbox - 쓸모없는 체크박스
-const routes = [
+// eslint-disable-next-line no-unused-vars
+const __routes__ = [
   {
     path: '/',
     element: <RootLayout />,
@@ -56,6 +56,25 @@ const routes = [
     ],
   },
 ];
+
+const routes = createRoutesFromElements(
+  <Route path="/" element={<RootLayout />}>
+    <Route index element={<SyncDocumentTitle />} />
+    <Route path="sync-web-storage" element={<SyncWebStorage />} />
+    {/* [중첩된 루트 설정] */}
+    <Route path="effect-sync-and-cleanup" element={<EffectSyncAndCleanup />}>
+      {/* /effect-sync-and-cleanup  →  마우스 위치 추적 */}
+      <Route index element={<PrintMousePosition />} />
+      {/* /effect-sync-and-cleanup/clock  →  시계 ON/OFF */}
+      <Route path="clock" element={<ClockOnOffWrapper />} />
+      {/* /effect-sync-and-cleanup/useless-checkbox  →  쓸모없는 체크박스 */}
+      <Route path="useless-checkbox" element={<UselessCheckbox />} />
+    </Route>
+    <Route path="scroll-trigger-effect" element={<ScrollTriggerEffect />} />
+    <Route path="sync-backend" element={<SyncBackend />} />
+    <Route path="check-on-offline" element={<CheckOnOffline />} />
+  </Route>
+);
 
 // 라우터
 const router = createBrowserRouter(routes);
