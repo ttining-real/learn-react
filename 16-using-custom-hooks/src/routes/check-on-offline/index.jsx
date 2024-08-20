@@ -7,7 +7,10 @@ import useToggle from '@/hooks/useToggle';
 function CheckOnOffline() {
   // const isOnline = useOnline();
   const [isToggle, setIsToggle] = useToggle(false, (nextIsToggle) => {
-    document.body.style.backgroundColor = nextIsToggle ? '#2f2f2f' : 'white';
+    document.body.style.cssText = `
+      background-color: ${nextIsToggle ? '#000' : '#fff'};
+      color: ${nextIsToggle ? '#fff' : '#000'};
+    `;
   });
 
   return (
