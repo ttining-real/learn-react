@@ -18,7 +18,7 @@ const navigation = [
   },
   {
     path: '/theme-switch',
-    text: '테마 스위치 (앱 상태 관리)',
+    text: '테마 스위치 (컨텍스트 관리)',
     element: <SwitchTheme />,
   },
   {

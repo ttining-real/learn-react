@@ -1,14 +1,10 @@
 import { GrFormDown, GrFormUp } from 'react-icons/gr';
-
 import useCounter from '@/hooks/useCounter';
-import useRenderCountLog from '@/hooks/useRenderCountLog';
 import CountButton from './CountButton';
 import CountOutput from './CountDisplay';
 import S from './style.module.css';
 
 function Counter() {
-  useRenderCountLog('Counter', '#7575e6', 800);
-
   const C = useCounter({ min: -5, count: 3, step: 2 });
   const { count, step, isMinDisabled, isMaxDisabled, increment, decrement } = C;
 

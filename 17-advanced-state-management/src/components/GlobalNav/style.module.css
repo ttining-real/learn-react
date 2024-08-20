@@ -1,10 +1,10 @@
 .component {
   overflow: auto;
   resize: horizontal;
-  min-inline-size: 160px;
+  min-inline-size: 168px;
   max-inline-size: 320px;
-  min-block-size: 94vh;
-  margin-block-start: 1vh;
+  min-block-size: 90vh;
+  margin-block-start: 8px;
   padding: 20px;
   border-inline-end: 1px dashed var(--accent-color, #440fbf);
 
@@ -14,6 +14,7 @@
     font-size: 24px;
     font-weight: 400;
     position: relative;
+    color: var(--accent-color, #440fbf);
 
     &::after {
       content: '🎩';

@@ -1,11 +1,16 @@
+import { node } from 'prop-types';
 import S from './style.module.css';
 
-function AppForm() {
-  const handleSubmit = () => {
-    console.log('submit');
-  };
+AppForm.propTypes = {
+  children: node.isRequired,
+};
 
-  return <form className={S.component} onSubmit={handleSubmit}></form>;
+function AppForm({ children, ...restProps }) {
+  return (
+    <form className={S.component} {...restProps}>
+      {children}
+    </form>
+  );
 }
 
 export default AppForm;

@@ -1,4 +1,7 @@
 .component {
-  display: flex;
-  gap: 12px;
+
+  .layout {
+    display: flex;
+    gap: 12px;
+  }
 }

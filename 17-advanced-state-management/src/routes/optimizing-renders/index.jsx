@@ -1,9 +1,11 @@
 import useDocumentTitle from '@/hooks/useDocumentTitle';
 import TimeAndCounter from './components/TimeAndCounter';
+import TodoListApp from './components/TodoListApp';
 import S from './style.module.css';
 
 function OptimizingRenders() {
   useDocumentTitle('렌더링(성능) 최적화');
+
   return (
     <main id="page" className={S.component}>
       <h1 className="headline">렌더링(성능) 최적화</h1>
@@ -40,7 +42,29 @@ function OptimizingRenders() {
         </p>
       </div>
 
+      <div className="divider" />
+
+      <h2 className="headline2">Time &amp; Counter</h2>
+      <div className="description">
+        <p>
+          리액트 개발 도구로 TimeAndCounter 앱의 렌더링 문제를 파악한 후
+          해결해봅니다.
+        </p>
+      </div>
+
       <TimeAndCounter />
+
+      <div className="divider" />
+
+      <h2 className="headline2">Todo List</h2>
+      <div className="description">
+        <p>
+          학습한 내용을 토대로 TodoList 앱의 렌더링 문제를 파악한 후
+          해결해봅니다.
+        </p>
+      </div>
+
+      <TodoListApp />
     </main>
   );
 }
