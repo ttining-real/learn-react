@@ -1,6 +1,7 @@
+import { useRef } from 'react';
 import useOnline from '@/hooks/useOnline';
+import useStateWithCallback from '@/hooks/useStateWithCallback';
 import Switcher from '../sync-web-storage/components/Switcher';
-import { useEffect, useRef, useState } from 'react';
 
 function CheckOnOffline() {
   const isOnline = useOnline();
@@ -20,29 +21,31 @@ export default CheckOnOffline;
 /* -------------------------------------------------------------------------- */
 
 function ChangeStateAndCallback() {
-  const [message, setMessage] = useState('hello');
+  const [count, setCount] = useStateWithCallback(0);
+
+  const [message, setMessage] = useStateWithCallback(
+    /* 초기 상태 */
+    'hello',
+    /* 상태 업데이트 이후 실행이 보장되는 콜백 함수 (이펙트 코드 추가 가능) */
+    (nextMessage) => {
+      pRef.current.textContent = nextMessage.toUpperCase();
+      setCount((c) => c + 1);
+    }
+  );
 
   const handleChangeMessage = () => {
     setMessage((m) => `${m} ❤️`);
   };
-
-  // 상태가 변경될 때마다 무언가 수행하고 싶다.
-  // useStateWithCallback(value, callback?)
-  //
-  // message 상태가 업데이트 될 때(리-렌더링) 마다 무언가 수행하려면?
-  // 예) 콘솔에 기록, 또는 명령형 프로그래밍을 수행
-  useEffect(() => {
-    pRef.current.textContent = message.toUpperCase();
-  }, [message]);
 
   const pRef = useRef(null);
 
   return (
     <>
       <button type="button" style={buttonStyles} onClick={handleChangeMessage}>
-        메시지 변경
+        메시지 변경 ({count})
       </button>
 
+      {/* 선언적 프로그래밍 */}
       <output style={outputStyles}>{message.toUpperCase()}</output>
       <p ref={pRef} style={pStyles} />
     </>
