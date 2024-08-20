@@ -1,15 +1,20 @@
 import { useRef } from 'react';
-import useOnline from '@/hooks/useOnline';
+// import useOnline from '@/hooks/useOnline';
 import useStateWithCallback from '@/hooks/useStateWithCallback';
 import Switcher from '../sync-web-storage/components/Switcher';
+import useToggle from '@/hooks/useToggle';
 
 function CheckOnOffline() {
-  const isOnline = useOnline();
+  // const isOnline = useOnline();
+  const [isToggle, setIsToggle] = useToggle(false, (nextIsToggle) => {
+    document.body.style.backgroundColor = nextIsToggle ? '#2f2f2f' : 'white';
+  });
 
   return (
     <div style={{ display: 'flex', flexFlow: 'column', gap: 20 }}>
       <h1>Check On/Offline</h1>
-      <Switcher value={isOnline} />
+      <Switcher value={isToggle} onToggle={() => setIsToggle((t) => !t)} />
+      <p>{isToggle.toString()}</p>
 
       <ChangeStateAndCallback />
     </div>
