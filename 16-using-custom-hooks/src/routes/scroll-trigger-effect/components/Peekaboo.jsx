@@ -114,8 +114,8 @@ function Peekaboo() {
 export default Peekaboo;
 
 const boxStyles = {
-  height: 400,
-  width: 400,
+  blockSize: 400,
+  inlineSize: '100%',
   background: 'red',
   display: 'grid',
   placeContent: 'center',
