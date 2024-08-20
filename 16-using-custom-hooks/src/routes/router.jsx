@@ -1,5 +1,4 @@
 // React Router 라이브러리를 사용한 싱글 페이지 앱 제작
-// 실습 진행 (30분까지 진행)
 
 import {
   createBrowserRouter,
