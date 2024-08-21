@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import { memo } from 'react';
 import { func } from 'prop-types';
 import { TodoType } from './@types';
 import S from './style.module.css';
@@ -31,4 +32,4 @@ function Todo({ todo, onChange }) {
   );
 }
 
-export default Todo;
+export default memo(Todo);

@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { useId } from 'react';
+import { memo, useId } from 'react';
 import { func, string } from 'prop-types';
 import { visibilityType } from './@types';
 import { visibilities } from './@constants';
@@ -78,4 +78,4 @@ function ThemeSwitcher({
   );
 }
 
-export default ThemeSwitcher;
+export default memo(ThemeSwitcher);

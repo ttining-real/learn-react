@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { memo, useRef, useState } from 'react';
 import { func } from 'prop-types';
 import S from './style.module.css';
 
@@ -55,4 +55,4 @@ function AddTodo({ setTodos }) {
   );
 }
 
-export default AddTodo;
+export default memo(AddTodo);

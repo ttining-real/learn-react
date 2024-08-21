@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import S from './style.module.css';
 import ThemeSwitcher from './ThemeSwitcher';
 import TodoList from './TodoList';
@@ -16,28 +16,38 @@ function TodoListApp() {
   const [themeColor, setThemeColor] = useState('#562ec6');
   const [focusColor, setFocusColor] = useState('#fddf37');
 
-  const handleChangeTodo = (todo) =>
-    setTodos((todos) => getUpdated(todos, todo));
+  const handleChangeTodo = useCallback(
+    (todo) => setTodos((todos) => getUpdated(todos, todo)),
+    []
+  );
 
-  const handleChangeVisibility = (visibility) => {
+  const handleChangeVisibility = useCallback((visibility) => {
     setVisibility(visibility);
-  };
+  }, []);
 
-  const handleChangeThemeColor = (color) => {
+  const handleChangeThemeColor = useCallback((color) => {
     setThemeColor(color);
-  };
+  }, []);
 
-  const handleChangeFocusColor = (color) => {
+  const handleChangeFocusColor = useCallback((color) => {
     setFocusColor(color);
-  };
+  }, []);
 
-  const filtered = getFiltered(todos, visibility);
+  const filtered = useMemo(
+    () => getFiltered(todos, visibility),
+    [todos, visibility]
+  );
+
+  const todoListAppStyles = useMemo(
+    () => ({
+      '--theme-color': themeColor,
+      '--focus-color': focusColor,
+    }),
+    [themeColor, focusColor]
+  );
 
   return (
-    <div
-      className={S.TodoListApp}
-      style={{ '--theme-color': themeColor, '--focus-color': focusColor }}
-    >
+    <div className={S.TodoListApp} style={todoListAppStyles}>
       <ThemeSwitcher
         visibility={visibility}
         themeColor={themeColor}

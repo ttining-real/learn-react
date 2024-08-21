@@ -1,16 +1,14 @@
-import useClock from '@/hooks/useClock';
-import S from './style.module.css';
-import Counter from '../Counter';
-import TimeToggler from './TimeToggler';
-import useRenderCountLog from '@/hooks/useRenderCountLog';
 import { useEffect, useRef } from 'react';
+import S from './style.module.css';
+import useClock from '@/hooks/useClock';
+import TimeToggler from './TimeToggler';
+import Counter from '../Counter';
 
 // 컴포넌트(함수)가 다시 렌더링(실행) 되는 이유
 // 1. 컴포넌트 자신이 소유한 상태(states)가 변경될 때
 // 2. 컴포넌트 외부에서 전달된 속성(props)이 변경될 때
 function TimeAndCounter() {
   const { time, turnOn, onOff } = useClock();
-  useRenderCountLog('TimeAndCounter', '#065270', 800, 20);
 
   // 현재(1) 시점의 지역 변수와 함수를 기억한다.
   // 다음 렌더링에서 과거(이전의 현재)의 지역 변수와 함수를

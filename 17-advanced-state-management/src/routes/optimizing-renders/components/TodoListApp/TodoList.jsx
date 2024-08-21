@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { func } from 'prop-types';
 import S from './style.module.css';
 import { TodoListType } from './@types';
@@ -18,4 +19,4 @@ function TodoList({ list, onChangeTodo }) {
   );
 }
 
-export default TodoList;
+export default memo(TodoList);
