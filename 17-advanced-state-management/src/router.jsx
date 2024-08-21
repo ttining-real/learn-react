@@ -55,7 +55,7 @@ export const routes = [
     children: navigation.map((item) => {
       const route = { element: item.element };
 
-      if (item.path === '/') route.index = true;
+      if (item.path === '/' && item.path === '') route.index = true;
       else route.path = item.path;
 
       return route;

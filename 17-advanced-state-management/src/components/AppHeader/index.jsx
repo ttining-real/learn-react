@@ -7,7 +7,7 @@ function AppHeader() {
 
   return (
     <header className={S.component}>
-      <Link to="/" className={S.homeLink}>
+      <Link to="/" className={S.homeLink} aria-label="홈">
         <IoLogoReact />
       </Link>
       {authUser && (
