@@ -5,8 +5,8 @@ import { AppLink } from '@/components';
 import { throttle } from '@/utils';
 import S from './style.module.css';
 
-// 컨텍스트 가져오기
-import { pageContext } from './context';
+// 페이지 컨텍스트 프로바이더 컴포넌트 불러오기
+import { PageProvider } from './context';
 
 function PropsDrillingSolution() {
   useDocumentTitle('프롭스 드릴링 이슈 해결책');
@@ -19,7 +19,7 @@ function PropsDrillingSolution() {
 
   return (
     // 컨텍스트.프로바이더(공급자)를 통해 값(메모 필요) 전달하기
-    <pageContext.Provider value={data}>
+    <PageProvider value={data}>
       <main id="page" className={S.component}>
         <h1 className="headline">프롭스 드릴링 이슈 해결책</h1>
 
@@ -54,7 +54,7 @@ function PropsDrillingSolution() {
 
         <GrandParent data={data} />
       </main>
-    </pageContext.Provider>
+    </PageProvider>
   );
 }
 
