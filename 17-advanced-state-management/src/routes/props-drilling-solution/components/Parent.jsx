@@ -1,16 +1,11 @@
-import { object } from 'prop-types';
-import S from './style.module.css';
 import Child from './Child';
+import S from './style.module.css';
 
-Parent.propTypes = {
-  data: object,
-};
-
-function Parent({ data }) {
+function Parent() {
   return (
     <div className={S.box}>
       <strong className={S.label}>Parent</strong>
-      <Child data={data} />
+      <Child />
     </div>
   );
 }

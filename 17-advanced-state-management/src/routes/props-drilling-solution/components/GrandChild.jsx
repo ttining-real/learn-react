@@ -1,17 +1,17 @@
-import { object } from 'prop-types';
+import { useContext } from 'react';
 import S from './style.module.css';
 
-GrandChild.propTypes = {
-  data: object,
-};
+// 컨텍스트 불러오기
+import { pageContext } from '../context';
 
-function GrandChild({ data }) {
-  console.log(data);
+function GrandChild() {
+  // 컨텍스트 값 가져오기
+  const { message, color } = useContext(pageContext);
 
   return (
-    <div className={S.box}>
+    <div className={S.box} style={{ backgroundColor: color }}>
       <strong className={S.label}>Grand Child</strong>
-      {data.message && <p>{data.message}</p>}
+      <p>{message}</p>
     </div>
   );
 }
