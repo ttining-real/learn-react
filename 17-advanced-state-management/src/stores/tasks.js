@@ -18,8 +18,9 @@ export const togglePin = () => ({
   type: ACTION_TYPES.TOGGLE_PIN,
 });
 
-export const deleteTask = () => ({
+export const deleteTask = (deleteId) => ({
   type: ACTION_TYPES.DELETE_TASK,
+  payload: deleteId,
 });
 
 export const INITIAL_TASKS = [
@@ -53,8 +54,9 @@ export default function reducer(state, action) {
     }
 
     case ACTION_TYPES.DELETE_TASK: {
-      console.log('삭제');
-      return state;
+      const deleteId = action.payload;
+      const nextState = state.filter((item) => item.id !== deleteId);
+      return nextState;
     }
 
     case ACTION_TYPES.TOGGLE_PIN: {

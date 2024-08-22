@@ -20,7 +20,7 @@ function TaskManager() {
 
   const taskContextValue = useMemo(() => {
     const handleAddTask = (nextStep) => dispatch(addTask(nextStep));
-    const handleDeleteTask = () => dispatch(deleteTask());
+    const handleDeleteTask = (deleteId) => dispatch(deleteTask(deleteId));
     const handleTogglePin = () => dispatch(togglePin());
     const handleToggleTask = () => dispatch(toggleTask());
 
@@ -91,8 +91,8 @@ function TaskList({ list = [] }) {
     togglePin();
   };
 
-  const handleDeleteTask = () => {
-    deleteTask();
+  const handleDeleteTask = (deleteId) => {
+    deleteTask(deleteId);
   };
 
   return (
@@ -112,7 +112,7 @@ function TaskList({ list = [] }) {
           <button type="button" onClick={handleTogglePin}>
             <PiPushPinLight />
           </button>
-          <button type="button" onClick={handleDeleteTask}>
+          <button type="button" onClick={() => handleDeleteTask(task.id)}>
             <RxCross1 />
           </button>
         </li>
