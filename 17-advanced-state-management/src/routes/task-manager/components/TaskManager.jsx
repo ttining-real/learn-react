@@ -1,31 +1,61 @@
 /* eslint-disable react/prop-types */
-import S from './TaskManager.module.css';
-import { PiPushPinLight, PiPushPinFill } from 'react-icons/pi';
+import taskReducer, {
+  addTask,
+  deleteTask,
+  INITIAL_TASKS,
+  togglePin,
+  toggleTask,
+} from '@/stores/tasks';
+import { createContext, useContext, useMemo, useReducer } from 'react';
+import { PiPushPinFill, PiPushPinLight } from 'react-icons/pi';
 import { RxCross1 } from 'react-icons/rx';
+import S from './TaskManager.module.css';
+
+const taskContext = createContext();
+
+const useTask = () => useContext(taskContext);
 
 function TaskManager() {
-  const taskList = [
-    { id: 1, content: 'Draiange systems', isCompleted: false, isPin: false },
-    {
-      id: 2,
-      content: 'Reereational faeilities',
-      isCompleted: false,
-      isPin: false,
-    },
-  ];
+  const [taskList, dispatch] = useReducer(taskReducer, INITIAL_TASKS);
+
+  const taskContextValue = useMemo(() => {
+    const handleAddTask = () => dispatch(addTask());
+    const handleDeleteTask = () => dispatch(deleteTask());
+    const handleTogglePin = () => dispatch(togglePin());
+    const handleToggleTask = () => dispatch(toggleTask());
+
+    return {
+      addTask: handleAddTask,
+      deleteTask: handleDeleteTask,
+      toggleTask: handleToggleTask,
+      togglePin: handleTogglePin,
+    };
+  }, []);
 
   return (
-    <div className={S.component}>
-      <PinnedTaskList />
-      <TaskList list={taskList} />
-      <AddTask />
-    </div>
+    <taskContext.Provider value={taskContextValue}>
+      <div className={S.component}>
+        <PinnedTaskList list={taskList} />
+        <TaskList list={taskList} />
+        <AddTask />
+      </div>
+    </taskContext.Provider>
   );
 }
 
 export default TaskManager;
 
 function PinnedTaskList({ list = [] }) {
+  const { togglePin, toggleTask } = useTask();
+
+  const handleToggleTask = (e) => {
+    toggleTask(e.target.checked);
+  };
+
+  const handleTogglePin = () => {
+    togglePin();
+  };
+
   return (
     <ul
       style={{
@@ -38,9 +68,10 @@ function PinnedTaskList({ list = [] }) {
       {list.map((task) => (
         <li key={task.id} style={{ display: 'flex', gap: 6 }}>
           <label>
-            <input type="checkbox" name="" /> {task.content}
+            <input type="checkbox" name="" onChange={handleToggleTask} />{' '}
+            {task.content}
           </label>
-          <button type="button">
+          <button type="button" onClick={handleTogglePin}>
             <PiPushPinFill />
           </button>
         </li>
@@ -50,6 +81,20 @@ function PinnedTaskList({ list = [] }) {
 }
 
 function TaskList({ list = [] }) {
+  const { toggleTask, togglePin, deleteTask } = useTask();
+
+  const handleToggleTask = (e) => {
+    toggleTask(e.target.checked);
+  };
+
+  const handleTogglePin = () => {
+    togglePin();
+  };
+
+  const handleDeleteTask = () => {
+    deleteTask();
+  };
+
   return (
     <ul
       style={{
@@ -62,12 +107,12 @@ function TaskList({ list = [] }) {
       {list.map((task) => (
         <li key={task.id} style={{ display: 'flex', gap: 6 }}>
           <label>
-            <input type="checkbox" name="" /> {task.content}
+            <input type="checkbox" onChange={handleToggleTask} /> {task.content}
           </label>
-          <button type="button">
+          <button type="button" onClick={handleTogglePin}>
             <PiPushPinLight />
           </button>
-          <button type="button">
+          <button type="button" onClick={handleDeleteTask}>
             <RxCross1 />
           </button>
         </li>
@@ -77,11 +122,16 @@ function TaskList({ list = [] }) {
 }
 
 function AddTask() {
+  const { addTask } = useTask();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    addTask();
+  };
+
   return (
-    <form>
-      <label htmlFor="" className="sr-only">
-        add task
-      </label>
+    <form onSubmit={handleSubmit}>
+      <label className="sr-only">add task</label>
       <input type="text" placeholder="Next step" />
       <button type="submit">+</button>
     </form>
