@@ -1,5 +1,6 @@
-import { useLayoutEffect, useState } from 'react';
 import S from './style.module.css';
+import { object } from 'prop-types';
+import { useLayoutEffect, useState } from 'react';
 import ThemeSwitcher from './ThemeSwitcher';
 import TodoList from './TodoList';
 import AddTodo from './AddTodo';
@@ -9,19 +10,18 @@ import {
   initialTodos,
   VISIBILITIES,
 } from './@constants';
-import { useTheme } from '@/app/contexts/theme';
 
-function TodoListApp() {
+TodoListApp.propTypes = {
+  theme: object,
+};
+
+function TodoListApp({ theme }) {
   const [todos, setTodos] = useState(initialTodos);
   const [visibility, setVisibility] = useState(VISIBILITIES.ALL);
 
   const [themeColor, setThemeColor] = useState('#562ec6');
 
   const [focusColor, setFocusColor] = useState('#fddf37');
-
-  const { semantics } = useTheme();
-
-  const theme = semantics.dark;
 
   useLayoutEffect(() => {
     if ('TodoListApp' in theme) {
