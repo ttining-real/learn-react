@@ -3,7 +3,7 @@ import S from './style.module.css';
 import { AppSwitch } from '@/components';
 import useToggle from '@/hooks/useToggle';
 import GrandParent from './components/GrandParent';
-import { semantics } from './theme';
+import { semantics } from '@/theme';
 
 function SwitchTheme() {
   useDocumentTitle('테마 스위치');
