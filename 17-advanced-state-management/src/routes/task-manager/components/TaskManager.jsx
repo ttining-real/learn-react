@@ -21,7 +21,7 @@ function TaskManager() {
   const taskContextValue = useMemo(() => {
     const handleAddTask = (nextStep) => dispatch(addTask(nextStep));
     const handleDeleteTask = (deleteId) => dispatch(deleteTask(deleteId));
-    const handleTogglePin = () => dispatch(togglePin());
+    const handleTogglePin = (taskId) => dispatch(togglePin(taskId));
     const handleToggleTask = () => dispatch(toggleTask());
 
     return {
@@ -52,8 +52,8 @@ function PinnedTaskList({ list = [] }) {
     toggleTask(e.target.checked);
   };
 
-  const handleTogglePin = () => {
-    togglePin();
+  const handleTogglePin = (taskId) => {
+    togglePin(taskId);
   };
 
   return (
@@ -61,21 +61,23 @@ function PinnedTaskList({ list = [] }) {
       style={{
         display: 'flex',
         flexFlow: 'column',
-        gap: 6,
         paddingInlineStart: 0,
+        gap: 6,
       }}
     >
-      {list.map((task) => (
-        <li key={task.id} style={{ display: 'flex', gap: 6 }}>
-          <label>
-            <input type="checkbox" name="" onChange={handleToggleTask} />{' '}
-            {task.content}
-          </label>
-          <button type="button" onClick={handleTogglePin}>
-            <PiPushPinFill />
-          </button>
-        </li>
-      ))}
+      {list.map((task) => {
+        return (
+          <li key={task.id} style={{ display: 'flex', gap: 6 }}>
+            <label>
+              <input type="checkbox" name="" onChange={handleToggleTask} />{' '}
+              {task.content}
+            </label>
+            <button type="button" onClick={() => handleTogglePin(task.id)}>
+              {task.isPin ? <PiPushPinFill /> : <PiPushPinLight />}
+            </button>
+          </li>
+        );
+      })}
     </ul>
   );
 }
@@ -87,8 +89,8 @@ function TaskList({ list = [] }) {
     toggleTask(e.target.checked);
   };
 
-  const handleTogglePin = () => {
-    togglePin();
+  const handleTogglePin = (taskId) => {
+    togglePin(taskId);
   };
 
   const handleDeleteTask = (deleteId) => {
@@ -100,8 +102,8 @@ function TaskList({ list = [] }) {
       style={{
         display: 'flex',
         flexFlow: 'column',
-        gap: 6,
         paddingInlineStart: 0,
+        gap: 6,
       }}
     >
       {list.map((task) => (
@@ -109,8 +111,8 @@ function TaskList({ list = [] }) {
           <label>
             <input type="checkbox" onChange={handleToggleTask} /> {task.content}
           </label>
-          <button type="button" onClick={handleTogglePin}>
-            <PiPushPinLight />
+          <button type="button" onClick={() => handleTogglePin(task.id)}>
+            {task.isPin ? <PiPushPinFill /> : <PiPushPinLight />}
           </button>
           <button type="button" onClick={() => handleDeleteTask(task.id)}>
             <RxCross1 />
