@@ -1,34 +1,5 @@
+import authReducer, { signInAction, signOutAction } from '@/stores/auth';
 import { useReducer } from 'react';
-
-// 액션 타입
-const ACTION_TYPE = {
-  SIGN_IN: 'log in',
-  SIGN_OUT: 'log out',
-};
-
-// 액션 크리에이터 (함수)
-const signInAction = (payload) => ({
-  type: ACTION_TYPE.SIGN_IN,
-  payload,
-});
-
-const signOutAction = () => ({
-  type: ACTION_TYPE.SIGN_OUT,
-});
-
-// 작업 요청(action) 알림(dispatch)이 오면 리듀서(reducer)가 일을 합니다.
-// 리듀서가 하는 일은 요청을 수행해 새로운 상태(state)를 반환합니다.
-const authReducer = (state, action) => {
-  // 액션: 작업 요청서 action { type, payload? }
-  // 요청을 식별해 기능 수행 -> 업데이트 해야 할 다음 상태 반환
-  if (action.type === ACTION_TYPE.SIGN_IN) {
-    return action.payload;
-  }
-
-  if (action.type === ACTION_TYPE.SIGN_OUT) {
-    return null;
-  }
-};
 
 function AuthStatus() {
   const [authUser, dispatch] = useReducer(authReducer, null);
@@ -36,26 +7,14 @@ function AuthStatus() {
   const signIn = () => {
     dispatch(
       signInAction({
-        name: '야무',
-        email: 'yamoo9@naver.com',
+        name: '띠닝',
+        email: 'ttining.lion@gmail.com',
       })
     );
-
-    // dispatch({
-    //   type: ACTION_TYPE.SIGN_IN,
-    //   payload: {
-    //     name: '야무',
-    //     email: 'yamoo9@naver.com',
-    //   },
-    // });
   };
 
   const signOut = () => {
     dispatch(signOutAction());
-
-    // dispatch({
-    //   type: ACTION_TYPE.SIGN_OUT,
-    // });
   };
 
   return (
