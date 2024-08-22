@@ -1,4 +1,9 @@
 @layer base {
+
+  html {
+    min-block-size: 100.04vh;
+  }
+
   [hidden] {
     display: none !important;
   }
@@ -25,7 +30,8 @@
     @apply text-slate-700 text-base leading-normal;
   }
 
-  #page {
-    text-align: center;
+  button {
+    @apply disabled:cursor-not-allowed;
   }
+
 }

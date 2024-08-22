@@ -1,11 +1,9 @@
-import { RouterProvider } from 'react-router-dom';
-import Fallback from '@/pages/Fallback';
 import router from '@/router';
+import { RouterProvider } from 'react-router-dom';
 
 function App() {
   return (
     <div className="App">
-      <Fallback />
       <RouterProvider router={router} />
     </div>
   );
