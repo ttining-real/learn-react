@@ -6,6 +6,16 @@ const ACTION_TYPE = {
   SIGN_OUT: 'log out',
 };
 
+// 액션 크리에이터 (함수)
+const signInAction = (payload) => ({
+  type: ACTION_TYPE.SIGN_IN,
+  payload,
+});
+
+const signOutAction = () => ({
+  type: ACTION_TYPE.SIGN_OUT,
+});
+
 // 작업 요청(action) 알림(dispatch)이 오면 리듀서(reducer)가 일을 합니다.
 // 리듀서가 하는 일은 요청을 수행해 새로운 상태(state)를 반환합니다.
 const authReducer = (state, action) => {
@@ -24,19 +34,28 @@ function AuthStatus() {
   const [authUser, dispatch] = useReducer(authReducer, null);
 
   const signIn = () => {
-    dispatch({
-      type: ACTION_TYPE.SIGN_IN,
-      payload: {
-        name: '띠닝',
-        email: 'ttining.lion@gmail.com',
-      },
-    });
+    dispatch(
+      signInAction({
+        name: '야무',
+        email: 'yamoo9@naver.com',
+      })
+    );
+
+    // dispatch({
+    //   type: ACTION_TYPE.SIGN_IN,
+    //   payload: {
+    //     name: '야무',
+    //     email: 'yamoo9@naver.com',
+    //   },
+    // });
   };
 
   const signOut = () => {
-    dispatch({
-      type: ACTION_TYPE.SIGN_OUT,
-    });
+    dispatch(signOutAction());
+
+    // dispatch({
+    //   type: ACTION_TYPE.SIGN_OUT,
+    // });
   };
 
   return (
