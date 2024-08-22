@@ -1,14 +1,21 @@
 import { primitives, semantics } from '@/theme';
+import { THEME_MODE } from '@/theme/semantics';
 import { createContext, useContext, useMemo, useState } from 'react';
 
 const themeContext = createContext();
 
 export function ThemeProvider(props) {
-  const [mode] = useState('light');
+  const [mode, setMode] = useState(THEME_MODE.LIGHT);
 
   const themeValue = useMemo(
     () => ({
+      mode,
       theme: semantics[mode],
+      toggleThemeMode: () => {
+        const nextMode =
+          mode === THEME_MODE.LIGHT ? THEME_MODE.DARK : THEME_MODE.LIGHT;
+        setMode(nextMode);
+      },
       color: primitives.color,
     }),
     [mode]
