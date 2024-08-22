@@ -4,7 +4,6 @@ import { useCallback } from 'react';
 import { AppSwitch } from '@/components';
 import { useTheme } from '@/contexts/theme';
 import useDocumentTitle from '@/hooks/useDocumentTitle';
-
 import GrandParent from './components/GrandParent';
 
 function SwitchTheme() {

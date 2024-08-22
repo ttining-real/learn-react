@@ -1,7 +1,7 @@
 import { AppLink } from '@/components';
 import useDocumentTitle from '@/hooks/useDocumentTitle';
 import guideImage from './assets/task-manager-guide.png';
-import TaskManager from './components/TaskManager';
+import TaskManager from './components/TaskManager/TaskManager';
 import S from './style.module.css';
 
 function TaskManagerUsingReducer() {
