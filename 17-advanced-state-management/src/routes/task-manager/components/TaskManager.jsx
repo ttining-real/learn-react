@@ -18,7 +18,7 @@ const useTask = () => useContext(taskContext);
 function TaskManager() {
   const [taskList, dispatch] = useReducer(taskReducer, INITIAL_TASKS);
 
-  const taskContextValue = useMemo(() => {
+  const taskMethods = useMemo(() => {
     const handleAddTask = (nextStep) => dispatch(addTask(nextStep));
     const handleDeleteTask = (deleteId) => dispatch(deleteTask(deleteId));
     const handleTogglePin = (taskId) => dispatch(togglePin(taskId));
@@ -33,8 +33,13 @@ function TaskManager() {
     };
   }, []);
 
+  const pinnedTaskList = taskList.filter((task) => task.isPin);
+  const unpinnedTaskList = taskList.filter((task) => !task.isPin);
+
   return (
-    <taskContext.Provider value={taskContextValue}>
+    <taskContext.Provider
+      value={{ pinnedTaskList, unpinnedTaskList, methods: taskMethods }}
+    >
       <div className={S.component}>
         <PinnedTaskList list={taskList} />
         <TaskList list={taskList} />
@@ -46,8 +51,11 @@ function TaskManager() {
 
 export default TaskManager;
 
-function PinnedTaskList({ list = [] }) {
-  const { togglePin, setTask } = useTask();
+function PinnedTaskList() {
+  const {
+    pinnedTaskList,
+    methods: { togglePin, setTask },
+  } = useTask();
 
   const handleSetTask = (taskId, isCompleted) => {
     setTask(taskId, isCompleted);
@@ -66,13 +74,18 @@ function PinnedTaskList({ list = [] }) {
         gap: 6,
       }}
     >
-      {list.map((task) => {
+      {pinnedTaskList.map((task) => {
         return (
           <li key={task.id} style={{ display: 'flex', gap: 6 }}>
-            <label>
+            <label
+              style={{
+                textDecoration: task.isCompleted ? 'line-through' : null,
+                fontSize: 24,
+              }}
+            >
               <input
                 type="checkbox"
-                name=""
+                defaultChecked={task.isCompleted}
                 onChange={(e) => handleSetTask(task.id, e.target.checked)}
               />{' '}
               {task.content}
@@ -87,8 +100,11 @@ function PinnedTaskList({ list = [] }) {
   );
 }
 
-function TaskList({ list = [] }) {
-  const { setTask, togglePin, deleteTask } = useTask();
+function TaskList() {
+  const {
+    unpinnedTaskList,
+    methods: { setTask, togglePin, deleteTask },
+  } = useTask();
 
   const handleSetTask = (taskId, isCompleted) => {
     setTask(taskId, isCompleted);
@@ -111,11 +127,14 @@ function TaskList({ list = [] }) {
         gap: 6,
       }}
     >
-      {list.map((task) => (
+      {unpinnedTaskList.map((task) => (
         <li key={task.id} style={{ display: 'flex', gap: 6 }}>
-          <label>
+          <label
+            style={{ textDecoration: task.isCompleted ? 'line-through' : null }}
+          >
             <input
               type="checkbox"
+              defaultChecked={task.isCompleted}
               onChange={(e) => handleSetTask(task.id, e.target.checked)}
             />{' '}
             {task.content}
@@ -135,7 +154,9 @@ function TaskList({ list = [] }) {
 function AddTask() {
   const id = useId();
 
-  const { addTask } = useTask();
+  const {
+    methods: { addTask },
+  } = useTask();
 
   const handleSubmit = (e) => {
     e.preventDefault();
