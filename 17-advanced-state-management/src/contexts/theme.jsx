@@ -18,6 +18,7 @@ export function ThemeProvider(props) {
     // 테마 컨텍스트 값 반환
     return {
       mode,
+      isDarkMode: mode === DARK,
       theme: semantics[mode],
       color: primitives.color,
       toggleMode,

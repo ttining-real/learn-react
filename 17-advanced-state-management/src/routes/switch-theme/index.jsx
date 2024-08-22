@@ -4,21 +4,17 @@ import { useCallback } from 'react';
 import { AppSwitch } from '@/components';
 import { useTheme } from '@/contexts/theme';
 import useDocumentTitle from '@/hooks/useDocumentTitle';
-import useToggle from '@/hooks/useToggle';
 
 import GrandParent from './components/GrandParent';
 
 function SwitchTheme() {
   useDocumentTitle('테마 스위치');
 
-  const [isDarkMode, setIsDarkMode] = useToggle(false);
-
-  const { toggleMode } = useTheme();
+  const { isDarkMode, toggleMode } = useTheme();
 
   const handleToggle = useCallback(() => {
-    setIsDarkMode((mode) => !mode);
     toggleMode();
-  }, [setIsDarkMode, toggleMode]);
+  }, [toggleMode]);
 
   return (
     <main id="page" className={S.component}>
