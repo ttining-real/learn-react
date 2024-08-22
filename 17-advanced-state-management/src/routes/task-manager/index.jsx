@@ -1,15 +1,52 @@
 import guideImage from './assets/task-manager-guide.png';
 import useDocumentTitle from '@/hooks/useDocumentTitle';
 import TaskManager from './components/TaskManager';
+import { AppDivider, AppLink } from '@/components';
 import S from './style.module.css';
-import { AppLink } from '@/components';
+import { useState } from 'react';
 
 function TaskManagerUsingReducer() {
   useDocumentTitle('태스크 매니저 (리듀서 활용)');
 
+  const [authUser, setAuthUser] = useState(null);
+
+  const signIn = () => {
+    setAuthUser({
+      email: 'yamoo9@naver.com',
+      name: '야무',
+    });
+  };
+
+  const signOut = () => {
+    setAuthUser(null);
+  };
+
   return (
     <main id="page" className={S.component}>
       <h1 className="headline">태스크 매니저 (리듀서 활용)</h1>
+
+      <div>
+        <h2 className="headline2">인증 정보</h2>
+        {authUser ? (
+          <>
+            <p>
+              {authUser.name} ({authUser.email})
+            </p>
+            <button type="button" onClick={signOut}>
+              로그아웃
+            </button>
+          </>
+        ) : (
+          <>
+            <p>인증된 사용자가 없습니다.</p>
+            <button type="button" onClick={signIn}>
+              로그인
+            </button>
+          </>
+        )}
+      </div>
+
+      <AppDivider />
 
       <div className="description">
         <figure>
