@@ -4,7 +4,7 @@ import taskReducer, {
   deleteTask,
   INITIAL_TASKS,
   togglePin,
-  toggleTask,
+  setTask,
 } from '@/stores/tasks';
 import { createContext, useContext, useId, useMemo, useReducer } from 'react';
 import { PiPushPinFill, PiPushPinLight } from 'react-icons/pi';
@@ -22,12 +22,13 @@ function TaskManager() {
     const handleAddTask = (nextStep) => dispatch(addTask(nextStep));
     const handleDeleteTask = (deleteId) => dispatch(deleteTask(deleteId));
     const handleTogglePin = (taskId) => dispatch(togglePin(taskId));
-    const handleToggleTask = () => dispatch(toggleTask());
+    const handleSetTask = (taskId, isCompleted) =>
+      dispatch(setTask(taskId, isCompleted));
 
     return {
       addTask: handleAddTask,
       deleteTask: handleDeleteTask,
-      toggleTask: handleToggleTask,
+      setTask: handleSetTask,
       togglePin: handleTogglePin,
     };
   }, []);
@@ -46,10 +47,10 @@ function TaskManager() {
 export default TaskManager;
 
 function PinnedTaskList({ list = [] }) {
-  const { togglePin, toggleTask } = useTask();
+  const { togglePin, setTask } = useTask();
 
-  const handleToggleTask = (e) => {
-    toggleTask(e.target.checked);
+  const handleSetTask = (taskId, isCompleted) => {
+    setTask(taskId, isCompleted);
   };
 
   const handleTogglePin = (taskId) => {
@@ -69,7 +70,11 @@ function PinnedTaskList({ list = [] }) {
         return (
           <li key={task.id} style={{ display: 'flex', gap: 6 }}>
             <label>
-              <input type="checkbox" name="" onChange={handleToggleTask} />{' '}
+              <input
+                type="checkbox"
+                name=""
+                onChange={(e) => handleSetTask(task.id, e.target.checked)}
+              />{' '}
               {task.content}
             </label>
             <button type="button" onClick={() => handleTogglePin(task.id)}>
@@ -83,10 +88,10 @@ function PinnedTaskList({ list = [] }) {
 }
 
 function TaskList({ list = [] }) {
-  const { toggleTask, togglePin, deleteTask } = useTask();
+  const { setTask, togglePin, deleteTask } = useTask();
 
-  const handleToggleTask = (e) => {
-    toggleTask(e.target.checked);
+  const handleSetTask = (taskId, isCompleted) => {
+    setTask(taskId, isCompleted);
   };
 
   const handleTogglePin = (taskId) => {
@@ -109,7 +114,11 @@ function TaskList({ list = [] }) {
       {list.map((task) => (
         <li key={task.id} style={{ display: 'flex', gap: 6 }}>
           <label>
-            <input type="checkbox" onChange={handleToggleTask} /> {task.content}
+            <input
+              type="checkbox"
+              onChange={(e) => handleSetTask(task.id, e.target.checked)}
+            />{' '}
+            {task.content}
           </label>
           <button type="button" onClick={() => handleTogglePin(task.id)}>
             {task.isPin ? <PiPushPinFill /> : <PiPushPinLight />}
