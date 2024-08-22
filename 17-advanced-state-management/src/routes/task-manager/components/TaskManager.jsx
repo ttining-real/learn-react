@@ -6,7 +6,7 @@ import taskReducer, {
   togglePin,
   toggleTask,
 } from '@/stores/tasks';
-import { createContext, useContext, useMemo, useReducer } from 'react';
+import { createContext, useContext, useId, useMemo, useReducer } from 'react';
 import { PiPushPinFill, PiPushPinLight } from 'react-icons/pi';
 import { RxCross1 } from 'react-icons/rx';
 import S from './TaskManager.module.css';
@@ -19,7 +19,7 @@ function TaskManager() {
   const [taskList, dispatch] = useReducer(taskReducer, INITIAL_TASKS);
 
   const taskContextValue = useMemo(() => {
-    const handleAddTask = () => dispatch(addTask());
+    const handleAddTask = (nextStep) => dispatch(addTask(nextStep));
     const handleDeleteTask = () => dispatch(deleteTask());
     const handleTogglePin = () => dispatch(togglePin());
     const handleToggleTask = () => dispatch(toggleTask());
@@ -122,17 +122,35 @@ function TaskList({ list = [] }) {
 }
 
 function AddTask() {
+  const id = useId();
+
   const { addTask } = useTask();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addTask();
+
+    const formData = new FormData(e.currentTarget);
+
+    let nextStep = formData.get('nextStep');
+    nextStep = nextStep.trim();
+
+    const inputElement = document.getElementById(id);
+
+    if (nextStep.length > 0) {
+      addTask(nextStep);
+      inputElement.value = '';
+    } else {
+      alert('다음 단계를 입력하세요.');
+      inputElement.select();
+    }
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <label className="sr-only">add task</label>
-      <input type="text" placeholder="Next step" />
+      <label htmlFor={id} className="sr-only">
+        add task
+      </label>
+      <input id={id} type="text" name="nextStep" placeholder="Next step" />
       <button type="submit">+</button>
     </form>
   );
