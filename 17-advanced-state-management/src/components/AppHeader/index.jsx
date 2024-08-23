@@ -3,7 +3,7 @@ import { IoLogoReact } from 'react-icons/io5';
 import S from './style.module.css';
 
 function AppHeader() {
-  const authUser = null;
+  const authUser = true;
 
   return (
     <header className={S.component}>
@@ -11,9 +11,12 @@ function AppHeader() {
         <IoLogoReact />
       </Link>
       {authUser && (
-        <div className={S.userInfo}>
-          <img src="https://placehold.co/20x20?text=photo" alt="" />
-          사용자 이름
+        <div className={S.wrapper}>
+          <div className={S.userInfo}>
+            <img src="https://placehold.co/20x20?text=photo" alt="" />
+            사용자 이름
+          </div>
+          <button type="button">로그아웃</button>
         </div>
       )}
     </header>
