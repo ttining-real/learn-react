@@ -43,6 +43,10 @@ import { configRoutes, getNavigationItems } from '@/utils';
 import RootLayout from '@/layouts/RootLayout';
 
 import HomePage from '@/pages/Home';
+// import {
+//   Component as NoteDetail,
+//   loader as noteDetailLoader,
+// } from '@/pages/Notes/NoteDetail';
 
 /**@type {import('react-router-dom').RouteObject[]} */
 const navigation = [
@@ -51,9 +55,6 @@ const navigation = [
     path: '',
     // display: false,
     element: <HomePage />,
-    // Component() {
-    //   return <div>Hello</div>;
-    // },
   },
   {
     text: '칸반보드',
@@ -72,10 +73,10 @@ const navigation = [
     lazy: () => import('@/pages/Notes/NoteDetail'),
   },
   {
-    text: '노트 디테일',
+    text: '노트 수정',
     path: '/notes/:noteId/edit',
     display: false,
-    lazy: () => import('@/pages/Notes/EditNote'),
+    lazy: () => import('@/pages/Notes/EditNote'), // Component, loader
   },
   {
     text: '노트 추가',
