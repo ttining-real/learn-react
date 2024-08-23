@@ -1,11 +1,12 @@
 import router from '@/router';
 import { RouterProvider } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 
 function App() {
   return (
-    <div className="App">
+    <HelmetProvider>
       <RouterProvider router={router} />
-    </div>
+    </HelmetProvider>
   );
 }
 

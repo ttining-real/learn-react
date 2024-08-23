@@ -3,7 +3,7 @@ import { AppFooter, AppHeader, AppNav } from '@/components';
 
 function RootLayout() {
   return (
-    <div className="Layout h-screen bg-indigo-50/30 flex flex-col">
+    <div className="h-screen bg-indigo-50/30 flex flex-col">
       <AppHeader />
       <AppNav />
       <main className="flex-1 m-4">
