@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { VscVscodeInsiders } from 'react-icons/vsc';
 import useDocumentTitle from '@/hooks/useDocumentTitle';
 import { AppButton, AppForm, AppInput } from '@/components';
@@ -9,6 +9,8 @@ import { useAuth } from '@/contexts/auth';
 
 function SignInUser() {
   useDocumentTitle('사용자 로그인');
+
+  const navigate = useNavigate();
   const { setAuth } = useAuth();
 
   const handleSignIn = async (e) => {
@@ -26,6 +28,7 @@ function SignInUser() {
       const { record: user, token } = authData;
       // 인증 컨텍스트에 사용자 정보를 저장
       setAuth({ user, token });
+      navigate('/');
     } catch (error) {
       console.error(error);
     }
