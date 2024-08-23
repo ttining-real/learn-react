@@ -1,25 +1,10 @@
 import { create } from 'zustand';
 
-const INITIAL_VALUE = 0;
+const INITIAL_VALUE = 9;
 
-const stateCreator = (set, get) => {
-  const increment = (by = 1) => {
-    const prevCount = get().count;
-    const nextCount = prevCount + by;
-    set({ count: nextCount });
-  };
-
-  const decrement = (by = 1) => {
-    const prevCount = get().count;
-    const nextCount = prevCount - by;
-    set({ count: nextCount });
-  };
-
-  const reset = () => {
-    set({ count: INITIAL_VALUE });
-  };
-
-  return { count: INITIAL_VALUE, increment, decrement, reset };
-};
-
-export const useCounter = create(stateCreator);
+export const useCounter = create((set) => ({
+  count: INITIAL_VALUE,
+  increment: (by = 1) => set(({ count }) => ({ count: count + by })),
+  decrement: (by = 1) => set(({ count }) => ({ count: count - by })),
+  reset: () => set({ count: INITIAL_VALUE }),
+}));

@@ -1,11 +1,8 @@
 import { memo } from 'react';
-import { NavLink } from 'react-router-dom';
 import { IoLogoReact } from 'react-icons/io5';
-import { useCounter } from '@/stores/counter';
+import { NavLink } from 'react-router-dom';
 
 function AppHeader() {
-  const increment = useCounter((s) => s.increment);
-
   return (
     <header className="flex justify-center py-3 bg-white border-b border-b-indigo-500/10">
       <NavLink
@@ -16,13 +13,6 @@ function AppHeader() {
         <span className="text-indigo-800 text-sm select-none">
           클라이언트 사이드 라우팅
         </span>
-        <button
-          type="button"
-          onClick={() => increment(7)}
-          className="euid-button"
-        >
-          + 1
-        </button>
       </NavLink>
     </header>
   );

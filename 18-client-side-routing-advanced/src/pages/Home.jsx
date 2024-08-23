@@ -1,15 +1,12 @@
 import { AppDivider, AppLink } from '@/components';
 import Counter from '@/miniApp/Counter';
 import TaskManager from '@/miniApp/TaskManager/TaskManager';
-import { useCounter } from '@/stores/counter';
 
 function HomePage() {
-  const count = useCounter((s) => s.count);
-
   return (
     <section id="page">
       <div className="learn">
-        <h1>앱 글로벌 상태 관리 with Zustand ({count})</h1>
+        <h1>앱 글로벌 상태 관리 with Zustand</h1>
 
         <p>
           <AppLink
