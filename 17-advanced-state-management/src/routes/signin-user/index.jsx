@@ -5,7 +5,7 @@ import { AppButton, AppForm, AppInput } from '@/components';
 import S from './style.module.css';
 import { userSignIn } from '@/api/user';
 import { useImmer } from 'use-immer';
-import { useAuth } from '@/contexts/auth';
+import { AUTH_KEY, useAuth } from '@/contexts/auth';
 import { setStorageData } from '@/utils';
 
 function SignInUser() {
@@ -33,7 +33,7 @@ function SignInUser() {
       setAuth(authInfo);
 
       // 로컬 스토리지에 사용자 정보 저장
-      setStorageData('@auth', authInfo);
+      setStorageData(AUTH_KEY, authInfo);
 
       // 홈페이지로 이동
       navigate('/');

@@ -10,12 +10,18 @@ import authReducer, {
   resetAuth,
   setAuth,
 } from '@/stores/auth';
+import { getStorageData } from '@/utils';
+
+export const AUTH_KEY = '@auth';
 
 // 인증 (Authentication) / 권한 (Authorization)
 const authContext = createContext();
 
 export const AuthProvider = (props) => {
-  const [authState, dispatch] = useReducer(authReducer, INITIAL_AUTH_INFO);
+  // 참고: https://ko.react.dev/reference/react/useReducer#usereducer
+  const [authState, dispatch] = useReducer(authReducer, INITIAL_AUTH_INFO, () =>
+    getStorageData(AUTH_KEY)
+  );
 
   const handleSetAuth = useCallback(
     (authInfo) => dispatch(setAuth(authInfo)),

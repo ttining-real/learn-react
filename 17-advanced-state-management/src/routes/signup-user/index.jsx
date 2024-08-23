@@ -1,12 +1,14 @@
 import S from './style.module.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { VscOctoface } from 'react-icons/vsc';
 import useDocumentTitle from '@/hooks/useDocumentTitle';
 import { AppButton, AppForm, AppInput } from '@/components';
 import { userSignUp } from '@/api/user';
+import toast from 'react-hot-toast';
 
 function SignUpUser() {
   useDocumentTitle('사용자 회원가입');
+  const navigate = useNavigate();
 
   const handleSignUp = async (e) => {
     e.preventDefault();
@@ -28,9 +30,21 @@ function SignUpUser() {
         return;
       }
 
-      const record = await userSignUp(username, email, password);
+      await userSignUp(username, email, password);
 
-      console.log(record);
+      // 성공적으로 회원가입이 되었으니 사용자에게 토스트를 띄움
+      toast('회원 가입이 성공적으로 수행되었습니다.', {
+        icon: '👏',
+        style: {
+          borderRadius: '10px',
+          background: '#333',
+          position: 'top-right',
+          color: '#fff',
+        },
+      });
+
+      // 회원가입 후, 로그인 페이지로 이동
+      navigate('/signin-user');
     } catch (error) {
       console.error(error);
     }
@@ -59,14 +73,14 @@ function SignUpUser() {
           name="username"
           required
           label="닉네임"
-          placeholder="ttining"
+          placeholder="yamoo9"
         />
         <AppInput
           name="email"
           email
           required
           label="이메일"
-          placeholder="ttining@gmail.com"
+          placeholder="yamoo9@naver.com"
         />
         <AppInput
           name="password"
