@@ -43,7 +43,6 @@ import { configRoutes, getNavigationItems } from '@/utils';
 import RootLayout from '@/layouts/RootLayout';
 
 import HomePage from '@/pages/Home';
-import KanbanBarodPage from '@/pages/KanbanBoard';
 
 /**@type {import('react-router-dom').RouteObject[]} */
 const navigation = [
@@ -52,11 +51,36 @@ const navigation = [
     path: '',
     // display: false,
     element: <HomePage />,
+    // Component() {
+    //   return <div>Hello</div>;
+    // },
   },
   {
     text: '칸반보드',
     path: '/kanbanboard',
-    element: <KanbanBarodPage />,
+    lazy: () => import('@/pages/KanbanBoard'),
+  },
+  {
+    text: '노트리스트',
+    path: '/notes',
+    lazy: () => import('@/pages/Notes/NoteList'),
+  },
+  {
+    text: '노트 디테일',
+    path: '/notes/:noteId',
+    display: false,
+    lazy: () => import('@/pages/Notes/NoteDetail'),
+  },
+  {
+    text: '노트 디테일',
+    path: '/notes/:noteId/edit',
+    display: false,
+    lazy: () => import('@/pages/Notes/EditNote'),
+  },
+  {
+    text: '노트 추가',
+    path: '/notes/new',
+    lazy: () => import('@/pages/Notes/NewNote'),
   },
 ];
 

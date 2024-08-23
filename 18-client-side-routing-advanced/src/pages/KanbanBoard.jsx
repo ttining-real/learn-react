@@ -1,7 +1,10 @@
-import KanBanBoard from '@/miniApp/KanbanBoard';
+import { lazy, Suspense } from 'react';
 import { Helmet } from 'react-helmet-async';
+import { AppSpinner } from '@/components';
 
-function KanbanBarodPage() {
+const KanBanBoard = lazy(() => import('@/miniApp/KanbanBoard'));
+
+export function Component() {
   return (
     <>
       <Helmet>
@@ -32,10 +35,10 @@ function KanbanBarodPage() {
             살펴봅시다.
           </p>
         </div>
-        <KanBanBoard />
+        <Suspense fallback={<AppSpinner />}>
+          <KanBanBoard />
+        </Suspense>
       </section>
     </>
   );
 }
-
-export default KanbanBarodPage;
