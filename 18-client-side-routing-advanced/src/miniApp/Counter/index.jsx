@@ -1,12 +1,12 @@
 import { memo } from 'react';
 import { GrFormDown, GrFormUp } from 'react-icons/gr';
-import useCounter from '@/hooks/useCounter';
+import useCustomCounter from '@/hooks/useCounter';
 import CountButton from './CountButton';
 import CountOutput from './CountDisplay';
 import S from './style.module.css';
 
 function Counter() {
-  const C = useCounter({ max: 10 });
+  const C = useCustomCounter();
   const { count, step, isMinDisabled, isMaxDisabled, increment, decrement } = C;
 
   const increamentLabel = `${step} 증가`;
