@@ -4,6 +4,7 @@ import useDocumentTitle from '@/hooks/useDocumentTitle';
 import { AppButton, AppForm, AppInput } from '@/components';
 import S from './style.module.css';
 import { userSignIn } from '@/api/user';
+import { useImmer } from 'use-immer';
 
 function SignInUser() {
   useDocumentTitle('사용자 로그인');
@@ -25,6 +26,27 @@ function SignInUser() {
       console.error(error);
     }
   };
+
+  const [formState, setFormState] = useImmer({
+    email: '',
+    password: '',
+  });
+
+  const handleEmailInput = (value) => {
+    setFormState((draft) => {
+      draft.email = value;
+    });
+  };
+
+  const handlePasswordInput = (value) => {
+    setFormState((draft) => {
+      draft.password = value;
+    });
+  };
+
+  // 파생된 상태 변수
+  const { email, password } = formState;
+  const isDisable = email.trim().length === 0 || password.trim().length === 0;
 
   return (
     <main id="page" className={S.component}>
@@ -50,14 +72,16 @@ function SignInUser() {
           email
           label="이메일"
           placeholder="yamoo9@naver.com"
+          onInput={handleEmailInput}
         />
         <AppInput
           name="password"
           password
           label="패스워드"
           placeholder="영어,숫자 조합 6자리 이상"
+          onInput={handlePasswordInput}
         />
-        <AppButton submit icon={<VscVscodeInsiders />}>
+        <AppButton submit disabled={isDisable} icon={<VscVscodeInsiders />}>
           로그인
         </AppButton>
       </AppForm>

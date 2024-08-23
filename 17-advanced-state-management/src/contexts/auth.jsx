@@ -1,4 +1,10 @@
-import { createContext, useMemo, useReducer, useCallback } from 'react';
+import {
+  createContext,
+  useMemo,
+  useReducer,
+  useCallback,
+  useContext,
+} from 'react';
 import authReducer, {
   INITIAL_AUTH_INFO,
   resetAuth,
@@ -27,4 +33,14 @@ export const AuthProvider = (props) => {
       {...props}
     />
   );
+};
+
+export const useAuth = () => {
+  const authContextValue = useContext(authContext);
+
+  if (!authContextValue) {
+    throw new Error('useAuth() 훅은 Auth Context 내부에서만 사용 가능합니다.');
+  }
+
+  return authContextValue;
 };
