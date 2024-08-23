@@ -19,6 +19,7 @@ function SignInUser() {
 
       const authData = await userSignIn(email, password);
 
+      // 요청에 따른 응답이 주어졌으니까 인증 컨텍스트에 사용자 정보를 저장
       console.log(authData);
     } catch (error) {
       console.error(error);
@@ -48,7 +49,7 @@ function SignInUser() {
           name="email"
           email
           label="이메일"
-          placeholder="ttining@gmail.com"
+          placeholder="yamoo9@naver.com"
         />
         <AppInput
           name="password"
