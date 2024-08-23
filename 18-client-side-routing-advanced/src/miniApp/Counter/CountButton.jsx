@@ -1,20 +1,20 @@
 import { memo } from 'react';
-import { func, node } from 'prop-types';
+import { node, oneOf } from 'prop-types';
+import { useCountStore } from './@store';
 import S from './style.module.css';
 
 CountButton.propTypes = {
   children: node,
-  onUpdate: func,
+  type: oneOf(['+', '-']),
 };
 
-function CountButton({ children, onUpdate, ...restProps }) {
+function CountButton({ children, type = '+', ...restProps }) {
+  const handler = useCountStore((s) =>
+    type === '+' ? s.increment : s.decrement
+  );
+
   return (
-    <button
-      type="button"
-      className={S.button}
-      onClick={onUpdate}
-      {...restProps}
-    >
+    <button type="button" className={S.button} onClick={handler} {...restProps}>
       {children}
     </button>
   );
