@@ -6,6 +6,7 @@ import S from './style.module.css';
 import { userSignIn } from '@/api/user';
 import { useImmer } from 'use-immer';
 import { useAuth } from '@/contexts/auth';
+import { setStorageData } from '@/utils';
 
 function SignInUser() {
   useDocumentTitle('사용자 로그인');
@@ -24,10 +25,17 @@ function SignInUser() {
 
       const authData = await userSignIn(email, password);
 
-      // 요청에 따른 응답이 주어졌으니까
+      // 요청에 따른 응답 검토
       const { record: user, token } = authData;
-      // 인증 컨텍스트에 사용자 정보를 저장
-      setAuth({ user, token });
+      const authInfo = { user, token };
+
+      // 인증 컨텍스트에 사용자 정보 저장
+      setAuth(authInfo);
+
+      // 로컬 스토리지에 사용자 정보 저장
+      setStorageData('@auth', authInfo);
+
+      // 홈페이지로 이동
       navigate('/');
     } catch (error) {
       console.error(error);
