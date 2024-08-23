@@ -5,9 +5,11 @@ import { AppButton, AppForm, AppInput } from '@/components';
 import S from './style.module.css';
 import { userSignIn } from '@/api/user';
 import { useImmer } from 'use-immer';
+import { useAuth } from '@/contexts/auth';
 
 function SignInUser() {
   useDocumentTitle('사용자 로그인');
+  const { setAuth } = useAuth();
 
   const handleSignIn = async (e) => {
     e.preventDefault();
@@ -20,8 +22,10 @@ function SignInUser() {
 
       const authData = await userSignIn(email, password);
 
-      // 요청에 따른 응답이 주어졌으니까 인증 컨텍스트에 사용자 정보를 저장
-      console.log(authData);
+      // 요청에 따른 응답이 주어졌으니까
+      const { record: user, token } = authData;
+      // 인증 컨텍스트에 사용자 정보를 저장
+      setAuth({ user, token });
     } catch (error) {
       console.error(error);
     }
