@@ -1,0 +1,27 @@
+@layer base {
+  body {
+    font-family: 'SUIT Variable', sans-serif;
+    min-block-size: 100.03vh;
+  }
+
+  ul {
+    padding-inline-start: 1rem;
+    list-style-type: disc;
+  }
+
+  ol {
+    padding-inline-start: 1.1rem;
+    list-style-type: decimal;
+  }
+
+  abbr[title] {
+    @apply cursor-help no-underline;
+  }
+
+  button {
+    &:disabled,
+    &[aria-disabled='true'] {
+      @apply cursor-not-allowed;
+    }
+  }
+}

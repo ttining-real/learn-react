@@ -1,0 +1,99 @@
+@layer components {
+  .layout {
+    --side-width: 200px;
+
+    display: grid;
+    grid-template-columns: var(--side-width) 1fr;
+    background-color: theme(colors.yellow.300);
+    min-block-size: 100svh;
+
+    main {
+      margin: theme(spacing.6) theme(spacing.4);
+    }
+  }
+
+  .anim-scale-up {
+    opacity: 1;
+    scale: 1;
+    transition: all 0.3s 0.2s ease-in-out;
+
+    @starting-style {
+      opacity: 0;
+      scale: 0.5;
+    }
+  }
+
+  .pokemon-card {
+    @apply inline-flex flex-col gap-2 items-center my-4 p-2 border-2 rounded-md border-yellow-600/40 bg-yellow-400/30 duration-500;
+    @apply hover:shadow-lg;
+
+    [role='group'] {
+      @apply flex justify-evenly w-full order-1;
+
+      button {
+        @apply flex-1 grid place-content-center aspect-square text-stone-600 rounded-md transition-colors duration-300;
+        @apply [&:hover:not(:disabled)]:bg-yellow-200/60 text-red-700;
+        @apply disabled:text-yellow-700 disabled:cursor-not-allowed;
+        @apply active:scale-y-90;
+      }
+    }
+
+    .error-message {
+      @apply text-xs text-red-600 font-extrabold;
+    }
+
+    .loading-message {
+      @apply m-0 w-24 h-24 flex flex-col items-center justify-center;
+    }
+
+    img {
+      @apply select-none -mb-3 saturate-0 anim-scale-up;
+      @apply hover:saturate-100;
+    }
+
+    figcaption {
+      @apply select-none mt-2 text-sm font-semibold text-yellow-600;
+
+      .pokemon-name {
+        @apply anim-scale-up;
+      }
+    }
+  }
+
+  .a11yHidden,
+  .sr-only {
+    overflow: hidden;
+    position: absolute;
+    clip: rect(1px, 1px, 1px, 1px);
+    clip-path: circle(0);
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    white-space: nowrap;
+
+    caption& {
+      position: static;
+    }
+
+    &.focusable:focus {
+      overflow: initial;
+      position: static;
+      clip: auto;
+      clip-path: unset;
+      width: initial;
+      height: initial;
+      margin: initial;
+      white-space: initial;
+    }
+  }
+
+  .button {
+    @apply text-xs pt-1 pb-1.5 px-4 bg-yellow-950/90 text-yellow-50 rounded-full;
+    @apply hover:bg-yellow-950;
+    @apply disabled:bg-yellow-950/20 disabled:text-yellow-950/50;
+  }
+
+  .scrollArea {
+    @apply overscroll-contain scrollbar-thin bg-yellow-100/10 scrollbar-thumb-yellow-700/40 scrollbar-track-transparent overflow-y-auto w-96 h-96 flex flex-col justify-start items-center gap-1 py-4 px-2 rounded-lg border-4 border-red-800/40;
+  }
+}
